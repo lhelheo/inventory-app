@@ -4,6 +4,10 @@ import { routes } from "./routes";
 
 const server = Fastify({ logger: true });
 
+server.setErrorHandler((error, request, reply) => {
+    reply.code(400).send({ message: error.message });
+});
+
 const start = async () => {
     await server.register(cors);
     await server.register(routes);
