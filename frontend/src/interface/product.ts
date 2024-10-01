@@ -3,4 +3,5 @@ export interface IProduct {
     name: string;
     price: number;
     clientID?: number;
+    product_code?: string;
 }

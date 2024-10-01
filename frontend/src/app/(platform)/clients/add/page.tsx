@@ -6,6 +6,7 @@ import { IProduct } from "@/interface/product";
 import { FormEvent, useRef, useState } from "react";
 
 export const AddClientForm = () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [customers, setCustomers] = useState<ICustomer[]>([]);
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
