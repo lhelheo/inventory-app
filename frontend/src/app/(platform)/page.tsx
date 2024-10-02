@@ -16,13 +16,17 @@ export default function GenericPage() {
         </div>
         <div className="flex gap-4 mt-4">
           <button 
-            onClick={() => router.push('/products/client')} className="cursor-pointer bg-white rounded-lg p-2 ease-linear transition-all text-blue-500 hover:text-blue-700">Adicionar produto</button>
+            onClick={() => router.push('/products/client')} 
+            className="cursor-pointer bg-white rounded-lg p-2 ease-linear transition-all text-blue-500 hover:text-blue-700">Adicionar produto</button>
         </div>
         <div className="flex gap-4 mt-4">
           <button onClick={() => router.push('/products')} className="cursor-pointer bg-white rounded-lg p-2 ease-linear transition-all text-blue-500 hover:text-blue-700">Visualizar produtos</button>
         </div>
         <div className="flex gap-4 mt-4">
           <button onClick={() => router.push('/products/delete')} className="cursor-pointer bg-white rounded-lg p-2 ease-linear transition-all text-blue-500 hover:text-blue-700">Deletar produto</button>
+        </div>
+        <div className="flex gap-4 mt-4">
+          <button onClick={() => router.push('/products/edit')} className="cursor-pointer bg-white rounded-lg p-2 ease-linear transition-all text-blue-500 hover:text-blue-700">Editar produto</button>
         </div>
       </div>
     </div>
