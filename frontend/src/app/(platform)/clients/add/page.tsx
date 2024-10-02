@@ -1,63 +1,65 @@
 "use client"
-
-import { api } from "@/app/services/api";
-import { ICustomer } from "@/interface/customer";
-import { IProduct } from "@/interface/product";
-import { FormEvent, useRef, useState } from "react";
+import React, { useState, useRef, FormEvent } from 'react';
+import axios from 'axios';
 
 export const AddClientForm = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [customers, setCustomers] = useState<ICustomer[]>([]);
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const phoneRef = useRef<HTMLInputElement>(null);
-    const productNameRef = useRef<HTMLInputElement>(null);
-    const productPriceRef = useRef<HTMLInputElement>(null);
-    const [product, setProduct] = useState<IProduct[]>([]);
-    
-    function handleAddProduct() {
-        if (!productNameRef.current || !productPriceRef.current) return;
-    
-        const newProduct: IProduct = {
-          name: productNameRef.current.value,
-          price: parseFloat(productPriceRef.current.value),
-        };
-    
-        setProduct((prevProduct) => [...prevProduct, newProduct]);
-    
-        productNameRef.current.value = "";
-        productPriceRef.current.value = "";
-      }
-    
-      async function handleSubmit(event: FormEvent) {
-        event.preventDefault();
-        if (!nameRef.current || !emailRef.current) return;
-    
-        const response = await api.post("/client", {
-          name: nameRef.current.value,
-          email: emailRef.current.value,
-          phone: phoneRef.current?.value,
-          product,
-        });
-    
-        setCustomers((allCustomers) => [...allCustomers, response.data]);
-        setProduct([]);
-      }
-    return (
-        <div className="mt-4">
-        <form onSubmit={handleSubmit} className="flex flex-col w-min gap-4">
-          <input ref={nameRef} type="text" className="placeholder-black text-black" placeholder="Nome" />
-          <input ref={emailRef} type="email" className="placeholder-black text-black" placeholder="Email" />
-          <input ref={phoneRef} type="text" className="placeholder-black text-black" placeholder="Telefone" />
+    const [message, setMessage] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
-          <div className="flex flex-col gap-4">
-            <input ref={productNameRef} type="text" className="placeholder-black text-black" placeholder="Nome do produto" />
-            <input ref={productPriceRef} type="number" className="placeholder-black text-black" step={0.01} placeholder="Preço do produto" />
-            <button type="submit" onClick={handleAddProduct}>Adicionar Produto</button>
-          </div>
-        </form>
-      </div>
-    )
-}
+    async function handleSubmit(event: FormEvent) {
+        event.preventDefault();
+        setLoading(true);
+
+        if (!nameRef.current || !emailRef.current || !phoneRef.current) {
+            setMessage("Nome, email e telefone são obrigatórios.");
+            setLoading(false);
+            return;
+        }
+
+        const clientData = {
+            name: nameRef.current.value,
+            email: emailRef.current.value,
+            phone: phoneRef.current.value,
+        };
+
+        try {
+            const response = await axios.post("http://localhost:3000/client", clientData);
+            setMessage(`Cliente criado com sucesso: ${response.data.user.name}`);
+            clearForm();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            setMessage(error.response?.data?.error || "Erro ao criar cliente ou produto.");
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    function clearForm() {
+        if (nameRef.current) nameRef.current.value = '';
+        if (emailRef.current) emailRef.current.value = '';
+        if (phoneRef.current) phoneRef.current.value = '';
+    }
+
+    return (
+        <div className="flex flex-col justify-center items-center h-screen">
+            <div className="my-4">
+                <h1 className="text-xl">Adicionar Cliente</h1>
+            </div>
+            <form onSubmit={handleSubmit} className="flex flex-col w-min gap-4">
+                <input ref={nameRef} type="text" className="rounded-sm p-2 placeholder-black text-black" placeholder="Nome" required />
+                <input ref={emailRef} type="email" className="rounded-sm p-2 placeholder-black text-black" placeholder="Email" required />
+                <input ref={phoneRef} type="text" className="rounded-sm p-2 placeholder-black text-black" placeholder="Telefone" required />
+                <button type="submit" className="py-3 bg-blue-600 hover:bg-blue-500 transition-all" disabled={loading}>
+                    {loading ? "Carregando..." : "Concluir"}
+                </button>
+            </form>
+
+            {message && <p className="mt-4 text-center text-green-600">{message}</p>}
+        </div>
+    );
+};
 
 export default AddClientForm;
