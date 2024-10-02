@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { ICustomer } from "@/interface/customer";
 import { api } from "@/app/services/api";
+import { Trash2 } from "lucide-react";
 
 export default function Home() {
   const [customers, setCustomers] = useState<ICustomer[]>([]);
@@ -38,37 +39,42 @@ export default function Home() {
   console.log(customers.map((customer) => customer.product));
 
   return (
-    <div className="p-10 flex h-full justify-center items-center">
+    <div className="p-10 flex flex-col h-full justify-center items-center">
+      <h1 className="text-xl">Clientes</h1>
       <div className="w-max p-4 bg-white text-black">
         {customers.length === 0 ? (
           <p>Nenhum cliente encontrado</p>
         ) : (
           customers.map((customer) => (
-        <div key={customer.id}>
-          {customer.name ? <h1>Nome do cliente: {customer.name}</h1> : <h1>Nome do cliente: Não informado</h1>}
-          {customer.email ? <p>Email do cliente: {customer.email}</p> : <p>Email do cliente: Não informado</p>}
-          {customer.phone ? <p>Telefone do cliente: {customer.phone}</p> : <p>Telefone do cliente: Não informado</p>}
-          <div className="bg-gray-300 text-black p-3">
-            {customer.product?.length !== 0 ? <h2>Produtos:</h2> : <p>Cliente não possui produtos</p>}
-            {customer.product?.map((product) => (
-          <div key={product.id}>
-            {product.name ? <p>Nome: {product.name}</p> : <p>Nome: Não informado</p>}
-            {product.price ? <p>Preço: ${product.price}</p> : <p>Preço: Não informado</p>}
-            {product.product_code ? <p>Código do produto: {product.product_code}</p> : <p>Código do produto: Não informado</p>}
+          <div key={customer.id} className="flex border p-10">
+            <div>
+            {customer.name ? <h1>Nome: {customer.name}</h1> : <h1>Nome: Não informado</h1>}
+            {customer.email ? <p>Email: {customer.email}</p> : <p>Email: Não informado</p>}
+            {customer.phone ? <p>Telefone: {customer.phone}</p> : <p>Telefone: Não informado</p>}
+            <div className="bg-gray-100 text-black p-3">
+              {customer.product?.length !== 0 ? <h2 className="font-semibold">Produtos:</h2> : <p>Cliente não possui produtos</p>}
+              {customer.product?.map((product) => (
+            <div key={product.id}>
+              {product.name ? <p>Nome: {product.name}</p> : <p>Nome: Não informado</p>}
+              {product.price ? <p>Preço: ${product.price}</p> : <p>Preço: Não informado</p>}
+              {product.product_code ? <p>Código do produto: {product.product_code}</p> : <p>Código do produto: Não informado</p>}
+            </div>
+              ))}
+            </div>
+            <hr />
+            </div>
+            <div>
+            <button
+              className="h-full font-bold px-2 text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all"
+              onClick={() => handleDelete(customer.id)}
+            >
+              <Trash2 size={24}/>
+            </button>
+            </div>
           </div>
-            ))}
-          </div>
-          <button
-            className="font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all"
-            onClick={() => handleDelete(customer.id)}
-          >
-            Delete
-          </button>
-          <hr />
+            ))
+          )}
         </div>
-          ))
-        )}
-      </div>
     </div>
   );
 }

@@ -17,7 +17,9 @@ export default function Products() {
     }
 
     return (
-        <>
+        <div className="flex flex-col justify-center items-center h-screen">
+            <h1 className="text-xl">Produtos</h1>
+            <div className="border rounded p-10">
             {products.map((product) => (
                 <div key={product.id} className="my-6">
                     <p>ID: {product.clientID ?? "Não informado"}</p>
@@ -26,6 +28,7 @@ export default function Products() {
                     <p>Código: {product.product_code ?? "Não informado"}</p>
                 </div>
             ))}
-        </>
+            </div>
+        </div>
     );
 }

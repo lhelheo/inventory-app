@@ -61,14 +61,15 @@ export const AddProductToClientForm = () => {
 
     return (
         <div className="flex flex-col justify-center items-center h-screen">
+            <div className="border p-10 rounded flex flex-col items-center">
             <div className="my-4">
-                <h1 className="text-xl">Adicionar Produto a Cliente</h1>
+                <h1 className="text-xl">Adicionar produto a um cliente</h1>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col w-min gap-4">
                 <select 
                     value={selectedClientId || ''} 
                     onChange={(e) => setSelectedClientId(Number(e.target.value))} 
-                    className="rounded-sm p-2 text-black"
+                    className="border rounded p-2 text-black"
                 >
                     <option value="" disabled>Selecione um cliente</option>
                     {clients.map((client) => (
@@ -78,9 +79,9 @@ export const AddProductToClientForm = () => {
                     ))}
                 </select>
 
-                <input ref={productNameRef} type="text" className="rounded-sm p-2 placeholder-black text-black" placeholder="Nome do produto" required />
-                <input ref={productPriceRef} type="number" className="rounded-sm p-2 placeholder-black text-black" placeholder="Preço do produto" step="0.01" required />
-                <input ref={productCodeRef} type="text" className="rounded-sm p-2 placeholder-black text-black" placeholder="Código do produto" required />
+                <input ref={productNameRef} type="text" className="border rounded p-2 placeholder-black text-black" placeholder="Nome do produto" required />
+                <input ref={productPriceRef} type="number" className="border rounded p-2 placeholder-black text-black" placeholder="Preço do produto" step="0.01" required />
+                <input ref={productCodeRef} type="text" className="border rounded p-2 placeholder-black text-black" placeholder="Código do produto" required />
 
                 <button type="submit" className="py-3 bg-blue-600 hover:bg-blue-500 transition-all" disabled={loading}>
                     {loading ? "Carregando..." : "Adicionar Produto"}
@@ -88,6 +89,7 @@ export const AddProductToClientForm = () => {
             </form>
 
             {message && <p className="mt-4 text-center text-green-600">{message}</p>}
+        </div>
         </div>
     );
 };

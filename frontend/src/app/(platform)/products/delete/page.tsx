@@ -43,6 +43,7 @@ export const DeleteProductForm = () => {
 
     return (
         <div className="flex flex-col justify-center items-center h-screen">
+            <div className="border rounded p-10">
             <div className="my-4">
                 <h1 className="text-xl">Deletar Produto</h1>
             </div>
@@ -50,7 +51,7 @@ export const DeleteProductForm = () => {
                 <select 
                     value={selectedProductId || ''} 
                     onChange={(e) => setSelectedProductId(Number(e.target.value))} 
-                    className="rounded-sm p-2 text-black"
+                    className="rounded border p-2 text-black"
                 >
                     <option value="" disabled>Selecione um produto</option>
                     {products.map((product) => (
@@ -70,6 +71,7 @@ export const DeleteProductForm = () => {
             </div>
 
             {message && <p className="mt-4 text-center text-red-600">{message}</p>}
+        </div>
         </div>
     );
 };
