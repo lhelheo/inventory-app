@@ -4,7 +4,7 @@ import axios from 'axios';
 import { baseUrl } from '@/helpers/url';
 import { IProduct } from '@/interface/product';
 
-export const DeleteProductForm = () => {
+export default function DeleteProductForm() {
     const [products, setProducts] = useState<IProduct[]>([]);
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
@@ -85,5 +85,3 @@ export const DeleteProductForm = () => {
         </div>
     );
 };
-
-export default DeleteProductForm;

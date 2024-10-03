@@ -2,7 +2,7 @@
 import { Eye, PackagePlus, Pencil, Plus, Trash2, User2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export const GenericPage = () => {
+export default function GenericPage() {
   const router = useRouter();
   return (
     <div className='flex flex-col h-screen justify-center items-center'>
@@ -58,5 +58,3 @@ export const GenericPage = () => {
     </div>
   );
 };
-
-export default GenericPage;

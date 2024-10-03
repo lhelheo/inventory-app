@@ -3,7 +3,7 @@ import React, { useState, useRef, FormEvent } from 'react';
 import axios from 'axios';
 import { baseUrl } from '@/helpers/url';
 
-export const AddClientForm = () => {
+export default function AddClientForm() {
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const phoneRef = useRef<HTMLInputElement>(null);
@@ -67,5 +67,3 @@ export const AddClientForm = () => {
         </div>
     );
 };
-
-export default AddClientForm;

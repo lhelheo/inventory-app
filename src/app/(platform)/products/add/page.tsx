@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ICustomer } from '@/interface/customer';
 import { baseUrl } from '@/helpers/url';
 
-export const AddProductToClientForm = () => {
+export default function AddProductToClientForm() {
     const [clients, setClients] = useState<ICustomer[]>([]);
     const [selectedClientId, setSelectedClientId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
@@ -103,5 +103,3 @@ export const AddProductToClientForm = () => {
         </div>
     );
 };
-
-export default AddProductToClientForm;
