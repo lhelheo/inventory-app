@@ -93,7 +93,7 @@ export const AddProductToClientForm = () => {
                 <input ref={productPriceRef} type="number" className="border rounded p-2 placeholder-black text-black" placeholder="Preço do produto" step="0.01" required />
                 <input ref={productCodeRef} type="text" className="border rounded p-2 placeholder-black text-black" placeholder="Código do produto" required />
 
-                <button type="submit" className="py-3 bg-blue-600 hover:bg-blue-500 transition-all" disabled={loading}>
+                <button type="submit" className="rounded py-3 text-white bg-blue-600 hover:bg-blue-500 transition-all" disabled={loading}>
                     {loading ? "Carregando..." : "Adicionar Produto"}
                 </button>
             </form>

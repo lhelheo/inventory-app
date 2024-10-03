@@ -84,10 +84,10 @@ export const EditProductForm = () => {
     return (
         <div className="flex flex-col justify-center items-center h-screen">
             <div className="border rounded p-10">
-            <div className="my-4">
+            <div className="flex items-center justify-center my-4">
                 <h1 className="text-xl">Editar Produto</h1>
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col w-min gap-4">
+            <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center w-full gap-4">
                 <select 
                     value={selectedProductId || ''} 
                     onChange={(e) => setSelectedProductId(Number(e.target.value))} 
@@ -105,7 +105,7 @@ export const EditProductForm = () => {
                 <input ref={productPriceRef} type="number" className="rounded border p-2 placeholder-black text-black" placeholder="Preço do produto" step="0.01" required />
                 <input ref={productCodeRef} type="text" className="rounded border p-2 placeholder-black text-black" placeholder="Código do produto" required />
 
-                <button type="submit" className="py-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition-all" disabled={loading}>
+                <button type="submit" className="py-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition-all w-full" disabled={loading}>
                     {loading ? "Carregando..." : "Salvar Alterações"}
                 </button>
             </form>

@@ -49,7 +49,7 @@ export const AddClientForm = () => {
 
     return (
         <div className="flex flex-col justify-center items-center h-screen">
-            <div className="border border-opacity-30 border-blue-500 rounded p-10">
+            <div className="flex flex-col justify-center items-center border border-opacity-30 border-blue-500 rounded p-10">
             <div className="my-4">
                 <h1 className="text-xl">Adicionar Cliente</h1>
             </div>

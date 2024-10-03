@@ -36,7 +36,7 @@ export const DeleteProductForm = () => {
         setLoading(true);
 
         try {
-            await axios.delete(`http://localhost:3000/product/${selectedProductId}`);
+            await axios.delete(`${baseUrl}/product/${selectedProductId}`);
             setMessage("Produto deletado com sucesso.");
             setProducts(products.filter((product) => product.id !== selectedProductId));
         } catch (error) {
@@ -73,10 +73,10 @@ export const DeleteProductForm = () => {
 
                 <button 
                     onClick={handleDelete} 
-                    className="py-3 bg-red-600 hover:bg-red-500 transition-all"
+                    className="py-3 text-white bg-red-600 hover:bg-red-500 transition-all"
                     disabled={loading}
                 >
-                    {loading ? "Carregando..." : "Deletar Produto"}
+                    {loading ? "Carregando..." : "Deletar"}
                 </button>
             </div>
 
