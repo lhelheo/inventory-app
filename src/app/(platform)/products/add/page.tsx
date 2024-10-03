@@ -1,9 +1,11 @@
 "use client"
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import axios from 'axios';
+import { ICustomer } from '@/interface/customer';
+import { baseUrl } from '@/helpers/url';
 
 export const AddProductToClientForm = () => {
-    const [clients, setClients] = useState<any[]>([]);
+    const [clients, setClients] = useState<ICustomer[]>([]);
     const [selectedClientId, setSelectedClientId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -15,16 +17,20 @@ export const AddProductToClientForm = () => {
     useEffect(() => {
         async function fetchClients() {
             try {
-                const response = await axios.get("http://localhost:3000/client"); // Supondo que há uma rota para buscar clientes
+                const response = await axios.get(`${baseUrl}/client`); // Supondo que há uma rota para buscar clientes
                 setClients(response.data);
             } catch (error) {
-                setMessage("Erro ao carregar clientes.");
+                if (axios.isAxiosError(error) && error.response) {
+                    setMessage("Erro ao buscar os clientes.");
+                }
+                else {
+                    setMessage("Erro ao buscar os clientes.");
+                }
             }
         }
         fetchClients();
     }, []);
 
-    // Função para enviar o produto associado ao cliente
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
         setLoading(true);
@@ -42,17 +48,21 @@ export const AddProductToClientForm = () => {
         };
 
         try {
-            const response = await axios.post(`http://localhost:3000/client/${selectedClientId}/product`, productData);
+            const response = await axios.post(`${baseUrl}/client/${selectedClientId}/product`, productData);
             setMessage(`Produto adicionado ao cliente: ${response.data.name}`);
             clearForm();
         } catch (error) {
-            setMessage("Erro ao adicionar produto ao cliente.");
+            if (axios.isAxiosError(error) && error.response) {
+                setMessage("Erro ao adicionar o produto ao cliente.");
+            }
+            else {
+                setMessage("Erro ao adicionar o produto ao cliente.");
+            }
         } finally {
             setLoading(false);
         }
     }
 
-    // Função para limpar o formulário
     function clearForm() {
         if (productNameRef.current) productNameRef.current.value = '';
         if (productPriceRef.current) productPriceRef.current.value = '';

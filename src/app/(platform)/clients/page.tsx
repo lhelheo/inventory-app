@@ -36,8 +36,6 @@ export default function Home() {
     }
   }
 
-  console.log(customers.map((customer) => customer.product));
-
   return (
     <div className="p-10 flex flex-col h-full justify-center items-center">
       <h1 className="text-xl">Clientes</h1>

@@ -1,9 +1,11 @@
 "use client"
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import axios from 'axios';
+import { IProduct } from '@/interface/product';
+import { baseUrl } from '@/helpers/url';
 
 export const EditProductForm = () => {
-    const [products, setProducts] = useState<any[]>([]);
+    const [products, setProducts] = useState<IProduct[]>([]);
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -12,20 +14,23 @@ export const EditProductForm = () => {
     const productPriceRef = useRef<HTMLInputElement>(null);
     const productCodeRef = useRef<HTMLInputElement>(null);
 
-    // Função para buscar os produtos existentes
     useEffect(() => {
         async function fetchProducts() {
             try {
-                const response = await axios.get("http://localhost:3000/product"); // Supondo que há uma rota para buscar produtos
+                const response = await axios.get(`${baseUrl}/product`);
                 setProducts(response.data);
             } catch (error) {
-                setMessage("Erro ao carregar produtos.");
+                if (axios.isAxiosError(error) && error.response) {
+                    setMessage("Erro ao buscar os produtos.");
+                }
+                else {
+                    setMessage("Erro ao buscar os produtos.");
+                }
             }
         }
         fetchProducts();
     }, []);
 
-    // Função para carregar os dados do produto selecionado para edição
     useEffect(() => {
         if (selectedProductId) {
             const product = products.find((p) => p.id === selectedProductId);
@@ -37,7 +42,6 @@ export const EditProductForm = () => {
         }
     }, [selectedProductId, products]);
 
-    // Função para atualizar o produto selecionado
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
         setLoading(true);
@@ -55,17 +59,21 @@ export const EditProductForm = () => {
         };
 
         try {
-            await axios.put(`http://localhost:3000/product/${selectedProductId}`, updatedProduct);
+            await axios.put(`${baseUrl}/product/${selectedProductId}`, updatedProduct);
             setMessage("Produto atualizado com sucesso.");
             clearForm();
         } catch (error) {
-            setMessage("Erro ao atualizar o produto.");
+            if (axios.isAxiosError(error)) {
+                setMessage(error.response?.data?.error || "Erro ao atualizar o produto.");
+            }
+            else {
+                setMessage("Erro desconhecido ao atualizar o produto.");
+            }
         } finally {
             setLoading(false);
         }
     }
 
-    // Função para limpar o formulário após a atualização
     function clearForm() {
         if (productNameRef.current) productNameRef.current.value = '';
         if (productPriceRef.current) productPriceRef.current.value = '';

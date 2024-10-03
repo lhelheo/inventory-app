@@ -1,9 +1,11 @@
 "use client";
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import axios from 'axios';
+import { baseUrl } from '@/helpers/url';
+import { ICustomer } from '@/interface/customer';
 
 export const EditClientForm = () => {
-    const [clients, setClients] = useState<any[]>([]);
+    const [clients, setClients] = useState<ICustomer[]>([]);
     const [selectedClientId, setSelectedClientId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
@@ -12,20 +14,20 @@ export const EditClientForm = () => {
     const emailRef = useRef<HTMLInputElement>(null);
     const phoneRef = useRef<HTMLInputElement>(null);
 
-    // Função para buscar os clientes existentes
     useEffect(() => {
         async function fetchClients() {
             try {
-                const response = await axios.get("http://localhost:3000/client"); // Supondo que há uma rota para buscar clientes
+                const response = await axios.get(`${baseUrl}/client`);
                 setClients(response.data);
             } catch (error) {
-                setMessage("Erro ao carregar clientes.");
+                if (axios.isAxiosError(error) && error.response) {
+                    setMessage("Erro ao buscar os clientes.");
+                }
             }
         }
         fetchClients();
     }, []);
 
-    // Função para carregar os dados do cliente selecionado para edição
     useEffect(() => {
         if (selectedClientId) {
             const client = clients.find((c) => c.id === selectedClientId);
@@ -37,7 +39,6 @@ export const EditClientForm = () => {
         }
     }, [selectedClientId, clients]);
 
-    // Função para atualizar o cliente selecionado
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
         setLoading(true);
@@ -55,17 +56,20 @@ export const EditClientForm = () => {
         };
 
         try {
-            await axios.put(`http://localhost:3000/product/${selectedClientId}/client`, updatedClient);
+            await axios.put(`${baseUrl}/product/${selectedClientId}/client`, updatedClient);
             setMessage("Cliente atualizado com sucesso.");
             clearForm();
         } catch (error) {
-            setMessage("Erro ao atualizar o cliente.");
+            if (axios.isAxiosError(error)) {
+                setMessage(error.response?.data?.error || "Erro ao atualizar o cliente.");
+            } else {
+                setMessage("Erro desconhecido ao atualizar o cliente.");
+            }
         } finally {
             setLoading(false);
         }
     }
 
-    // Função para limpar o formulário após a atualização
     function clearForm() {
         if (nameRef.current) nameRef.current.value = '';
         if (emailRef.current) emailRef.current.value = '';

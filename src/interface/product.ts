@@ -1,7 +1,7 @@
 export interface IProduct {
     id?: number;
     name: string;
-    price: number;
+    price: string;
     clientID?: number;
-    product_code?: string;
+    product_code: string;
 }

@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useRef, FormEvent } from 'react';
 import axios from 'axios';
+import { baseUrl } from '@/helpers/url';
 
 export const AddClientForm = () => {
     const nameRef = useRef<HTMLInputElement>(null);
@@ -26,12 +27,15 @@ export const AddClientForm = () => {
         };
 
         try {
-            const response = await axios.post("http://localhost:3000/client", clientData);
+            const response = await axios.post(`${baseUrl}/client`, clientData);
             setMessage(`Cliente criado com sucesso: ${response.data.user.name}`);
             clearForm();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        } catch (error: any) {
-            setMessage(error.response?.data?.error || "Erro ao criar cliente ou produto.");
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                setMessage(error.response?.data?.error || "Erro ao criar cliente ou produto.");
+            } else {
+                setMessage("Erro desconhecido ao criar cliente ou produto.");
+            }
         } finally {
             setLoading(false);
         }

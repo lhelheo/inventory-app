@@ -1,27 +1,32 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { baseUrl } from '@/helpers/url';
+import { IProduct } from '@/interface/product';
 
 export const DeleteProductForm = () => {
-    const [products, setProducts] = useState<any[]>([]);
+    const [products, setProducts] = useState<IProduct[]>([]);
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
-    // Função para buscar os produtos
     useEffect(() => {
         async function fetchProducts() {
             try {
-                const response = await axios.get("http://localhost:3000/product"); // Supondo que há uma rota para buscar produtos
+                const response = await axios.get(`${baseUrl}/product`);
                 setProducts(response.data);
             } catch (error) {
-                setMessage("Erro ao carregar produtos.");
+                if (axios.isAxiosError(error) && error.response) {
+                    setMessage("Erro ao buscar os produtos.");
+                }
+                else {
+                    setMessage("Erro ao buscar os produtos.");
+                }
             }
         }
         fetchProducts();
     }, []);
 
-    // Função para deletar o produto selecionado
     async function handleDelete() {
         if (!selectedProductId) {
             setMessage("Por favor, selecione um produto.");
@@ -35,7 +40,12 @@ export const DeleteProductForm = () => {
             setMessage("Produto deletado com sucesso.");
             setProducts(products.filter((product) => product.id !== selectedProductId));
         } catch (error) {
-            setMessage("Erro ao deletar o produto.");
+            if (axios.isAxiosError(error) && error.response) {
+                setMessage("Erro ao deletar o produto.");
+            }
+            else {
+                setMessage("Erro ao deletar o produto.");
+            }
         } finally {
             setLoading(false);
         }
