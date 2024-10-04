@@ -13,7 +13,7 @@ export default function Products() {
     }, []);
     
     async function loadProducts() {
-        const response = await api.get(`${baseUrl}/product`);
+        const response = await api.get(`${baseUrl}/products`);
         setProducts(response.data);
     }
 

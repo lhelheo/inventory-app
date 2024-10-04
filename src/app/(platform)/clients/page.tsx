@@ -15,7 +15,7 @@ export default function Clients() {
   }, []);
 
   async function loadCustomers() {
-    const response = await api.get(`${baseUrl}/client`);
+    const response = await api.get(`${baseUrl}/clients`);
     setCustomers(response.data);
   }
 
