@@ -4,8 +4,10 @@ import { ICustomer } from "@/interface/customer";
 import { api } from "@/app/services/api";
 import { Trash2 } from "lucide-react";
 import { baseUrl } from "@/helpers/url";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const [customers, setCustomers] = useState<ICustomer[]>([]);
 
   useEffect(() => {
@@ -46,7 +48,7 @@ export default function Home() {
         ) : (
           customers.map((customer) => (
           <div key={customer.id} className="flex border p-10">
-            <div>
+            <div onClick={() => router.push(`/clients/${customer.id}`)}>
             {customer.name ? <h1>Nome: {customer.name}</h1> : <h1>Nome: Não informado</h1>}
             {customer.email ? <p>Email: {customer.email}</p> : <p>Email: Não informado</p>}
             {customer.phone ? <p>Telefone: {customer.phone}</p> : <p>Telefone: Não informado</p>}
