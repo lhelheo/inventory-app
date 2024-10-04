@@ -7,29 +7,17 @@ import React, { useEffect, useState } from 'react';
 
 export default function ClientPage(){
     const { id } = useParams<{ id: string }>();
-    const [client, setClient] = useState<ICustomer | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const [client, setClient] = useState<ICustomer>();
+
+    console.log(id);
 
     useEffect(() => {
-        loadClient();
+        loadCustomers();
     }, []);
-    
-    async function loadClient() {
-        try {
-            const response = await api.get(`${baseUrl}/client/${id}/`);
-            setClient(response.data);
-            console.log(response.data);
-        } catch (err) {
-            setError('Failed to load client data');
-        } finally {
-            setLoading(false);
-        }
-    }
 
-
-    if (error) {
-        return <div>Error: {error}</div>;
+    async function loadCustomers() {
+        const response = await api.get(`${baseUrl}/client/4`);
+        setClient(response.data);
     }
 
     if (!client) {
