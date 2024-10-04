@@ -6,7 +6,7 @@ import { Trash2 } from "lucide-react";
 import { baseUrl } from "@/helpers/url";
 import { useRouter } from "next/navigation";
 
-export default function Home() {
+export default function Clients() {
   const router = useRouter();
   const [customers, setCustomers] = useState<ICustomer[]>([]);
 
@@ -52,17 +52,6 @@ export default function Home() {
             {customer.name ? <h1>Nome: {customer.name}</h1> : <h1>Nome: Não informado</h1>}
             {customer.email ? <p>Email: {customer.email}</p> : <p>Email: Não informado</p>}
             {customer.phone ? <p>Telefone: {customer.phone}</p> : <p>Telefone: Não informado</p>}
-            <div className="bg-gray-100 text-black p-3">
-              {customer.product?.length !== 0 ? <h2 className="font-semibold pb-3">Produtos:</h2> : <p>Cliente não possui produtos</p>}
-              {customer.product?.map((product) => (
-            <div key={product.id}>
-              {product.name ? <p>Nome: {product.name}</p> : <p>Nome: Não informado</p>}
-              {product.price ? <p>Preço: ${product.price}</p> : <p>Preço: Não informado</p>}
-              {product.product_code ? <p>Código do produto: {product.product_code}</p> : <p>Código do produto: Não informado</p>}
-              <hr className="border border-gray-400 my-3" />
-            </div>
-              ))}
-            </div>
             <hr />
             </div>
             <div>
