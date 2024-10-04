@@ -17,7 +17,7 @@ export default function EditProduct() {
     useEffect(() => {
         async function fetchProducts() {
             try {
-                const response = await axios.get(`${baseUrl}/product`);
+                const response = await axios.get(`${baseUrl}/products`);
                 setProducts(response.data);
             } catch (error) {
                 if (axios.isAxiosError(error) && error.response) {

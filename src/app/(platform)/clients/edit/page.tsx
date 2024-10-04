@@ -17,7 +17,7 @@ export default function EditClient() {
     useEffect(() => {
         async function fetchClients() {
             try {
-                const response = await axios.get(`${baseUrl}/client`);
+                const response = await axios.get(`${baseUrl}/clients`);
                 setClients(response.data);
             } catch (error) {
                 if (axios.isAxiosError(error) && error.response) {

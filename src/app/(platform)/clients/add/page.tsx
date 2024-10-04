@@ -27,7 +27,7 @@ export default function CreateClient() {
         };
 
         try {
-            const response = await axios.post(`${baseUrl}/client`, clientData);
+            const response = await axios.post(`${baseUrl}/clients`, clientData);
             setMessage(`Cliente criado com sucesso: ${response.data.user.name}`);
             clearForm();
         } catch (error) {
