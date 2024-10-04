@@ -1,10 +1,10 @@
 "use client";
-import React, { useState, useEffect, useRef, FormEvent } from 'react';
+import { useState, useEffect, useRef, FormEvent } from 'react';
 import axios from 'axios';
 import { baseUrl } from '@/helpers/url';
 import { ICustomer } from '@/interface/customer';
 
-export default function EditClientForm() {
+export default function EditClient() {
     const [clients, setClients] = useState<ICustomer[]>([]);
     const [selectedClientId, setSelectedClientId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);

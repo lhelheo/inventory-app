@@ -1,9 +1,9 @@
 "use client"
-import React, { useState, useRef, FormEvent } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import axios from 'axios';
 import { baseUrl } from '@/helpers/url';
 
-export default function AddClientForm() {
+export default function CreateClient() {
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const phoneRef = useRef<HTMLInputElement>(null);

@@ -1,10 +1,10 @@
 "use client"
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '@/helpers/url';
 import { IProduct } from '@/interface/product';
 
-export default function DeleteProductForm() {
+export default function DeleteProduct() {
     const [products, setProducts] = useState<IProduct[]>([]);
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);

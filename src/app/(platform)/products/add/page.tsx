@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ICustomer } from '@/interface/customer';
 import { baseUrl } from '@/helpers/url';
 
-export default function AddProductToClientForm() {
+export default function CreateProduct() {
     const [clients, setClients] = useState<ICustomer[]>([]);
     const [selectedClientId, setSelectedClientId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
@@ -17,7 +17,7 @@ export default function AddProductToClientForm() {
     useEffect(() => {
         async function fetchClients() {
             try {
-                const response = await axios.get(`${baseUrl}/client`); // Supondo que há uma rota para buscar clientes
+                const response = await axios.get(`${baseUrl}/client`);
                 setClients(response.data);
             } catch (error) {
                 if (axios.isAxiosError(error) && error.response) {

@@ -2,13 +2,11 @@
 import { api } from '@/app/services/api';
 import { ICustomer } from '@/interface/customer';
 import { useParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export default function ClientPage(){
+export default function Client(){
     const { id } = useParams<{ id: string }>();
     const [client, setClient] = useState<ICustomer>();
-
-    console.log(id);
 
     useEffect(() => {
         loadCustomers();
@@ -24,15 +22,15 @@ export default function ClientPage(){
     }
 
     return (
-        <div>
-            <h1>Client Details</h1>
+        <div className="flex h-screen justify-center items-center">
+            <h1>Informações do cliente</h1>
             <p><strong>ID:</strong> {client.id}</p>
             <p><strong>Name:</strong> {client.name}</p>
             <p><strong>Email:</strong> {client.email}</p>
             <p><strong>Phone:</strong> {client.phone}</p>
             {
                 client.product?.map((product) => (
-                    <div key={product.id}>
+                    <div key={product.id} className="p-10 bg-black text-white">
                         <p><strong>Name:</strong> {product.name}</p>
                         <p><strong>Price:</strong> {product.price}</p>
                         <p><strong>Código:</strong> {product.product_code}</p>
