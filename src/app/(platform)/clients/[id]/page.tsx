@@ -17,8 +17,9 @@ export default function ClientPage(){
     
     async function loadClient() {
         try {
-            const response = await api.get(`${baseUrl}/client/${id}`);
+            const response = await api.get(`${baseUrl}/client/${id}/`);
             setClient(response.data);
+            console.log(response.data);
         } catch (err) {
             setError('Failed to load client data');
         } finally {
