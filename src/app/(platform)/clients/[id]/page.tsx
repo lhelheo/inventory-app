@@ -1,6 +1,5 @@
 "use client"
 import { api } from '@/app/services/api';
-import { baseUrl } from '@/helpers/url';
 import { ICustomer } from '@/interface/customer';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -16,7 +15,7 @@ export default function ClientPage(){
     }, []);
 
     async function loadCustomers() {
-        const response = await api.get(`https://userlist-testing.vercel.app/client/4`);
+        const response = await api.get(`https://userlist-testing.vercel.app/client/${id}`);
         setClient(response.data);
     }
 
