@@ -30,6 +30,15 @@ export default function ClientPage(){
             <p><strong>Name:</strong> {client.name}</p>
             <p><strong>Email:</strong> {client.email}</p>
             <p><strong>Phone:</strong> {client.phone}</p>
+            {
+                client.product?.map((product) => (
+                    <div key={product.id}>
+                        <p><strong>Name:</strong> {product.name}</p>
+                        <p><strong>Price:</strong> {product.price}</p>
+                        <p><strong>Código:</strong> {product.product_code}</p>
+                    </div>
+                ))
+            }
         </div>
     );
 };
