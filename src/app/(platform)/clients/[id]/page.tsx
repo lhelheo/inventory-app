@@ -16,7 +16,7 @@ export default function ClientPage(){
     }, []);
 
     async function loadCustomers() {
-        const response = await api.get(`${baseUrl}/client/4`);
+        const response = await api.get(`https://userlist-testing.vercel.app/client/4`);
         setClient(response.data);
     }
 
