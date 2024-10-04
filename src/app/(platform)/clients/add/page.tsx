@@ -57,7 +57,7 @@ export default function CreateClient() {
                 <input ref={nameRef} type="text" className="border rounded p-2 placeholder-black text-black" placeholder="Nome" required />
                 <input ref={emailRef} type="email" className="border rounded p-2 placeholder-black text-black" placeholder="Email" required />
                 <input ref={phoneRef} type="text" className="border rounded p-2 placeholder-black text-black" placeholder="Telefone" required />
-                <button type="submit" className="py-3 bg-blue-600 hover:bg-blue-500 transition-all" disabled={loading}>
+                <button type="submit" className="text-white rounded py-3 bg-blue-600 hover:bg-blue-500 transition-all" disabled={loading}>
                     {loading ? "Carregando..." : "Concluir"}
                 </button>
             </form>

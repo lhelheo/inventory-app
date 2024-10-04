@@ -73,7 +73,7 @@ export default function DeleteProduct() {
 
                 <button 
                     onClick={handleDelete} 
-                    className="py-3 text-white bg-red-600 hover:bg-red-500 transition-all"
+                    className="rounded py-3 text-white bg-red-600 hover:bg-red-500 transition-all"
                     disabled={loading}
                 >
                     {loading ? "Carregando..." : "Deletar"}

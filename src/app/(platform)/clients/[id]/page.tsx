@@ -22,15 +22,17 @@ export default function Client(){
     }
 
     return (
-        <div className="flex h-screen justify-center items-center">
-            <h1>Informações do cliente</h1>
-            <p><strong>ID:</strong> {client.id}</p>
-            <p><strong>Name:</strong> {client.name}</p>
-            <p><strong>Email:</strong> {client.email}</p>
-            <p><strong>Phone:</strong> {client.phone}</p>
+        <div className="flex flex-col h-screen justify-center items-center">
+            <div className="my-6">
+                <h1 className="font-semibold">Informações do cliente</h1>
+                <p>{client.id} - {client.name}</p>
+                <p>Contato - {client.email} / {client.phone}</p>
+            </div>
+            <p className="font-semibold">Produtos</p>
             {
                 client.product?.map((product) => (
-                    <div key={product.id} className="p-10 bg-black text-white">
+                    <div key={product.id} className="w-full max-w-[300px] p-10 border">
+                        <p><strong>ID:</strong> {product.id}</p>
                         <p><strong>Name:</strong> {product.name}</p>
                         <p><strong>Price:</strong> {product.price}</p>
                         <p><strong>Código:</strong> {product.product_code}</p>

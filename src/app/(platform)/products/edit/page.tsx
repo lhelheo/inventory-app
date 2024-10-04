@@ -96,7 +96,7 @@ export default function EditProduct() {
                     <option value="" disabled>Selecione um produto</option>
                     {products.map((product) => (
                         <option key={product.id} value={product.id}>
-                            {product.name} - R$ {product.price}
+                            {product.name} - {product.product_code}
                         </option>
                     ))}
                 </select>

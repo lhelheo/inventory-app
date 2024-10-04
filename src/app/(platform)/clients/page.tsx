@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { ICustomer } from "@/interface/customer";
 import { api } from "@/app/services/api";
-import { Trash2 } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 import { baseUrl } from "@/helpers/url";
 import { useRouter } from "next/navigation";
 
@@ -51,7 +51,7 @@ export default function Clients() {
       <h1 className="text-xl">Clientes</h1>
       <div className="w-max p-4 bg-white text-black">
         {loading ? (
-          <p>Loading...</p>
+          <p>Carregando clientes...</p>
         ) : customers.length === 0 ? (
           <p>Nenhum cliente encontrado</p>
         ) : (
@@ -61,21 +61,19 @@ export default function Clients() {
                 {customer.name ? <h1>Nome: {customer.name}</h1> : <h1>Nome: Não informado</h1>}
                 {customer.email ? <p>Email: {customer.email}</p> : <p>Email: Não informado</p>}
                 {customer.phone ? <p>Telefone: {customer.phone}</p> : <p>Telefone: Não informado</p>}
-                <hr />
               </div>
-              <div>
-                <button
-                  className="h-full font-bold px-2 text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all"
-                  onClick={() => handleDelete(customer.id)}
+              <div className="flex">
+                <div
+                  className="flex items-center h-full font-bold px-2 text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all"
+                  
                 >
-                  <Trash2 size={24} />
-                </button>
-                <button
-                  className="h-full font-bold px-2 text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all"
-                  onClick={() => router.push(`/clients/${customer.id}`)}
+                  <Trash2 size={18} onClick={() => handleDelete(customer.id)}/>
+                </div>
+                <div
+                  className="flex items-center h-full font-bold px-2 text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all"
                 >
-                  Visualizar
-                </button>
+                  <Eye size={18} onClick={() => router.push(`/clients/${customer.id}`)}/>
+                </div>
               </div>
             </div>
           ))
