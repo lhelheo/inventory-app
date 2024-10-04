@@ -48,7 +48,7 @@ export default function Home() {
         ) : (
           customers.map((customer) => (
           <div key={customer.id} className="flex border p-10">
-            <div onClick={() => router.push(`/clients/${customer.id}`)}>
+            <div>
             {customer.name ? <h1>Nome: {customer.name}</h1> : <h1>Nome: Não informado</h1>}
             {customer.email ? <p>Email: {customer.email}</p> : <p>Email: Não informado</p>}
             {customer.phone ? <p>Telefone: {customer.phone}</p> : <p>Telefone: Não informado</p>}
@@ -71,6 +71,12 @@ export default function Home() {
               onClick={() => handleDelete(customer.id)}
             >
               <Trash2 size={24}/>
+            </button>
+            <button
+              className="h-full font-bold px-2 text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all"
+              onClick={() => router.push(`/clients/${customer.id}`)}
+            >
+              Visualizar
             </button>
             </div>
           </div>

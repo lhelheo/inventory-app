@@ -1,4 +1,5 @@
 "use client"
+import { baseUrl } from '@/helpers/url';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -18,7 +19,8 @@ export default function ClientPage(){
     useEffect(() => {
         const fetchClient = async () => {
             try {
-                const response = await fetch(`/api/clients/${id}`);
+                const response = await fetch(`${baseUrl}/clients/${id}`);
+                console.log(response);
                 if (!response.ok) {
                     throw new Error('Failed to fetch client');
                 }
