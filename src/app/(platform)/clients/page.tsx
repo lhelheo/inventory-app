@@ -47,38 +47,49 @@ export default function Clients() {
   }
 
   return (
-    <div className="p-10 flex flex-col h-full justify-center items-center">
-      <h1 className="text-xl">Clientes</h1>
-      <div className="w-max p-4 bg-white text-black">
+    <div className="p-10 flex flex-col justify-center items-center h-screen bg-gray-100">
+      <h1 className="text-xl font-semibold text-gray-800 mb-4">Clientes</h1>
+      <div className="w-full max-w-4xl p-6 bg-white shadow-md rounded-lg">
         {loading ? (
-          <p>Carregando clientes...</p>
+          <p className="text-gray-600">Carregando clientes...</p>
         ) : customers.length === 0 ? (
-          <p>Nenhum cliente encontrado</p>
+          <p className="text-gray-600">Nenhum cliente encontrado</p>
         ) : (
-          customers.map((customer) => (
-            <div key={customer.id} className="flex border p-10">
-              <div>
-                {customer.name ? <h1>Nome: {customer.name}</h1> : <h1>Nome: Não informado</h1>}
-                {customer.email ? <p>Email: {customer.email}</p> : <p>Email: Não informado</p>}
-                {customer.phone ? <p>Telefone: {customer.phone}</p> : <p>Telefone: Não informado</p>}
-              </div>
-              <div className="flex">
-                <div
-                  className="flex items-center h-full font-bold px-2 text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all"
-                  
-                >
-                  <Trash2 size={18} onClick={() => handleDelete(customer.id)}/>
-                </div>
-                <div
-                  className="flex items-center h-full font-bold px-2 text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all"
-                >
-                  <Eye size={18} onClick={() => router.push(`/clients/${customer.id}`)}/>
-                </div>
-              </div>
-            </div>
-          ))
+          <table className="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead>
+              <tr className="bg-gray-200 text-gray-700">
+                <th className="px-4 py-2 text-left">Nome</th>
+                <th className="px-4 py-2 text-left">Email</th>
+                <th className="px-4 py-2 text-left">Telefone</th>
+                <th className="px-4 py-2 text-left">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {customers.map((customer) => (
+                <tr key={customer.id} className="border-t border-gray-200">
+                  <td className="px-4 py-2">{customer.name ? customer.name : 'Não informado'}</td>
+                  <td className="px-4 py-2">{customer.email ? customer.email : 'Não informado'}</td>
+                  <td className="px-4 py-2">{customer.phone ? customer.phone : 'Não informado'}</td>
+                  <td className="px-4 py-2 flex">
+                    <div
+                      className="flex items-center font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2"
+                      onClick={() => handleDelete(customer.id)}
+                    >
+                      <Trash2 size={18} />
+                    </div>
+                    <div
+                      className="flex items-center font-bold text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all"
+                      onClick={() => router.push(`/clients/${customer.id}`)}
+                    >
+                      <Eye size={18} />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         )}
       </div>
     </div>
   );
-}
+}  
