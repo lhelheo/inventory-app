@@ -55,7 +55,6 @@ export default function Clients() {
         ) : customers.length === 0 ? (
           <p className="text-gray-600">Nenhum cliente encontrado</p>
         ) : (
-          // Adicione a classe 'overflow-x-auto' para permitir scroll horizontal em telas pequenas
           <div className="overflow-x-auto">
             <table className="table-auto w-full bg-white shadow-md rounded-lg">
               <thead>
