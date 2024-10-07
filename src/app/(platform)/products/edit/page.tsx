@@ -82,36 +82,57 @@ export default function EditProduct() {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen">
-            <div className="border rounded p-10">
-            <div className="flex items-center justify-center my-4">
-                <h1 className="text-xl">Editar Produto</h1>
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
+            <div className="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full border border-gray-200">
+                <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Editar Produto</h1>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    <select
+                        value={selectedProductId || ''}
+                        onChange={(e) => setSelectedProductId(Number(e.target.value))}
+                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                        <option value="" disabled>Selecione um produto</option>
+                        {products.map((product) => (
+                            <option key={product.id} value={product.id}>
+                                {product.name} - {product.product_code}
+                            </option>
+                        ))}
+                    </select>
+    
+                    <input 
+                        ref={productNameRef} 
+                        type="text" 
+                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        placeholder="Nome do produto" 
+                        required 
+                    />
+                    <input 
+                        ref={productPriceRef} 
+                        type="number" 
+                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        placeholder="Preço do produto" 
+                        step="0.01" 
+                        required 
+                    />
+                    <input 
+                        ref={productCodeRef} 
+                        type="text" 
+                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        placeholder="Código do produto" 
+                        required 
+                    />
+    
+                    <button 
+                        type="submit" 
+                        className="py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-500 transition-all w-full focus:ring-4 focus:ring-blue-300 disabled:bg-blue-300"
+                        disabled={loading}
+                    >
+                        {loading ? "Carregando..." : "Salvar Alterações"}
+                    </button>
+                </form>
+    
+                {message && <p className="mt-4 text-center text-green-600">{message}</p>}
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center w-full gap-4">
-                <select 
-                    value={selectedProductId || ''} 
-                    onChange={(e) => setSelectedProductId(Number(e.target.value))} 
-                    className="rounded border p-2 text-black"
-                >
-                    <option value="" disabled>Selecione um produto</option>
-                    {products.map((product) => (
-                        <option key={product.id} value={product.id}>
-                            {product.name} - {product.product_code}
-                        </option>
-                    ))}
-                </select>
-
-                <input ref={productNameRef} type="text" className="rounded border p-2 placeholder-black text-black" placeholder="Nome do produto" required />
-                <input ref={productPriceRef} type="number" className="rounded border p-2 placeholder-black text-black" placeholder="Preço do produto" step="0.01" required />
-                <input ref={productCodeRef} type="text" className="rounded border p-2 placeholder-black text-black" placeholder="Código do produto" required />
-
-                <button type="submit" className="py-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition-all w-full" disabled={loading}>
-                    {loading ? "Carregando..." : "Salvar Alterações"}
-                </button>
-            </form>
-
-            {message && <p className="mt-4 text-center text-green-600">{message}</p>}
-        </div>
         </div>
     );
-};
+}    

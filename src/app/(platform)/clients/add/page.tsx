@@ -48,22 +48,42 @@ export default function CreateClient() {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen">
-            <div className="flex flex-col justify-center items-center border border-opacity-30 border-blue-500 rounded p-10">
-            <div className="my-4">
-                <h1 className="text-xl">Adicionar Cliente</h1>
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
+            <div className="bg-white shadow-md rounded-lg p-8 max-w-sm w-full border border-gray-200">
+                <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Adicionar Cliente</h1>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                    <input 
+                        ref={nameRef} 
+                        type="text" 
+                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        placeholder="Nome" 
+                        required 
+                    />
+                    <input 
+                        ref={emailRef} 
+                        type="email" 
+                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        placeholder="Email" 
+                        required 
+                    />
+                    <input 
+                        ref={phoneRef} 
+                        type="text" 
+                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                        placeholder="Telefone" 
+                        required 
+                    />
+                    <button 
+                        type="submit" 
+                        className="bg-blue-600 text-white rounded-lg py-3 mt-4 hover:bg-blue-500 transition-all focus:ring-4 focus:ring-blue-300 disabled:bg-blue-300"
+                        disabled={loading}
+                    >
+                        {loading ? "Carregando..." : "Concluir"}
+                    </button>
+                </form>
+    
+                {message && <p className="mt-4 text-center text-green-600">{message}</p>}
             </div>
-            <form onSubmit={handleSubmit} className="flex flex-col w-min gap-4">
-                <input ref={nameRef} type="text" className="border rounded p-2 placeholder-black text-black" placeholder="Nome" required />
-                <input ref={emailRef} type="email" className="border rounded p-2 placeholder-black text-black" placeholder="Email" required />
-                <input ref={phoneRef} type="text" className="border rounded p-2 placeholder-black text-black" placeholder="Telefone" required />
-                <button type="submit" className="text-white rounded py-3 bg-blue-600 hover:bg-blue-500 transition-all" disabled={loading}>
-                    {loading ? "Carregando..." : "Concluir"}
-                </button>
-            </form>
-
-            {message && <p className="mt-4 text-center text-green-600">{message}</p>}
-        </div>
         </div>
     );
-};
+}    

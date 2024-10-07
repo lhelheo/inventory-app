@@ -70,36 +70,57 @@ export default function CreateProduct() {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen">
-            <div className="border p-10 rounded flex flex-col items-center">
-            <div className="my-4">
-                <h1 className="text-xl">Adicionar produto a um cliente</h1>
-            </div>
-            <form onSubmit={handleSubmit} className="flex flex-col w-min gap-4">
-                <select 
-                    value={selectedClientId || ''} 
-                    onChange={(e) => setSelectedClientId(Number(e.target.value))} 
-                    className="border rounded p-2 text-black"
-                >
-                    <option value="" disabled>Selecione um cliente</option>
-                    {clients.map((client) => (
-                        <option key={client.id} value={client.id}>
-                            {client.name}
-                        </option>
-                    ))}
-                </select>
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
+    <div className="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full border border-gray-200">
+        <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Adicionar Produto a um Cliente</h1>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <select
+                value={selectedClientId || ''}
+                onChange={(e) => setSelectedClientId(Number(e.target.value))}
+                className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+                <option value="" disabled>Selecione um cliente</option>
+                {clients.map((client) => (
+                    <option key={client.id} value={client.id}>
+                        {client.name}
+                    </option>
+                ))}
+            </select>
 
-                <input ref={productNameRef} type="text" className="border rounded p-2 placeholder-black text-black" placeholder="Nome do produto" required />
-                <input ref={productPriceRef} type="number" className="border rounded p-2 placeholder-black text-black" placeholder="Preço do produto" step="0.01" required />
-                <input ref={productCodeRef} type="text" className="border rounded p-2 placeholder-black text-black" placeholder="Código do produto" required />
+            <input 
+                ref={productNameRef} 
+                type="text" 
+                className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                placeholder="Nome do produto" 
+                required 
+            />
+            <input 
+                ref={productPriceRef} 
+                type="number" 
+                className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                placeholder="Preço do produto" 
+                step="0.01" 
+                required 
+            />
+            <input 
+                ref={productCodeRef} 
+                type="text" 
+                className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                placeholder="Código do produto" 
+                required 
+            />
 
-                <button type="submit" className="rounded py-3 text-white bg-blue-600 hover:bg-blue-500 transition-all" disabled={loading}>
-                    {loading ? "Carregando..." : "Adicionar Produto"}
-                </button>
-            </form>
+            <button 
+                type="submit" 
+                className="bg-blue-600 text-white rounded-lg py-3 mt-4 hover:bg-blue-500 transition-all focus:ring-4 focus:ring-blue-300 disabled:bg-blue-300"
+                disabled={loading}
+            >
+                {loading ? "Carregando..." : "Adicionar Produto"}
+            </button>
+        </form>
 
-            {message && <p className="mt-4 text-center text-green-600">{message}</p>}
-        </div>
-        </div>
+        {message && <p className="mt-4 text-center text-green-600">{message}</p>}
+    </div>
+</div>
     );
 };
