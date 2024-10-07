@@ -47,7 +47,7 @@ export default function Clients() {
   }
 
   return (
-    <div className="p-10 flex flex-col justify-center items-center h-screen bg-gray-100">
+    <div className="p-4 flex flex-col justify-center items-center min-h-screen bg-gray-100">
       <h1 className="text-xl font-semibold text-gray-800 mb-4">Clientes</h1>
       <div className="w-full max-w-4xl p-6 bg-white shadow-md rounded-lg">
         {loading ? (
@@ -55,39 +55,42 @@ export default function Clients() {
         ) : customers.length === 0 ? (
           <p className="text-gray-600">Nenhum cliente encontrado</p>
         ) : (
-          <table className="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden">
-            <thead>
-              <tr className="bg-gray-200 text-gray-700">
-                <th className="px-4 py-2 text-left">Nome</th>
-                <th className="px-4 py-2 text-left">Email</th>
-                <th className="px-4 py-2 text-left">Telefone</th>
-                <th className="px-4 py-2 text-left">Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {customers.map((customer) => (
-                <tr key={customer.id} className="border-t border-gray-200">
-                  <td className="px-4 py-2">{customer.name ? customer.name : 'Não informado'}</td>
-                  <td className="px-4 py-2">{customer.email ? customer.email : 'Não informado'}</td>
-                  <td className="px-4 py-2">{customer.phone ? customer.phone : 'Não informado'}</td>
-                  <td className="px-4 py-2 flex">
-                    <div
-                      className="flex items-center font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2"
-                      onClick={() => handleDelete(customer.id)}
-                    >
-                      <Trash2 size={18} />
-                    </div>
-                    <div
-                      className="flex items-center font-bold text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all"
-                      onClick={() => router.push(`/clients/${customer.id}`)}
-                    >
-                      <Eye size={18} />
-                    </div>
-                  </td>
+          // Adicione a classe 'overflow-x-auto' para permitir scroll horizontal em telas pequenas
+          <div className="overflow-x-auto">
+            <table className="table-auto w-full bg-white shadow-md rounded-lg">
+              <thead>
+                <tr className="bg-gray-200 text-gray-700">
+                  <th className="px-4 py-2 text-left">Nome</th>
+                  <th className="px-4 py-2 text-left">Email</th>
+                  <th className="px-4 py-2 text-left">Telefone</th>
+                  <th className="px-4 py-2 text-left">Ações</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {customers.map((customer) => (
+                  <tr key={customer.id} className="border-t border-gray-200">
+                    <td className="px-4 py-2">{customer.name || 'Não informado'}</td>
+                    <td className="px-4 py-2">{customer.email || 'Não informado'}</td>
+                    <td className="px-4 py-2">{customer.phone || 'Não informado'}</td>
+                    <td className="px-4 py-2 flex">
+                      <div
+                        className="flex items-center font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2"
+                        onClick={() => handleDelete(customer.id)}
+                      >
+                        <Trash2 size={18} />
+                      </div>
+                      <div
+                        className="flex items-center font-bold text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all"
+                        onClick={() => router.push(`/clients/${customer.id}`)}
+                      >
+                        <Eye size={18} />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>
