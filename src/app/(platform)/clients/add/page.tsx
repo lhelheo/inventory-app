@@ -1,7 +1,6 @@
 "use client"
-import { useState, useRef, FormEvent } from 'react';
-import axios from 'axios';
-import { baseUrl } from '@/helpers/url';
+import { useRef, useState, FormEvent } from "react";
+import axios from "axios";
 
 export default function CreateClient() {
     const nameRef = useRef<HTMLInputElement>(null);
@@ -13,38 +12,88 @@ export default function CreateClient() {
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
         setLoading(true);
-
-        if (!nameRef.current || !emailRef.current || !phoneRef.current) {
-            setMessage("Nome, email e telefone são obrigatórios.");
-            setLoading(false);
-            return;
-        }
-
-        const clientData = {
-            name: nameRef.current.value,
-            email: emailRef.current.value,
-            phone: phoneRef.current.value,
-        };
+        setMessage(null);  // Resetar a mensagem
 
         try {
-            const response = await axios.post(`${baseUrl}/clients`, clientData);
-            setMessage(`Cliente criado com sucesso: ${response.data.user.name}`);
-            clearForm();
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                setMessage(error.response?.data?.error || "Erro ao criar cliente ou produto.");
-            } else {
-                setMessage("Erro desconhecido ao criar cliente ou produto.");
-            }
+            const { name, email, phone } = getFormData();
+            const { token, userID } = getAuthData();
+
+            await addClient({ name, email, phone, userID, token });
+            clearFormFields();
+            setMessage("Cliente adicionado com sucesso!");
+        } catch (error: any) {
+            handleError(error);
         } finally {
             setLoading(false);
         }
     }
 
-    function clearForm() {
-        if (nameRef.current) nameRef.current.value = '';
-        if (emailRef.current) emailRef.current.value = '';
-        if (phoneRef.current) phoneRef.current.value = '';
+    function getFormData() {
+        const name = nameRef.current?.value;
+        const email = emailRef.current?.value;
+        const phone = phoneRef.current?.value;
+
+        if (!name || !email || !phone) {
+            throw new Error("Todos os campos são obrigatórios.");
+        }
+
+        return { name, email, phone };
+    }
+
+    function getAuthData() {
+        const token = localStorage.getItem("token");
+        const storedUser = localStorage.getItem("user");
+
+        if (!token || !storedUser) {
+            throw new Error("Usuário não autenticado.");
+        }
+
+        let userAuth;
+        try {
+            userAuth = JSON.parse(storedUser);
+        } catch {
+            throw new Error("Erro ao processar dados de autenticação.");
+        }
+
+        const userID = userAuth?.id;
+        if (!userID) {
+            throw new Error("ID de usuário inválido.");
+        }
+
+        return { token, userID };
+    }
+
+    async function addClient({ name, email, phone, userID, token }: any) {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/clients`, {
+            name,
+            email,
+            phone,
+            userID,
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,  // Adiciona o token ao cabeçalho
+            }
+        });
+
+        if (response.status !== 201) {
+            throw new Error("Falha ao adicionar cliente.");
+        }
+    }
+
+    function clearFormFields() {
+        if (nameRef.current) nameRef.current.value = "";
+        if (emailRef.current) emailRef.current.value = "";
+        if (phoneRef.current) phoneRef.current.value = "";
+    }
+
+    function handleError(error: any) {
+        if (axios.isAxiosError(error) && error.response) {
+            console.error("Failed to create client", error.response.data);
+            setMessage(error.response.data.message || "Erro ao adicionar o cliente.");
+        } else {
+            console.error("Failed to create client", error);
+            setMessage(error.message || "Erro inesperado ao adicionar o cliente.");
+        }
     }
 
     return (
@@ -86,4 +135,4 @@ export default function CreateClient() {
             </div>
         </div>
     );
-}    
+}

@@ -1,70 +1,91 @@
 "use client"
-import { Eye, PackagePlus, Pencil, Plus, Trash2, User2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
-export default function Home() {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false); 
+export default function LoginPage() {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
 
-  const handleNavigation = (path: string) => {
-    setLoading(true); 
-    router.push(path); 
-  };
+    const handleLogin = async (event: React.FormEvent) => {
+        event.preventDefault();
+        setError(null);
+        setLoading(true);
 
-  return (
-    <div className="flex flex-col min-h-screen justify-center items-center bg-gray-100">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-xl w-full text-center">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Gerenciamento de Inventário</h1>
-        <p className="text-lg text-gray-600 mb-6">Selecione uma ação abaixo para prosseguir:</p>
+        try {
+            const response = await axios.post('http://localhost:3000/login', { username, password });
 
-        <div className="grid grid-cols-2 gap-4">
-          <button 
-            onClick={() => handleNavigation('/clients')}
-            className="bg-blue-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-blue-600 transition-all">
-            <User2 size={32} className="mb-2" />
-            <span className="font-medium">Visualizar Clientes</span>
-          </button>
+            if (response.status === 200 && response.data?.token) {
+                console.log('Login successful:', response.data);
 
-          <button 
-            onClick={() => handleNavigation('/clients/add')}
-            className="bg-green-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-green-600 transition-all">
-            <Plus size={32} className="mb-2" />
-            <span className="font-medium">Adicionar Cliente</span>
-          </button>
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
 
-          <button 
-            onClick={() => handleNavigation('/products')}
-            className="bg-blue-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-blue-600 transition-all">
-            <Eye size={32} className="mb-2" />
-            <span className="font-medium">Visualizar Produtos</span>
-          </button>
+                router.push('/home');
+            } else {
+                setError('Invalid login credentials');
+                console.log('Login failed:', response.data);
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error) && error.response) {
+                console.error('Login error:', error.response.data);
+                setError(error.response.data.message || 'Login failed');
+            } else {
+                console.error('Login error:', error);
+                setError('An unexpected error occurred');
+            }
+        } finally {
+            setLoading(false); 
+        }
+    };
 
-          <button 
-            onClick={() => handleNavigation('/products/add')}
-            className="bg-green-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-green-600 transition-all">
-            <PackagePlus size={32} className="mb-2" />
-            <span className="font-medium">Adicionar Produto</span>
-          </button>
-
-          <button 
-            onClick={() => handleNavigation('/products/edit')}
-            className="bg-yellow-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-yellow-600 transition-all">
-            <Pencil size={32} className="mb-2" />
-            <span className="font-medium">Editar Produto</span>
-          </button>
-
-          <button 
-            onClick={() => handleNavigation('/products/delete')}
-            className="bg-red-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-red-600 transition-all">
-            <Trash2 size={32} className="mb-2" />
-            <span className="font-medium">Deletar Produto</span>
-          </button>
+    return (
+        <div className="flex justify-center items-center h-screen">
+            <form 
+                onSubmit={handleLogin}
+                className="flex flex-col w-72"
+            >
+                <h2 className="text-xl">Login</h2>
+                <div className="my-4">
+                    <label>
+                        Email:
+                        <input
+                            type="text"
+                            className="flex border rounded w-full mb-2 p-2"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Password:
+                        <input
+                            type="password"
+                            className="flex border rounded w-full mb-2 p-2"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                
+                <div className="flex flex-col">
+                    <button 
+                        type="submit" 
+                        className="px-4 py-2 bg-blue-500 text-white rounded"   
+                        disabled={loading}>
+                        {loading ? 'Loading...' : 'Login'}
+                    </button>
+                    {error && 
+                        <p className="flex justify-center text-red-500 my-4">
+                            {error}
+                        </p>
+                    }
+                </div>
+            </form>
         </div>
-
-        {/* Exibe a mensagem de carregamento quando o estado de loading está ativo */}
-        {loading && <p className="mt-6 text-blue-600">Carregando, por favor aguarde...</p>}
-      </div>
-    </div>
-  );
-}
+    );
+};
