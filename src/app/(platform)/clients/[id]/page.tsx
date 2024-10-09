@@ -1,13 +1,13 @@
 "use client"
 import { api } from '@/app/services/api';
-import { ICustomer } from '@/interface/customer';
+import { IClient } from '@/interface/interfaces';
 import { useParams } from 'next/navigation';
 import React from 'react';
 import { useEffect, useState } from 'react';
 
 export default function Client() {
     const { id } = useParams<{ id: string }>();
-    const [client, setClient] = useState<ICustomer>();
+    const [client, setClient] = useState<IClient>();
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

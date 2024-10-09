@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { ICustomer } from "@/interface/customer";
 import { api } from "@/app/services/api";
 import { Eye, Pencil, Trash2 } from "lucide-react";
 import { baseUrl } from "@/helpers/url";
 import { useRouter } from "next/navigation";
+import { IClient } from "@/interface/interfaces";
 
 export default function Clients() {
   const router = useRouter();
-  const [customers, setCustomers] = useState<ICustomer[]>([]);
+  const [customers, setCustomers] = useState<IClient[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 

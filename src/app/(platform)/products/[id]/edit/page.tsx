@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef, FormEvent } from 'react';
 import axios from 'axios';
 import { baseUrl } from '@/helpers/url';
-import { IProduct } from '@/interface/product';
+import { IProduct } from '@/interface/interfaces';
 
 interface Product {
     params: {

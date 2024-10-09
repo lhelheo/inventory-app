@@ -1,11 +1,11 @@
 "use client"
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import axios from 'axios';
-import { ICustomer } from '@/interface/customer';
 import { baseUrl } from '@/helpers/url';
+import { IClient } from '@/interface/interfaces';
 
 export default function CreateProduct() {
-    const [clients, setClients] = useState<ICustomer[]>([]);
+    const [clients, setClients] = useState<IClient[]>([]);
     const [selectedClientId, setSelectedClientId] = useState<number | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);

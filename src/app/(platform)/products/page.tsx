@@ -2,7 +2,7 @@
 import { api } from "@/app/services/api";
 import { formatData } from "@/helpers/format";
 import { baseUrl } from "@/helpers/url";
-import { IProduct } from "@/interface/product";
+import { IProduct } from "@/interface/interfaces";
 import { Pencil } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React from "react";

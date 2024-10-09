@@ -1,8 +1,8 @@
 "use client"
 import { useState, useEffect, useRef, FormEvent } from 'react';
 import axios from 'axios';
-import { IProduct } from '@/interface/product';
 import { baseUrl } from '@/helpers/url';
+import { IProduct } from '@/interface/interfaces';
 
 export default function EditProduct() {
     const [products, setProducts] = useState<IProduct[]>([]);
@@ -36,8 +36,8 @@ export default function EditProduct() {
             const product = products.find((p) => p.id === selectedProductId);
             if (productNameRef.current && productPriceRef.current && productCodeRef.current && product) {
                 productNameRef.current.value = product.name;
-                productPriceRef.current.value = product.price;
-                productCodeRef.current.value = product.product_code;
+                productPriceRef.current.value = product.price.toString();
+                productCodeRef.current.value = product.product_code || '';
             }
         }
     }, [selectedProductId, products]);
