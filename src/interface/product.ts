@@ -1,11 +1,8 @@
-import Client from "@/app/(platform)/clients/[id]/page";
-import { User } from "lucide-react";
-
 export interface IProduct {
     id: number;
     name: string;
     price: string;
-    status: string;
+    status: "Disponivel" | "Vendido" | "Em Processamento";
     supplier: string;
     description?: string;
     cost_price: string;

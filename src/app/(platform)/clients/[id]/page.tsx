@@ -26,7 +26,7 @@ export default function Client() {
     }
 
     const totalSoldPrice = client?.product
-        ?.filter(product => product.status === "Disponivel")
+        ?.filter(product => product.status === "Vendido")
         .reduce((total, product) => total + Number(product.price), 0);
 
     return (
