@@ -25,7 +25,7 @@ export default function Client() {
         }
     }
 
-    const totalSoldPrice = client?.product
+    const totalSoldPrice = client?.products
         ?.filter(product => product.status === "Vendido")
         .reduce((total, product) => total + Number(product.price), 0);
 
@@ -52,7 +52,7 @@ export default function Client() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {client?.product?.map((product) => (
+                                {client?.products?.map((product) => (
                                     <tr key={product.id} className="border-t border-gray-200">
                                         <td className="px-4 py-2">{product.name}</td>
                                         <td className="px-4 py-2">{product.price}</td>
