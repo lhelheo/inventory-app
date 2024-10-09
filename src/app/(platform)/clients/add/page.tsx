@@ -1,138 +1,153 @@
-"use client"
-import { useRef, useState, FormEvent } from "react";
-import axios from "axios";
+"use client";
+import React, { useState } from 'react';
+import axios from 'axios';
+
+interface ClientFormData {
+  name: string;
+  email: string;
+  phone: string;
+  productName?: string;
+  productPrice?: number;
+  productCode?: string;
+}
 
 export default function CreateClient() {
-    const nameRef = useRef<HTMLInputElement>(null);
-    const emailRef = useRef<HTMLInputElement>(null);
-    const phoneRef = useRef<HTMLInputElement>(null);
-    const [message, setMessage] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+  const [formData, setFormData] = useState<ClientFormData>({
+    name: '',
+    email: '',
+    phone: '',
+    productName: '',
+    productPrice: undefined,
+    productCode: '',
+  });
 
-    async function handleSubmit(event: FormEvent) {
-        event.preventDefault();
-        setLoading(true);
-        setMessage(null);  // Resetar a mensagem
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: name === "productPrice" ? Number(value) : value, // Converte para número se for productPrice
+    }));
+  };
 
-        try {
-            const { name, email, phone } = getFormData();
-            const { token, userID } = getAuthData();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-            await addClient({ name, email, phone, userID, token });
-            clearFormFields();
-            setMessage("Cliente adicionado com sucesso!");
-        } catch (error: any) {
-            handleError(error);
-        } finally {
-            setLoading(false);
-        }
+    // Obtendo o token do localStorage
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert('Usuário não autenticado.');
+      return;
     }
 
-    function getFormData() {
-        const name = nameRef.current?.value;
-        const email = emailRef.current?.value;
-        const phone = phoneRef.current?.value;
-
-        if (!name || !email || !phone) {
-            throw new Error("Todos os campos são obrigatórios.");
-        }
-
-        return { name, email, phone };
+    // Decodificando o token para obter o userID
+    let userID: number | undefined;
+    try {
+      const decodedToken = JSON.parse(atob(token.split('.')[1])); // Decodifica o payload do token
+      userID = decodedToken.id; // Altere conforme a estrutura do seu token
+    } catch (error) {
+      console.error('Erro ao decodificar o token:', error);
+      alert('Erro ao processar o token de autenticação.');
+      return;
     }
 
-    function getAuthData() {
-        const token = localStorage.getItem("token");
-        const storedUser = localStorage.getItem("user");
-
-        if (!token || !storedUser) {
-            throw new Error("Usuário não autenticado.");
-        }
-
-        let userAuth;
-        try {
-            userAuth = JSON.parse(storedUser);
-        } catch {
-            throw new Error("Erro ao processar dados de autenticação.");
-        }
-
-        const userID = userAuth?.id;
-        if (!userID) {
-            throw new Error("ID de usuário inválido.");
-        }
-
-        return { token, userID };
+    if (userID === undefined) {
+      alert('ID de usuário não encontrado no token.');
+      return;
     }
 
-    async function addClient({ name, email, phone, userID, token }: any) {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/clients`, {
-            name,
-            email,
-            phone,
-            userID,
-        }, {
-            headers: {
-                Authorization: `Bearer ${token}`,  // Adiciona o token ao cabeçalho
-            }
-        });
-
-        if (response.status !== 201) {
-            throw new Error("Falha ao adicionar cliente.");
-        }
+    try {
+      const response = await axios.post('http://localhost:3000/client', {
+        ...formData,
+        userID, // Inclui o userID no corpo da requisição
+      });
+      console.log(response.data);
+      alert('Cliente criado com sucesso!');
+      clearForm();  // Limpa o formulário após a criação
+    } catch (error) {
+      console.error('Erro ao criar cliente:', error);
+      alert('Falha ao criar cliente. Verifique os dados e tente novamente.');
     }
+  };
 
-    function clearFormFields() {
-        if (nameRef.current) nameRef.current.value = "";
-        if (emailRef.current) emailRef.current.value = "";
-        if (phoneRef.current) phoneRef.current.value = "";
-    }
+  const clearForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      productName: '',
+      productPrice: undefined,
+      productCode: '',
+    });
+  };
 
-    function handleError(error: any) {
-        if (axios.isAxiosError(error) && error.response) {
-            console.error("Failed to create client", error.response.data);
-            setMessage(error.response.data.message || "Erro ao adicionar o cliente.");
-        } else {
-            console.error("Failed to create client", error);
-            setMessage(error.message || "Erro inesperado ao adicionar o cliente.");
-        }
-    }
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4">
+      <label htmlFor="name">Nome:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        required
+        className="border border-gray-300 rounded-lg p-2"
+      />
 
-    return (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
-            <div className="bg-white shadow-md rounded-lg p-8 max-w-sm w-full border border-gray-200">
-                <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Adicionar Cliente</h1>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                    <input 
-                        ref={nameRef} 
-                        type="text" 
-                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                        placeholder="Nome" 
-                        required 
-                    />
-                    <input 
-                        ref={emailRef} 
-                        type="email" 
-                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                        placeholder="Email" 
-                        required 
-                    />
-                    <input 
-                        ref={phoneRef} 
-                        type="text" 
-                        className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                        placeholder="Telefone" 
-                        required 
-                    />
-                    <button 
-                        type="submit" 
-                        className="bg-blue-600 text-white rounded-lg py-3 mt-4 hover:bg-blue-500 transition-all focus:ring-4 focus:ring-blue-300 disabled:bg-blue-300"
-                        disabled={loading}
-                    >
-                        {loading ? "Carregando..." : "Concluir"}
-                    </button>
-                </form>
-    
-                {message && <p className="mt-4 text-center text-green-600">{message}</p>}
-            </div>
-        </div>
-    );
+      <label htmlFor="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        required
+        className="border border-gray-300 rounded-lg p-2"
+      />
+
+      <label htmlFor="phone">Telefone:</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        required
+        className="border border-gray-300 rounded-lg p-2"
+      />
+
+      <label htmlFor="productName">Nome do Produto:</label>
+      <input
+        type="text"
+        id="productName"
+        name="productName"
+        value={formData.productName}
+        onChange={handleChange}
+        className="border border-gray-300 rounded-lg p-2"
+      />
+
+      <label htmlFor="productPrice">Preço do Produto:</label>
+      <input
+        type="number"
+        id="productPrice"
+        name="productPrice"
+        value={formData.productPrice !== undefined ? formData.productPrice : ''}
+        onChange={handleChange}
+        className="border border-gray-300 rounded-lg p-2"
+      />
+
+      <label htmlFor="productCode">Código do Produto:</label>
+      <input
+        type="text"
+        id="productCode"
+        name="productCode"
+        value={formData.productCode}
+        onChange={handleChange}
+        className="border border-gray-300 rounded-lg p-2"
+      />
+
+      <button type="submit" className="bg-blue-600 text-white rounded-lg py-2 mt-4 hover:bg-blue-500 transition-all">
+        Criar Cliente
+      </button>
+    </form>
+  );
 }

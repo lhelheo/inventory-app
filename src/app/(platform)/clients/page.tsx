@@ -17,7 +17,7 @@ export default function Clients() {
 
   async function loadCustomers() {
     try {
-      const response = await api.get(`${baseUrl}/clients`);
+      const response = await api.get(`https://userlist-testing.vercel.app/clients`);
       setCustomers(response.data);
     } catch (error) {
       console.error("Failed to load customers", error);
