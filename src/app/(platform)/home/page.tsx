@@ -55,7 +55,6 @@ export default function Login() {
           </button>
         </div>
 
-        {/* Exibe a mensagem de carregamento quando o estado de loading está ativo */}
         {loading && <p className="mt-6 text-blue-600">Carregando, por favor aguarde...</p>}
       </div>
     </div>
