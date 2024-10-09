@@ -56,7 +56,7 @@ export default function CreateClient() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/client', {
+      const response = await axios.post('https://userlist-testing.vercel.app/client', {
         ...formData,
         userID, // Inclui o userID no corpo da requisição
       });
