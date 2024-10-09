@@ -1,5 +1,5 @@
 "use client"
-import { Eye, PackagePlus, Pencil, Plus, Trash2, User2 } from "lucide-react";
+import { Eye, PackagePlus, Plus, Trash2, User2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -45,13 +45,6 @@ export default function Login() {
             className="bg-green-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-green-600 transition-all">
             <PackagePlus size={32} className="mb-2" />
             <span className="font-medium">Adicionar Produto</span>
-          </button>
-
-          <button 
-            onClick={() => handleNavigation('/products/edit')}
-            className="bg-yellow-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-yellow-600 transition-all">
-            <Pencil size={32} className="mb-2" />
-            <span className="font-medium">Editar Produto</span>
           </button>
 
           <button 

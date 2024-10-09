@@ -1,5 +1,6 @@
 "use client"
 import { api } from "@/app/services/api";
+import { formatData } from "@/helpers/format";
 import { baseUrl } from "@/helpers/url";
 import { IProduct } from "@/interface/product";
 import React from "react";
@@ -42,6 +43,8 @@ export default function Products() {
                                     <p className="text-gray-700"><strong>Nome:</strong> {product.name ?? "Não informado"}</p>
                                     <p className="text-gray-700"><strong>Preço:</strong> {product.price ? `R$ ${product.price}` : "Não informado"}</p>
                                     <p className="text-gray-700"><strong>Código:</strong> {product.product_code ?? "Não informado"}</p>
+                                    <p className="text-gray-700"><strong>Criado em:</strong> {formatData(product.createAt) ?? "Não informado"}</p>
+                                    <p className="text-gray-700"><strong>Atualizado em:</strong> {formatData(product.updateAt) ?? "Não informado"}</p>
                                 </div>
                             ))
                         ) : (

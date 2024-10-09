@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { ICustomer } from "@/interface/customer";
 import { api } from "@/app/services/api";
-import { Eye, Trash2 } from "lucide-react";
+import { Eye, Pencil, Trash2 } from "lucide-react";
 import { baseUrl } from "@/helpers/url";
 import { useRouter } from "next/navigation";
 
@@ -79,10 +79,16 @@ export default function Clients() {
                         <Trash2 size={18} />
                       </div>
                       <div
-                        className="flex items-center font-bold text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all"
+                        className="flex items-center font-bold text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all mr-2"
                         onClick={() => router.push(`/clients/${customer.id}`)}
                       >
                         <Eye size={18} />
+                      </div>
+                      <div
+                        className="flex items-center font-bold text-yellow-500 hover:text-yellow-700 cursor-pointer ease-linear transition-all"
+                        onClick={() => router.push(`/clients/${customer.id}/edit`)}
+                      >
+                        <Pencil size={18} />
                       </div>
                     </td>
                   </tr>
