@@ -47,6 +47,7 @@ export default function Client(){
                             <th className="px-4 py-2 text-left">Nome</th>
                             <th className="px-4 py-2 text-left">Preço</th>
                             <th className="px-4 py-2 text-left">Código</th>
+                            <th className="px-4 py-2 text-left">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,6 +56,7 @@ export default function Client(){
                                 <td className="px-4 py-2">{product.name}</td>
                                 <td className="px-4 py-2">{product.price}</td>
                                 <td className="px-4 py-2">{product.product_code}</td>
+                                <td className="px-4 py-2">{product.status}</td>
                             </tr>
                         ))}
                     </tbody>
