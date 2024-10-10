@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { baseUrl } from '@/helpers/url';
-import { IProduct } from '@/interface/product';
+import { IProduct } from '@/interface/interfaces';
 
 export default function DeleteProduct() {
     const [products, setProducts] = useState<IProduct[]>([]);
