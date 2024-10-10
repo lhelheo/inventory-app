@@ -17,7 +17,7 @@ export default function LoginPage() {
         setLoading(true);
 
         try {
-            const response = await axios.post(`http://localhost:3000/login`, { username, password });
+            const response = await axios.post(`https://userlist-testing.vercel.app/login`, { username, password });
 
             if (response.status === 200 && response.data?.token) {
                 console.log('Login successful:', response.data);
