@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { baseUrl } from '@/helpers/url';
+// import { baseUrl } from '@/helpers/url';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -17,7 +17,7 @@ export default function LoginPage() {
         setLoading(true);
 
         try {
-            const response = await axios.post(`${baseUrl}/login`, { username, password });
+            const response = await axios.post(`https://localhost:3000/login`, { username, password });
 
             if (response.status === 200 && response.data?.token) {
                 console.log('Login successful:', response.data);
