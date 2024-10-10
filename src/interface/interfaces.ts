@@ -1,5 +1,3 @@
-import { Product } from "@prisma/client";
-
 export enum Role {
     USER = 'USER',
     ADMIN = 'ADMIN', 
@@ -11,7 +9,7 @@ export interface IUser {
     password: string;
     role: Role;
     clients: IClient[]; 
-    products: Product[]; 
+    products: IProduct[]; 
 }
   
 export interface IClient {
