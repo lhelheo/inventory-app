@@ -19,7 +19,7 @@ export interface IClient {
     email?: string; 
     userID: number; 
     user: IUser; 
-    products: IProduct[]; 
+    product: IProduct[]; 
 }
   
 export interface IProduct {

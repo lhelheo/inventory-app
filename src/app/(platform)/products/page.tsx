@@ -43,16 +43,17 @@ export default function Products() {
                     products.map((product) => (
                     <div key={product.id} className="my-6 p-4 bg-gray-50 rounded-lg shadow-sm flex justify-between items-center">
                         <div>
-                        <p className="text-gray-700"><strong>ID:</strong> {product.clientID ?? "Não informado"}</p>
-                        <p className="text-gray-700"><strong>Nome:</strong> {product.name ?? "Não informado"}</p>
-                        <p className="text-gray-700"><strong>Preço:</strong> {product.price ? `R$ ${product.price}` : "Não informado"}</p>
-                        <p className="text-gray-700"><strong>Código:</strong> {product.product_code ?? "Não informado"}</p>
-                        <p className="text-gray-700"><strong>Criado em:</strong> {formatData(product.createAt) ?? "Não informado"}</p>
-                        <p className="text-gray-700"><strong>Atualizado em:</strong> {formatData(product.updateAt) ?? "Não informado"}</p>
-                        <p className="text-gray-700"><strong>Preço de custo: </strong> {product.cost_price ?? "Não informado"}</p>
+                        <p className="text-gray-700"><strong>Cliente:</strong> {product.client.name ?? "Não informado"}</p>
+                        <p className="text-gray-700"><strong>Produto:</strong> {product.name ?? "Não informado"}</p>
                         <p className="text-gray-700"><strong>Fornecedor:</strong> {product.supplier ?? "Não informado"}</p>
                         <p className="text-gray-700"><strong>Status:</strong> {product.status ?? "Não informado"}</p>
                         <p className="text-gray-700"><strong>Descrição:</strong> {product.description ?? "Não informado"}</p>
+                        <p className="text-gray-700"><strong>Preço de venda:</strong> {product.price ? `R$ ${product.price}` : "Não informado"}</p>
+                        <p className="text-gray-700"><strong>Preço de custo: </strong> {product.cost_price ? `R$ ${product.cost_price}` : "Não informado"}</p>
+                        <p className="text-gray-700"><strong>Código:</strong> {product.product_code ?? "Não informado"}</p>
+                        <p className="text-gray-700"><strong>Criado em:</strong> {formatData(product.createAt) ?? "Não informado"}</p>
+                        <p className="text-gray-700"><strong>Atualizado em:</strong> {formatData(product.updateAt) ?? "Não informado"}</p>
+                        
                         </div>
                         <Pencil onClick={() => router.push(`/products/${product.id}/edit/`)} className="text-blue-500 hover:text-blue-700" />
                     </div>

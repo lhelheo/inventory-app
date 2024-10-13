@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-// import { baseUrl } from '@/helpers/url';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
