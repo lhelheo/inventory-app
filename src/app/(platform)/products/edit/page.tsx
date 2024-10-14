@@ -36,7 +36,7 @@ export default function EditProduct() {
             const product = products.find((p) => p.id === selectedProductId);
             if (productNameRef.current && productPriceRef.current && productCodeRef.current && product) {
                 productNameRef.current.value = product.name;
-                productPriceRef.current.value = product.price.toString();
+                productPriceRef.current.value = product.selling_price.toString();
                 productCodeRef.current.value = product.product_code || '';
             }
         }

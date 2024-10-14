@@ -48,7 +48,7 @@ export default function Products() {
                         <p className="text-gray-700"><strong>Fornecedor:</strong> {product.supplier ?? "Não informado"}</p>
                         <p className="text-gray-700"><strong>Status:</strong> {product.status ?? "Não informado"}</p>
                         <p className="text-gray-700"><strong>Descrição:</strong> {product.description ?? "Não informado"}</p>
-                        <p className="text-gray-700"><strong>Preço de venda:</strong> {product.price ? `R$ ${product.price}` : "Não informado"}</p>
+                        <p className="text-gray-700"><strong>Preço de venda:</strong> {product.selling_price ? `R$ ${product.selling_price}` : "Não informado"}</p>
                         <p className="text-gray-700"><strong>Preço de custo: </strong> {product.cost_price ? `R$ ${product.cost_price}` : "Não informado"}</p>
                         <p className="text-gray-700"><strong>Código:</strong> {product.product_code ?? "Não informado"}</p>
                         <p className="text-gray-700"><strong>Criado em:</strong> {formatData(product.createAt) ?? "Não informado"}</p>

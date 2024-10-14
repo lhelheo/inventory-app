@@ -9,7 +9,9 @@ export interface IUser {
     password: string;
     role: Role;
     clients: IClient[]; 
-    products: IProduct[]; 
+    products: IProduct[];
+    updateAt: Date;
+    createAt: Date; 
 }
   
 export interface IClient {
@@ -19,7 +21,9 @@ export interface IClient {
     email?: string; 
     userID: number; 
     user: IUser; 
-    product: IProduct[]; 
+    products: IProduct[]; 
+    updateAt: Date;
+    createAt: Date;   
 }
   
 export interface IProduct {
@@ -29,7 +33,7 @@ export interface IProduct {
     supplier: string;
     description?: string; 
     product_code?: string; 
-    price: number;
+    selling_price: number;
     cost_price: number;
     clientID: number; 
     client: IClient; 
