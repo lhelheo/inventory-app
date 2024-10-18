@@ -1,5 +1,4 @@
 "use client"
-import { api } from "@/app/services/api";
 import { formatData } from "@/helpers/format";
 import { baseUrl } from "@/helpers/url";
 import { IProduct } from "@/interface/interfaces";
@@ -19,8 +18,17 @@ export default function Products() {
     
     async function loadProducts() {
         try {
-            const response = await api.get(`${baseUrl}/products`);
-            setProducts(response.data);
+            const response = await fetch(`${baseUrl}/products`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch products');
+            }
+            const data = await response.json();
+            setProducts(data);
         }
         catch (error) {
             console.error("Failed to load products", error);
