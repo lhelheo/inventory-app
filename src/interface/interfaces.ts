@@ -21,7 +21,7 @@ export interface IClient {
     email?: string; 
     userID: number; 
     user: IUser; 
-    products: IProduct[]; 
+    product: IProduct[]; 
     updateAt: Date;
     createAt: Date;   
 }
@@ -33,7 +33,7 @@ export interface IProduct {
     supplier: string;
     description?: string; 
     product_code?: string; 
-    selling_price: number;
+    price: number;
     cost_price: number;
     clientID: number; 
     client: IClient; 

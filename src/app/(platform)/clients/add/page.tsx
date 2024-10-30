@@ -105,7 +105,6 @@ export default function CreateClient() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            required
             placeholder="Digite o email do cliente"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
         />

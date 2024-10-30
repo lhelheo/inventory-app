@@ -41,7 +41,7 @@ export default function ProductPage(props: Product) {
     useEffect(() => {
         if (product && nameRef.current && priceRef.current && descriptionRef.current && statusRef.current && supplierRef.current && costPriceRef.current && productCodeRef.current) {
             nameRef.current.value = product.name;
-            priceRef.current.value = product.selling_price.toString();
+            priceRef.current.value = product.price.toString();
             descriptionRef.current.value = product.description ?? '';
             statusRef.current.value = product.status ?? 'Disponivel';
             supplierRef.current.value = product.supplier ?? 'Não informado';
