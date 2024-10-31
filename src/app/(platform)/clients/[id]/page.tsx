@@ -1,5 +1,6 @@
 "use client"
 import { api } from '@/app/services/api';
+import { baseUrl } from '@/helpers/url';
 import { IClient } from '@/interface/interfaces';
 import { useParams } from 'next/navigation';
 import React from 'react';
@@ -16,7 +17,7 @@ export default function Client() {
 
     async function loadCustomers() {
         try {
-            const response = await api.get(`https://userlist-testing.vercel.app/client/${id}`);
+            const response = await api.get(`${baseUrl}/client/${id}`);
             setClient(response.data);
         } catch (error) {
             console.error("Failed to load customers", error);

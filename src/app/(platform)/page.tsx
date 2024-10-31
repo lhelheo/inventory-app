@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { baseUrl } from '@/helpers/url';
 
 export default function LoginPage() {
     const [username, setUsername] = useState('');
@@ -16,7 +17,7 @@ export default function LoginPage() {
         setLoading(true);
 
         try {
-            const response = await axios.post(`https://userlist-testing.vercel.app/login`, { username, password });
+            const response = await axios.post(`${baseUrl}/login`, { username, password });
 
             if (response.status === 200 && response.data?.token) {
                 console.log('Login successful:', response.data);
