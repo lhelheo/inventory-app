@@ -31,12 +31,19 @@ export default function Clients() {
     try {
       const response = await api.delete(`${baseUrl}/client/${id}`)
       if (response.status === 200) {
+<<<<<<< HEAD
         alert('Client deleted successfully!')
 
         const allCustomers = customers.filter((customer) => customer.id !== id)
         setCustomers(allCustomers)
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+=======
+        alert("Client deleted successfully!");
+        const allCustomers = customers.filter((customer) => customer.id !== id);
+        setCustomers(allCustomers);
+      }
+>>>>>>> b73dd9d468ea55f01e8163ae06e5e78837e81ad2
     } catch (err: any) {
       if (err.response && err.response.status === 404) {
         alert('Client not found')
@@ -82,6 +89,7 @@ export default function Clients() {
               <tbody>
                 {filteredCustomers.map((customer) => (
                   <tr key={customer.id} className="border-t border-gray-200">
+<<<<<<< HEAD
                     <td className="px-4 py-2">
                       {customer.name || 'Não informado'}
                     </td>
@@ -91,6 +99,11 @@ export default function Clients() {
                     <td className="px-4 py-2">
                       {customer.phone || 'Não informado'}
                     </td>
+=======
+                    <td className="px-4 py-2">{customer.name || 'Não informado'}</td>
+                    <td className="px-4 py-2">{customer.email || 'Não informado'}</td>
+                    <td className="px-4 py-2">{customer.phone || 'Não informado'}</td>
+>>>>>>> b73dd9d468ea55f01e8163ae06e5e78837e81ad2
                     <td className="px-4 py-2 flex">
                       <div
                         className="flex items-center font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2"
@@ -106,9 +119,13 @@ export default function Clients() {
                       </div>
                       <div
                         className="flex items-center font-bold text-yellow-500 hover:text-yellow-700 cursor-pointer ease-linear transition-all"
+<<<<<<< HEAD
                         onClick={() =>
                           router.push(`/clients/${customer.id}/edit`)
                         }
+=======
+                        onClick={() => router.push(`/clients/${customer.id}/edit`)}
+>>>>>>> b73dd9d468ea55f01e8163ae06e5e78837e81ad2
                       >
                         <Pencil size={18} />
                       </div>
