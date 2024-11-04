@@ -56,7 +56,7 @@ export default function Products() {
                   <div>
                     <p className="text-gray-700">
                       <strong>Cliente:</strong>{' '}
-                      {product.client.name ?? 'Não informado'}
+                      {product.client?.name ?? 'Não informado'}
                     </p>
                     <p className="text-gray-700">
                       <strong>Produto:</strong>{' '}
