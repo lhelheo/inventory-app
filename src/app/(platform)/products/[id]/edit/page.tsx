@@ -63,7 +63,7 @@ export default function ProductPage(props: Product) {
     if (product) {
       nameRef.current!.value = product.name
       priceRef.current!.value = product.price.toString()
-      descriptionRef.current!.value = product.description ?? ''
+      descriptionRef.current!.value = product.description ?? 'Não informado'
       statusRef.current!.value = product.status ?? 'Disponivel'
       supplierRef.current!.value = product.supplier ?? 'Não informado'
       costPriceRef.current!.value = product.cost_price.toString()
