@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef, FormEvent } from 'react'
 import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
-import { IProduct } from '@/interface/interfaces'
+import { IProduct, IClient } from '@/interface/interfaces'
+import { api } from '@/app/services/api'
 
 interface Product {
   params: {
@@ -15,6 +16,7 @@ export default function ProductPage(props: Product) {
   const [product, setProduct] = useState<IProduct | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
+  const [customers, setCustomers] = useState<IClient[]>([])
 
   const nameRef = useRef<HTMLInputElement>(null)
   const priceRef = useRef<HTMLInputElement>(null)
@@ -23,7 +25,22 @@ export default function ProductPage(props: Product) {
   const supplierRef = useRef<HTMLInputElement>(null)
   const costPriceRef = useRef<HTMLInputElement>(null)
   const productCodeRef = useRef<HTMLInputElement>(null)
-  const clientIDRef = useRef<HTMLInputElement>(null)
+  const clientIDRef = useRef<HTMLSelectElement>(null)
+
+  useEffect(() => {
+    loadCustomers()
+  }, [])
+
+  async function loadCustomers() {
+    try {
+      const response = await api.get(`${baseUrl}/clients`)
+      setCustomers(response.data)
+    } catch (error) {
+      console.error('Failed to load customers', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     async function fetchProduct() {
@@ -67,7 +84,9 @@ export default function ProductPage(props: Product) {
       supplier: supplierRef.current!.value,
       cost_price: parseFloat(costPriceRef.current!.value),
       product_code: productCodeRef.current!.value,
-      clientID: clientIDRef.current!.value || null,
+      clientID: clientIDRef.current!.value
+        ? Number(clientIDRef.current!.value)
+        : null, // Convertendo clientID para Number
     }
 
     try {
@@ -99,76 +118,167 @@ export default function ProductPage(props: Product) {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6">
-        Editar Produto
-      </h1>
-      <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md border border-gray-200">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            ref={nameRef}
-            type="text"
-            className="input"
-            placeholder="Nome do produto"
-            required
-          />
-          <input
-            ref={priceRef}
-            type="number"
-            step="0.01"
-            className="input"
-            placeholder="Preço do produto"
-            required
-          />
-          <input
-            ref={descriptionRef}
-            type="text"
-            className="input"
-            placeholder="Descrição do produto"
-          />
-          <input
-            ref={costPriceRef}
-            type="number"
-            step="0.01"
-            className="input"
-            placeholder="Preço de Custo"
-            required
-          />
-          <input
-            ref={supplierRef}
-            type="text"
-            className="input"
-            placeholder="Fornecedor"
-          />
-          <input
-            ref={productCodeRef}
-            type="text"
-            className="input"
-            placeholder="Código do Produto"
-          />
-          <select ref={statusRef} className="input" required>
-            <option value="Disponivel">Disponível</option>
-            <option value="Vendido">Vendido</option>
-            <option value="Em pagamento">Em pagamento</option>
-          </select>
-          <input
-            ref={clientIDRef}
-            type="text"
-            className="input"
-            placeholder="ID do Cliente (opcional)"
-          />{' '}
+    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50 p-4">
+      <h1 className="text-3xl font-bold text-gray-800 mb-8">Editar Produto</h1>
+
+      <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-lg border border-gray-200">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label
+              className="block text-gray-700 font-semibold mb-2"
+              htmlFor="name"
+            >
+              Nome do produto
+            </label>
+            <input
+              ref={nameRef}
+              type="text"
+              id="name"
+              className="input w-full border border-gray-700 border-opacity-20 p-1 rounded"
+              placeholder="Nome do produto"
+              required
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                className="block text-gray-700 font-semibold mb-2"
+                htmlFor="price"
+              >
+                Preço
+              </label>
+              <input
+                ref={priceRef}
+                type="number"
+                step="0.01"
+                id="price"
+                className="input w-full rounded border border-gray-700 border-opacity-20 p-1"
+                placeholder="Preço do produto"
+                required
+              />
+            </div>
+            <div>
+              <label
+                className="block text-gray-700 font-semibold mb-2"
+                htmlFor="costPrice"
+              >
+                Preço de Custo
+              </label>
+              <input
+                ref={costPriceRef}
+                type="number"
+                step="0.01"
+                id="costPrice"
+                className="input w-full rounded border border-gray-700 border-opacity-20 p-1"
+                placeholder="Preço de Custo"
+                required
+              />
+            </div>
+          </div>
+
+          <div>
+            <label
+              className="block text-gray-700 font-semibold mb-2"
+              htmlFor="description"
+            >
+              Descrição
+            </label>
+            <input
+              ref={descriptionRef}
+              type="text"
+              id="description"
+              className="input w-full rounded border border-gray-700 border-opacity-20 p-1"
+              placeholder="Descrição do produto"
+            />
+          </div>
+
+          <div>
+            <label
+              className="block text-gray-700 font-semibold mb-2"
+              htmlFor="supplier"
+            >
+              Fornecedor
+            </label>
+            <input
+              ref={supplierRef}
+              type="text"
+              id="supplier"
+              className="input w-full rounded border border-gray-700 border-opacity-20 p-1"
+              placeholder="Fornecedor"
+            />
+          </div>
+
+          <div>
+            <label
+              className="block text-gray-700 font-semibold mb-2"
+              htmlFor="productCode"
+            >
+              Código do Produto
+            </label>
+            <input
+              ref={productCodeRef}
+              type="text"
+              id="productCode"
+              className="input w-full rounded border border-gray-700 border-opacity-20 p-1"
+              placeholder="Código do Produto"
+            />
+          </div>
+
+          <div>
+            <label
+              className="block text-gray-700 font-semibold mb-2"
+              htmlFor="status"
+            >
+              Status
+            </label>
+            <select
+              ref={statusRef}
+              id="status"
+              className="input w-full rounded border border-gray-700 border-opacity-20 p-1"
+              required
+            >
+              <option value="Disponivel">Disponível</option>
+              <option value="Vendido">Vendido</option>
+              <option value="Em pagamento">Em pagamento</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              className="block text-gray-700 font-semibold mb-2"
+              htmlFor="clientID"
+            >
+              Cliente
+            </label>
+            <select
+              ref={clientIDRef}
+              id="clientID"
+              className="input w-full rounded border border-gray-700 border-opacity-20 p-1"
+            >
+              <option value="">Selecione um cliente (opcional)</option>
+              {customers.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {client.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <button
             type="submit"
-            className="py-3 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-all"
+            className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-500 transition-all"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Salvar Alterações'}
           </button>
-        </form>
 
-        {message && (
-          <p className="mt-4 text-center text-green-600">{message}</p>
-        )}
+          {message && (
+            <p className="mt-4 text-center text-green-600 font-semibold">
+              {message}
+            </p>
+          )}
+        </form>
       </div>
     </div>
   )
