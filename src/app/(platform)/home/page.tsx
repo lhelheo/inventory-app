@@ -1,5 +1,5 @@
 'use client'
-import { Eye, PackagePlus, Plus, Trash2, User2 } from 'lucide-react'
+import { Box, Eye, PackagePlus, Plus, Trash2, User2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -61,6 +61,14 @@ export default function Login() {
           >
             <Trash2 size={32} className="mb-2" />
             <span className="font-medium">Deletar Produto</span>
+          </button>
+
+          <button
+            onClick={() => handleNavigation('/stock')}
+            className="bg-yellow-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-yellow-600 transition-all"
+          >
+            <Box size={32} className="mb-2" />
+            <span className="font-medium">Visualizar estoque</span>
           </button>
         </div>
 

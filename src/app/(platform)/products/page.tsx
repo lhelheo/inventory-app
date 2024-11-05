@@ -46,63 +46,107 @@ export default function Products() {
           <h1 className="text-2xl font-semibold text-gray-800 mb-6">
             Produtos
           </h1>
-          <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-lg border border-gray-200">
+          <div className="bg-white shadow-md rounded-lg p-8 w-[85%] border border-gray-200 overflow-x-auto">
             {products.length > 0 ? (
-              products.map((product) => (
-                <div
-                  key={product.id}
-                  className="my-6 p-4 bg-gray-50 rounded-lg shadow-sm flex justify-between items-center"
-                >
-                  <div>
-                    <p className="text-gray-700">
-                      <strong>Cliente:</strong>{' '}
-                      {product.client?.name ?? 'Não informado'}
-                    </p>
-                    <p className="text-gray-700">
-                      <strong>Produto:</strong>{' '}
-                      {product.name ?? 'Não informado'}
-                    </p>
-                    <p className="text-gray-700">
-                      <strong>Fornecedor:</strong>{' '}
-                      {product.supplier ?? 'Não informado'}
-                    </p>
-                    <p className="text-gray-700">
-                      <strong>Status:</strong>{' '}
-                      {product.status ?? 'Não informado'}
-                    </p>
-                    <p className="text-gray-700">
-                      <strong>Descrição:</strong>{' '}
-                      {product.description ?? 'Não informado'}
-                    </p>
-                    <p className="text-gray-700">
-                      <strong>Preço de venda:</strong>{' '}
-                      {product.price ? `R$ ${product.price}` : 'Não informado'}
-                    </p>
-                    <p className="text-gray-700">
-                      <strong>Preço de custo: </strong>{' '}
-                      {product.cost_price
-                        ? `R$ ${product.cost_price}`
-                        : 'Não informado'}
-                    </p>
-                    <p className="text-gray-700">
-                      <strong>Código:</strong>{' '}
-                      {product.product_code ?? 'Não informado'}
-                    </p>
-                    <p className="text-gray-700">
-                      <strong>Criado em:</strong>{' '}
-                      {formatData(product.createAt) ?? 'Não informado'}
-                    </p>
-                    <p className="text-gray-700">
-                      <strong>Atualizado em:</strong>{' '}
-                      {formatData(product.updateAt) ?? 'Não informado'}
-                    </p>
-                  </div>
-                  <Pencil
-                    onClick={() => router.push(`/products/${product.id}/edit/`)}
-                    className="text-blue-500 hover:text-blue-700"
-                  />
-                </div>
-              ))
+              <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+                <thead>
+                  <tr>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Cliente
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Produto
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Fornecedor
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Status
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Descrição
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Preço de venda
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Preço de custo
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Código
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Criado em
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Atualizado em
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-center">
+                      Ações
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products.map((product) => (
+                    <tr key={product.id} className="border-t">
+                      <td className="py-3 px-4 text-gray-700">
+                        {product.client?.name ?? 'Não informado'}
+                      </td>
+                      <td className="py-3 px-4 text-gray-700">
+                        {product.name ?? 'Não informado'}
+                      </td>
+                      <td className="py-3 px-4 text-gray-700">
+                        {product.supplier ?? 'Não informado'}
+                      </td>
+                      {product.status === 'Disponivel' && (
+                        <td className="py-3 px-4 text-green-600">
+                          {product.status}
+                        </td>
+                      )}
+                      {product.status === 'Em Processamento' && (
+                        <td className="py-3 px-4 text-orange-600">
+                          {product.status}
+                        </td>
+                      )}
+                      {product.status === 'Vendido' && (
+                        <td className="py-3 px-4 text-red-600">
+                          {product.status}
+                        </td>
+                      )}
+                      <td className="py-3 px-4 text-gray-700">
+                        {product.description ?? 'Não informado'}
+                      </td>
+                      <td className="py-3 px-4 text-gray-700">
+                        {product.price
+                          ? `R$ ${product.price}`
+                          : 'Não informado'}
+                      </td>
+                      <td className="py-3 px-4 text-gray-700">
+                        {product.cost_price
+                          ? `R$ ${product.cost_price}`
+                          : 'Não informado'}
+                      </td>
+                      <td className="py-3 px-4 text-gray-700">
+                        {product.product_code ?? 'Não informado'}
+                      </td>
+                      <td className="py-3 px-4 text-gray-700">
+                        {formatData(product.createAt) ?? 'Não informado'}
+                      </td>
+                      <td className="py-3 px-4 text-gray-700">
+                        {formatData(product.updateAt) ?? 'Não informado'}
+                      </td>
+                      <td className="py-3 px-4 text-center">
+                        <Pencil
+                          onClick={() =>
+                            router.push(`/products/${product.id}/edit/`)
+                          }
+                          className="text-blue-500 hover:text-blue-700 cursor-pointer"
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             ) : (
               <p className="text-center text-gray-600">
                 Nenhum produto disponível.
