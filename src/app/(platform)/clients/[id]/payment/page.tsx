@@ -81,6 +81,9 @@ export default function Payment(props: PaymentPageProps) {
                 <strong>Valor Pendente:</strong> R${' '}
                 {product.pendingAmount?.toFixed(2)}
               </p>
+              <p className="text-gray-700 mb-2">
+                <strong>Quantidade:</strong> {product.pendingAmount}
+              </p>
               <p
                 className={`text-gray-700 mb-4 ${
                   product.status === 'Disponivel' ? 'text-green-600' : ''
