@@ -5,127 +5,122 @@ import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-interface PaymentPageProps {
+interface ClientPaymentProps {
   params: {
     id: string
   }
 }
 
-export default function Payment(props: PaymentPageProps) {
+export default function ClientPayment(props: ClientPaymentProps) {
+  const [paymentValue, setPaymentValue] = useState('')
   const [products, setProducts] = useState<IProduct[]>([])
-  const [paymentAmount, setPaymentAmount] = useState<number>(0)
-  const [message, setMessage] = useState<string>('')
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
 
-  console.log('clientId', props.params.id)
-
-  useEffect(() => {
-    const fetchClientsProducts = async () => {
-      try {
-        const response = await axios.get(
-          `${baseUrl}/client/${props.params.id}/products`,
-        )
-        setProducts(response.data)
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (error) {
-        setMessage('Erro ao carregar produtos do cliente')
+  // Função para buscar produtos do cliente
+  const fetchClientProducts = async () => {
+    try {
+      const response = await axios.get(
+        `${baseUrl}/client/${props.params.id}/products`,
+      )
+      setProducts(response.data) // Verifica se `response.data` contém a lista de produtos diretamente
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data?.message || 'Erro ao carregar produtos')
+      } else {
+        setError('Erro ao carregar produtos')
       }
     }
-    fetchClientsProducts()
-  }, [props.params.id])
+  }
 
+  useEffect(() => {
+    fetchClientProducts()
+  }, [])
+
+  // Função para processar o pagamento
   const handlePayment = async () => {
-    setMessage('')
-
-    if (paymentAmount || paymentAmount <= 0) {
-      setMessage('Valor de pagamento inválido')
-    }
-
     setLoading(true)
+    setMessage('')
+    setError('')
 
     try {
-      const response = await axios.post(
+      const response = await axios.patch(
         `${baseUrl}/client/${props.params.id}/pay`,
-        {
-          paymentAmount,
-        },
+        { paymentValue },
       )
-      setProducts(response.data.updatedProducts) // ?
-      setMessage('Pagamento efetuado com sucesso')
-      setPaymentAmount(0)
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+      setMessage(response.data.message)
+
+      // Atualiza os produtos com a resposta da API, que contém o status atualizado
+      setProducts(response.data.products || products)
+      setPaymentValue('')
     } catch (error) {
-      setMessage('Erro ao efetuar pagamento')
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data?.message || 'Erro ao processar pagamento')
+      } else {
+        setError('Erro ao processar pagamento')
+      }
     } finally {
       setLoading(false)
     }
   }
 
+  console.log(`URL para PATCH: ${baseUrl}/client/${props.params.id}/pay`)
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-      <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md border border-gray-200">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-4">
-          Pagamento de Produtos
-        </h1>
+    <div className="max-w-lg mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Realizar Pagamento</h1>
 
-        {products ? (
-          products.map((product) => (
-            <div key={product.id} className="mb-6">
-              <p className="text-gray-700 mb-2">
-                <strong>Produto:</strong> {product.name}
-              </p>
-              <p className="text-gray-700 mb-2">
-                <strong>Preço Total:</strong> R$ {product.price.toFixed(2)}
-              </p>
-              <p className="text-gray-700 mb-2">
-                <strong>Valor Pendente:</strong> R${' '}
-                {product.pendingAmount?.toFixed(2)}
-              </p>
-              <p className="text-gray-700 mb-2">
-                <strong>Quantidade:</strong> {product.pendingAmount}
-              </p>
-              <p
-                className={`text-gray-700 mb-4 ${
-                  product.status === 'Disponivel' ? 'text-green-600' : ''
-                }`}
-              >
-                <strong>Status:</strong> {product.status}
-              </p>
-            </div>
-          ))
-        ) : (
-          <p>Carregando produtos...</p>
-        )}
-
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            handlePayment()
-          }}
-          className="flex flex-col gap-4"
+      <div className="mb-4">
+        <label
+          htmlFor="paymentValue"
+          className="block text-sm font-medium text-gray-700"
         >
-          <input
-            type="number"
-            step="0.01"
-            value={paymentAmount || ''}
-            onChange={(e) => setPaymentAmount(parseFloat(e.target.value))}
-            className="input"
-            placeholder="Valor do pagamento"
-            required
-          />
-          <button
-            type="submit"
-            className="py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500 transition-all"
-            disabled={loading}
-          >
-            {loading ? 'Processando...' : 'Realizar Pagamento'}
-          </button>
-        </form>
-
-        {message && (
-          <p className="mt-4 text-center text-green-600">{message}</p>
-        )}
+          Valor do Pagamento
+        </label>
+        <input
+          type="number"
+          id="paymentValue"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+          value={paymentValue}
+          onChange={(e) => setPaymentValue(e.target.value)}
+          min="0"
+          step="0.01"
+        />
       </div>
+
+      <button
+        onClick={handlePayment}
+        disabled={loading || !paymentValue}
+        className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 disabled:bg-gray-300"
+      >
+        {loading ? 'Processando...' : 'Pagar'}
+      </button>
+
+      {message && <p className="text-green-600 mt-4">{message}</p>}
+      {error && <p className="text-red-600 mt-4">{error}</p>}
+
+      {products.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-xl font-bold mb-2">Status dos Produtos</h2>
+          <ul className="space-y-2">
+            {products.map((product) => (
+              <li key={product.id} className="p-4 border rounded-md">
+                <p>
+                  <strong>Produto:</strong> {product.name}
+                </p>
+                <p>
+                  <strong>Status:</strong> {product.status}
+                </p>
+                <p>
+                  <strong>Saldo Restante:</strong> {product.pendingAmount ?? 0}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
