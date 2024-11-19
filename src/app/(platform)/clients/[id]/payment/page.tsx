@@ -1,5 +1,3 @@
-'use client'
-
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
