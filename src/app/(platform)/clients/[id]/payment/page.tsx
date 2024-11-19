@@ -3,6 +3,7 @@
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
+import { cookies } from 'next/headers'
 import { useEffect, useState } from 'react'
 
 interface ClientPaymentProps {
@@ -11,12 +12,15 @@ interface ClientPaymentProps {
   }
 }
 
-export default function ClientPayment(props: ClientPaymentProps) {
+export default async function ClientPayment(props: ClientPaymentProps) {
   const [paymentValue, setPaymentValue] = useState('')
   const [products, setProducts] = useState<IProduct[]>([])
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+
+  const cookieStore = await cookies()
+  const theme = cookieStore.get('theme')
 
   // Função para buscar produtos do cliente
   const fetchClientProducts = async () => {
