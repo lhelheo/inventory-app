@@ -11,6 +11,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
+  console.log(localStorage.getItem('token'))
+
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault()
     setError(null)
