@@ -1,3 +1,4 @@
+'use client'
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
@@ -9,7 +10,7 @@ interface ClientPaymentProps {
   }
 }
 
-export default async function ClientPayment(props: ClientPaymentProps) {
+export default function ClientPayment(props: ClientPaymentProps) {
   const [paymentValue, setPaymentValue] = useState('')
   const [products, setProducts] = useState<IProduct[]>([])
   const [loading, setLoading] = useState(false)
