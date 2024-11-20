@@ -11,8 +11,6 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
-  console.log(localStorage.getItem('token'))
-
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault()
     setError(null)
@@ -25,7 +23,7 @@ export default function LoginPage() {
       })
 
       if (response.status === 200 && response.data?.token) {
-        console.log('Login successful:', response.data)
+        // console.log('Login successful:', response.data)
 
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('user', JSON.stringify(response.data.user))
