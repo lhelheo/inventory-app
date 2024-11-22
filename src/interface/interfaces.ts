@@ -23,7 +23,7 @@ export interface IProduct {
   supplier: string
   description?: string
   product_code?: string
-  pendingAmount?: number
+  remaining_balance?: number
   price: number
   cost_price: number
   clientID: number

@@ -1,4 +1,5 @@
 'use client'
+
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
@@ -12,6 +13,9 @@ interface ClientPaymentProps {
 
 export default function ClientPayment(props: ClientPaymentProps) {
   const [paymentValue, setPaymentValue] = useState('')
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+    null,
+  )
   const [products, setProducts] = useState<IProduct[]>([])
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
@@ -39,20 +43,25 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
   // Função para processar o pagamento
   const handlePayment = async () => {
+    if (!selectedProductId) {
+      setError('Por favor, selecione um produto para realizar o pagamento.')
+      return
+    }
+
     setLoading(true)
     setMessage('')
     setError('')
 
     try {
       const response = await axios.patch(
-        `${baseUrl}/client/${props.params.id}/pay`,
-        { paymentValue },
+        `${baseUrl}/client/${props.params.id}/product/${selectedProductId}/pay`,
+        { amount: parseFloat(paymentValue) },
       )
 
       setMessage(response.data.message)
 
-      // Atualiza os produtos com a resposta da API, que contém o status atualizado
-      setProducts(response.data.products || products)
+      // Atualiza os produtos com a resposta da API ou refaz a busca
+      fetchClientProducts()
       setPaymentValue('')
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -65,12 +74,37 @@ export default function ClientPayment(props: ClientPaymentProps) {
     }
   }
 
-  console.log(`URL para PATCH: ${baseUrl}/client/${props.params.id}/pay`)
-
   return (
     <div className="max-w-lg mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Realizar Pagamento</h1>
 
+      {/* Lista de Produtos para Seleção */}
+      <div className="mb-4">
+        <label
+          htmlFor="product"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Selecione um Produto
+        </label>
+        <select
+          id="product"
+          className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+          value={selectedProductId || ''}
+          onChange={(e) => setSelectedProductId(e.target.value)}
+        >
+          <option value="" disabled>
+            Escolha um produto
+          </option>
+          {products.map((product) => (
+            <option key={product.id} value={product.id}>
+              {product.name} - Saldo Restante: R$
+              {product.remaining_balance ?? product.price}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Campo de Valor do Pagamento */}
       <div className="mb-4">
         <label
           htmlFor="paymentValue"
@@ -89,17 +123,20 @@ export default function ClientPayment(props: ClientPaymentProps) {
         />
       </div>
 
+      {/* Botão de Pagar */}
       <button
         onClick={handlePayment}
-        disabled={loading || !paymentValue}
+        disabled={loading || !paymentValue || !selectedProductId}
         className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 disabled:bg-gray-300"
       >
         {loading ? 'Processando...' : 'Pagar'}
       </button>
 
+      {/* Mensagens de Feedback */}
       {message && <p className="text-green-600 mt-4">{message}</p>}
       {error && <p className="text-red-600 mt-4">{error}</p>}
 
+      {/* Lista de Produtos com Status */}
       {products.length > 0 && (
         <div className="mt-8">
           <h2 className="text-xl font-bold mb-2">Status dos Produtos</h2>
@@ -113,7 +150,10 @@ export default function ClientPayment(props: ClientPaymentProps) {
                   <strong>Status:</strong> {product.status}
                 </p>
                 <p>
-                  <strong>Saldo Restante:</strong> {product.pendingAmount ?? 0}
+                  <strong>Saldo pendente:</strong> {product.remaining_balance}
+                </p>
+                <p>
+                  <strong>Price:</strong> {product.price}
                 </p>
               </li>
             ))}
