@@ -21,13 +21,12 @@ export default function ClientPayment(props: ClientPaymentProps) {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
 
-  // Função para buscar produtos do cliente
   const fetchClientProducts = async () => {
     try {
       const response = await axios.get(
         `${baseUrl}/client/${props.params.id}/products`,
       )
-      setProducts(response.data) // Verifica se `response.data` contém a lista de produtos diretamente
+      setProducts(response.data)
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setError(error.response?.data?.message || 'Erro ao carregar produtos')
@@ -41,7 +40,6 @@ export default function ClientPayment(props: ClientPaymentProps) {
     fetchClientProducts()
   }, [])
 
-  // Função para processar o pagamento
   const handlePayment = async () => {
     if (!selectedProductId) {
       setError('Por favor, selecione um produto para realizar o pagamento.')
@@ -60,7 +58,6 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
       setMessage(response.data.message)
 
-      // Atualiza os produtos com a resposta da API ou refaz a busca
       fetchClientProducts()
       setPaymentValue('')
     } catch (error) {
@@ -78,7 +75,6 @@ export default function ClientPayment(props: ClientPaymentProps) {
     <div className="max-w-lg mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Realizar Pagamento</h1>
 
-      {/* Lista de Produtos para Seleção */}
       <div className="mb-4">
         <label
           htmlFor="product"
@@ -97,14 +93,13 @@ export default function ClientPayment(props: ClientPaymentProps) {
           </option>
           {products.map((product) => (
             <option key={product.id} value={product.id}>
-              {product.name} - Saldo Restante: R$
+              {product.name}
               {product.remaining_balance ?? product.price}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Campo de Valor do Pagamento */}
       <div className="mb-4">
         <label
           htmlFor="paymentValue"
@@ -123,7 +118,6 @@ export default function ClientPayment(props: ClientPaymentProps) {
         />
       </div>
 
-      {/* Botão de Pagar */}
       <button
         onClick={handlePayment}
         disabled={loading || !paymentValue || !selectedProductId}
@@ -132,11 +126,9 @@ export default function ClientPayment(props: ClientPaymentProps) {
         {loading ? 'Processando...' : 'Pagar'}
       </button>
 
-      {/* Mensagens de Feedback */}
       {message && <p className="text-green-600 mt-4">{message}</p>}
       {error && <p className="text-red-600 mt-4">{error}</p>}
 
-      {/* Lista de Produtos com Status */}
       {products.length > 0 && (
         <div className="mt-8">
           <h2 className="text-xl font-bold mb-2">Status dos Produtos</h2>

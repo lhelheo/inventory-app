@@ -55,6 +55,7 @@ export default function Client() {
                 <tr className="bg-gray-200 text-gray-700">
                   <th className="px-4 py-2 text-left">Nome</th>
                   <th className="px-4 py-2 text-left">Preço</th>
+                  <th className="px-4 py-2 text-left">Valor pendente</th>
                   <th className="px-4 py-2 text-left">Código</th>
                   <th className="px-4 py-2 text-left">Status</th>
                 </tr>
@@ -64,6 +65,7 @@ export default function Client() {
                   <tr key={product.id} className="border-t border-gray-200">
                     <td className="px-4 py-2">{product.name}</td>
                     <td className="px-4 py-2">{product.price}</td>
+                    <td className="px-4 py-2">{product.remaining_balance}</td>
                     <td className="px-4 py-2">{product.product_code}</td>
                     <td className="px-4 py-2">{product.status}</td>
                   </tr>
