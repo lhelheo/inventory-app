@@ -94,7 +94,6 @@ export default function ClientPayment(props: ClientPaymentProps) {
           {products.map((product) => (
             <option key={product.id} value={product.id}>
               {product.name}
-              {product.remaining_balance ?? product.price}
             </option>
           ))}
         </select>
