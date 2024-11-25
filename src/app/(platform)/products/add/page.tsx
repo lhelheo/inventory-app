@@ -90,7 +90,13 @@ export default function CreateProduct() {
         <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
           Adicionar Produto
         </h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+          <label
+            htmlFor="productCode"
+            className="text-sm font-medium text-gray-700"
+          >
+            Selecione um cliente:
+          </label>
           <select
             value={selectedClientId ?? ''}
             onChange={(e) =>
@@ -107,7 +113,12 @@ export default function CreateProduct() {
               </option>
             ))}
           </select>
-
+          <label
+            htmlFor="productCode"
+            className="text-sm font-medium text-gray-700"
+          >
+            Nome:
+          </label>
           <input
             ref={productNameRef}
             type="text"
@@ -115,6 +126,12 @@ export default function CreateProduct() {
             placeholder="Nome do produto"
             required
           />
+          <label
+            htmlFor="productCode"
+            className="text-sm font-medium text-gray-700"
+          >
+            Preço:
+          </label>
           <input
             ref={productPriceRef}
             type="number"
@@ -123,6 +140,12 @@ export default function CreateProduct() {
             step="0.01"
             required
           />
+          <label
+            htmlFor="productCode"
+            className="text-sm font-medium text-gray-700"
+          >
+            Código:
+          </label>
           <input
             ref={productCodeRef}
             type="text"
@@ -130,6 +153,12 @@ export default function CreateProduct() {
             placeholder="Código do produto"
             required
           />
+          <label
+            htmlFor="productCode"
+            className="text-sm font-medium text-gray-700"
+          >
+            Preço de custo:
+          </label>
           <input
             ref={costPriceRef}
             type="number"
@@ -138,12 +167,24 @@ export default function CreateProduct() {
             step="0.01"
             required
           />
+          <label
+            htmlFor="productCode"
+            className="text-sm font-medium text-gray-700"
+          >
+            Fornecedor:
+          </label>
           <input
             ref={supplierRef}
             type="text"
             className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Fornecedor"
           />
+          <label
+            htmlFor="productCode"
+            className="text-sm font-medium text-gray-700"
+          >
+            Disponibilidade:
+          </label>
           <select
             ref={statusRef}
             className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -152,7 +193,12 @@ export default function CreateProduct() {
             <option value="Vendido">Vendido</option>
             <option value="Em Processamento">Em Processamento</option>
           </select>
-
+          <label
+            htmlFor="productCode"
+            className="text-sm font-medium text-gray-700"
+          >
+            Descrição:
+          </label>
           <input
             ref={descriptionRef}
             type="text"

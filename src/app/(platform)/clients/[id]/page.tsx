@@ -2,10 +2,11 @@
 import { api } from '@/app/services/api'
 import { baseUrl } from '@/helpers/url'
 import { IClient } from '@/interface/interfaces'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 export default function Client() {
+  const router = useRouter()
   const { id } = useParams<{ id: string }>()
   const [client, setClient] = useState<IClient>()
   const [loading, setLoading] = useState(true)
@@ -47,6 +48,14 @@ export default function Client() {
             <p className="text-gray-600">
               Contato - {client?.email} / {client?.phone}
             </p>
+            <div className="flex justify-center w-full pt-4">
+              <button
+                onClick={() => router.push(`/clients/${id}/payment`)}
+                className="bg-blue-500 hover:bg-blue-700 ease-linear transition-all text-white font-bold py-2 px-4 rounded"
+              >
+                Realizar Pagamento
+              </button>
+            </div>
           </div>
           <div className="w-full max-w-2xl mt-4">
             <p className="font-semibold text-lg mb-2 text-gray-800">Produtos</p>

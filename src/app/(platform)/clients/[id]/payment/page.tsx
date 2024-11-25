@@ -72,7 +72,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
   }
 
   return (
-    <div className="max-w-lg mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Realizar Pagamento</h1>
 
       <div className="mb-4">
@@ -130,25 +130,31 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
       {products.length > 0 && (
         <div className="mt-8">
-          <h2 className="text-xl font-bold mb-2">Status dos Produtos</h2>
-          <ul className="space-y-2">
-            {products.map((product) => (
-              <li key={product.id} className="p-4 border rounded-md">
-                <p>
-                  <strong>Produto:</strong> {product.name}
-                </p>
-                <p>
-                  <strong>Status:</strong> {product.status}
-                </p>
-                <p>
-                  <strong>Saldo pendente:</strong> {product.remaining_balance}
-                </p>
-                <p>
-                  <strong>Price:</strong> {product.price}
-                </p>
-              </li>
-            ))}
-          </ul>
+          <h2 className="text-xl font-bold mb-4">Status dos Produtos</h2>
+          <table className="min-w-full table-auto border-collapse border border-gray-300">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 border-b text-left">Produto</th>
+                <th className="px-4 py-2 border-b text-left">Status</th>
+                <th className="px-4 py-2 border-b text-left">Saldo Pendente</th>
+                <th className="px-4 py-2 border-b text-left">Preço</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.map((product) => (
+                <tr key={product.id} className="odd:bg-gray-50">
+                  <td className="px-4 py-2 border-b">{product.name}</td>
+                  <td className="px-4 py-2 border-b">{product.status}</td>
+                  <td className="px-4 py-2 border-b">
+                    {product.remaining_balance === 0
+                      ? 'Venda finalizada'
+                      : product.remaining_balance || product.price}
+                  </td>
+                  <td className="px-4 py-2 border-b">{product.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

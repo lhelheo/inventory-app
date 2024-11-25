@@ -101,7 +101,7 @@ export default function CreateClient() {
             value={formData.name}
             onChange={handleChange}
             required
-            placeholder="Digite o nome do cliente"
+            placeholder="Nome do cliente"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
@@ -119,7 +119,7 @@ export default function CreateClient() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Digite o email do cliente"
+            placeholder="Email do cliente"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
@@ -138,7 +138,7 @@ export default function CreateClient() {
             value={formData.phone}
             onChange={handleChange}
             required
-            placeholder="Digite o telefone do cliente"
+            placeholder="Telefone do cliente"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
@@ -156,7 +156,7 @@ export default function CreateClient() {
             name="productName"
             value={formData.productName}
             onChange={handleChange}
-            placeholder="Digite o nome do produto"
+            placeholder="Nome do produto"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
@@ -176,7 +176,7 @@ export default function CreateClient() {
               formData.productPrice !== undefined ? formData.productPrice : ''
             }
             onChange={handleChange}
-            placeholder="Digite o preço do produto"
+            placeholder="Preço do produto"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
@@ -194,7 +194,7 @@ export default function CreateClient() {
             name="productCode"
             value={formData.productCode}
             onChange={handleChange}
-            placeholder="Digite o código do produto"
+            placeholder="Código do produto"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
