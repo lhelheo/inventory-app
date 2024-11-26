@@ -90,13 +90,15 @@ export default function Products() {
                   {products.map((product) => (
                     <tr key={product.id} className="border-t">
                       <td className="py-3 px-4 text-gray-700">
-                        {product.client?.name ?? 'Não informado'}
+                        {product.client?.name
+                          ? product.client.name
+                          : 'Não informado'}
                       </td>
                       <td className="py-3 px-4 text-gray-700">
-                        {product.name ?? 'Não informado'}
+                        {product.name ? product.name : 'Não informado'}
                       </td>
                       <td className="py-3 px-4 text-gray-700">
-                        {product.supplier ?? 'Não informado'}
+                        {product.supplier ? product.supplier : 'Não informado'}
                       </td>
                       {product.status === 'Disponivel' && (
                         <td className="py-3 px-4 text-green-600">

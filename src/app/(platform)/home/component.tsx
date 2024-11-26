@@ -27,7 +27,7 @@ export const HomeForm = () => {
           className="bg-green-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-green-600 transition-all"
         >
           <Plus size={32} className="mb-2" />
-          <span className="font-medium">Adicionar Cliente</span>
+          <span className="font-medium">Criar Cliente</span>
         </button>
 
         <button
@@ -43,7 +43,7 @@ export const HomeForm = () => {
           className="bg-green-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-green-600 transition-all"
         >
           <PackagePlus size={32} className="mb-2" />
-          <span className="font-medium">Adicionar Produto</span>
+          <span className="font-medium">Criar Produto</span>
         </button>
 
         <button
