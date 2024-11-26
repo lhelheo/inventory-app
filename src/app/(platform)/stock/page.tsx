@@ -65,7 +65,8 @@ export default function Stock() {
                   {products
                     .filter(
                       (product) =>
-                        !product.client || product.status === 'Disponivel',
+                        !product.client ||
+                        (product.status === 'Disponivel' && product.client),
                     )
                     .map((product) => (
                       <tr key={product.id} className="border-t">
