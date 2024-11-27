@@ -27,8 +27,6 @@ export default function LoginPage() {
       })
 
       if (response.status === 200 && response.data?.token) {
-        // console.log('Login successful:', response.data)
-
         localStorage.setItem('token', response.data.token)
         localStorage.setItem('user', JSON.stringify(response.data.user))
 
@@ -51,24 +49,29 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <form onSubmit={handleLogin} className="flex flex-col w-72">
-        <h2 className="text-xl">Login</h2>
-        <div className="my-4">
+    <div className="flex justify-center items-center h-screen bg-gray-100">
+      <form
+        onSubmit={handleLogin}
+        className="flex flex-col w-[400px] border border-gray-200 bg-white rounded shadow p-20"
+      >
+        <div className="flex justify-center text-xl">
+          <p className="font-semibold">Acesse sua conta</p>
+        </div>
+        <div className="my-4 gap-3 flex flex-col">
           <label>
-            Email:
             <input
               type="text"
               className="flex border rounded w-full mb-2 p-2"
               value={username}
+              placeholder="Usuário"
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </label>
           <label>
-            Password:
             <input
               type="password"
+              placeholder="Senha"
               className="flex border rounded w-full mb-2 p-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -80,7 +83,7 @@ export default function LoginPage() {
         <div className="flex flex-col">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded"
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ease-linear transition-all"
             disabled={loading}
           >
             {loading ? 'Loading...' : 'Login'}

@@ -52,28 +52,25 @@ export default function Products() {
                 <thead>
                   <tr>
                     <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
-                      Cliente
+                      Nome
                     </th>
                     <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
-                      Produto
-                    </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
-                      Fornecedor
+                      Comprador
                     </th>
                     <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
                       Status
                     </th>
                     <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
-                      Descrição
-                    </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
-                      Preço de venda
-                    </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
-                      Preço de custo
-                    </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
                       Código
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Custo
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Venda
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Descrição
                     </th>
                     <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
                       Criado em
@@ -81,7 +78,7 @@ export default function Products() {
                     <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
                       Atualizado em
                     </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-center">
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
                       Ações
                     </th>
                   </tr>
@@ -89,53 +86,20 @@ export default function Products() {
                 <tbody>
                   {products.map((product) => (
                     <tr key={product.id} className="border-t">
-                      <td className="py-3 px-4 text-gray-700">
-                        {product.client?.name
-                          ? product.client.name
-                          : 'Não informado'}
+                      <td className="py-3 px-4">{product.name}</td>
+                      <td className="py-3 px-4">
+                        {product.client?.name || '-'}
                       </td>
-                      <td className="py-3 px-4 text-gray-700">
-                        {product.name ? product.name : 'Não informado'}
+                      <td className="py-3 px-4">{product.status}</td>
+                      <td className="py-3 px-4">{product.product_code}</td>
+                      <td className="py-3 px-4">{`R$ ${product.cost_price}`}</td>
+                      <td className="py-3 px-4">{`R$ ${product.price}`}</td>
+                      <td className="py-3 px-4">{product.description}</td>
+                      <td className="py-3 px-4">
+                        {formatData(product.createAt)}
                       </td>
-                      <td className="py-3 px-4 text-gray-700">
-                        {product.supplier ? product.supplier : 'Não informado'}
-                      </td>
-                      {product.status === 'Disponivel' && (
-                        <td className="py-3 px-4 text-green-600">
-                          {product.status}
-                        </td>
-                      )}
-                      {product.status === 'Em Processamento' && (
-                        <td className="py-3 px-4 text-orange-600">
-                          {product.status}
-                        </td>
-                      )}
-                      {product.status === 'Vendido' && (
-                        <td className="py-3 px-4 text-red-600">
-                          {product.status}
-                        </td>
-                      )}
-                      <td className="py-3 px-4 text-gray-700">
-                        {product.description ?? 'Não informado'}
-                      </td>
-                      <td className="py-3 px-4 text-gray-700">
-                        {product.price
-                          ? `R$ ${product.price}`
-                          : 'Não informado'}
-                      </td>
-                      <td className="py-3 px-4 text-gray-700">
-                        {product.cost_price
-                          ? `R$ ${product.cost_price}`
-                          : 'Não informado'}
-                      </td>
-                      <td className="py-3 px-4 text-gray-700">
-                        {product.product_code ?? 'Não informado'}
-                      </td>
-                      <td className="py-3 px-4 text-gray-700">
-                        {formatData(product.createAt) ?? 'Não informado'}
-                      </td>
-                      <td className="py-3 px-4 text-gray-700">
-                        {formatData(product.updateAt) ?? 'Não informado'}
+                      <td className="py-3 px-4">
+                        {formatData(product.updateAt)}
                       </td>
                       <td className="py-3 px-4 text-center">
                         <Pencil
