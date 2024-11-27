@@ -88,12 +88,6 @@ export default function CreateClient() {
         <h2 className="text-2xl font-semibold text-center">Criar Cliente</h2>
 
         <div className="flex flex-col w-full">
-          <label
-            htmlFor="name"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
-            Nome:
-          </label>
           <input
             type="text"
             id="name"
@@ -101,36 +95,24 @@ export default function CreateClient() {
             value={formData.name}
             onChange={handleChange}
             required
-            placeholder="Nome do cliente"
+            placeholder="Nome"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
         <div className="flex flex-col w-full">
-          <label
-            htmlFor="email"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
-            Email:
-          </label>
           <input
             type="email"
             id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Email do cliente"
+            placeholder="Email"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
         <div className="flex flex-col w-full">
-          <label
-            htmlFor="phone"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
-            Telefone:
-          </label>
           <input
             type="tel"
             id="phone"
@@ -138,18 +120,14 @@ export default function CreateClient() {
             value={formData.phone}
             onChange={handleChange}
             required
-            placeholder="Telefone do cliente"
+            placeholder="Telefone"
             className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
+        <div>Opcional: Criação de produto</div>
+
         <div className="flex flex-col w-full">
-          <label
-            htmlFor="productName"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
-            Nome do Produto:
-          </label>
           <input
             type="text"
             id="productName"
@@ -162,12 +140,6 @@ export default function CreateClient() {
         </div>
 
         <div className="flex flex-col w-full">
-          <label
-            htmlFor="productPrice"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
-            Preço do Produto:
-          </label>
           <input
             type="number"
             id="productPrice"
@@ -182,12 +154,6 @@ export default function CreateClient() {
         </div>
 
         <div className="flex flex-col w-full">
-          <label
-            htmlFor="productCode"
-            className="mb-1 text-sm font-medium text-gray-700"
-          >
-            Código do Produto:
-          </label>
           <input
             type="text"
             id="productCode"

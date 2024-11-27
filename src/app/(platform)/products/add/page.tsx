@@ -90,122 +90,155 @@ export default function CreateProduct() {
         <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
           Adicionar Produto
         </h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-          <label
-            htmlFor="productCode"
-            className="text-sm font-medium text-gray-700"
-          >
-            Selecione um cliente:
-          </label>
-          <select
-            value={selectedClientId ?? ''}
-            onChange={(e) =>
-              setSelectedClientId(
-                e.target.value ? Number(e.target.value) : null,
-              )
-            }
-            className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Nenhum cliente associado</option>
-            {clients.map((client) => (
-              <option key={client.id} value={client.id}>
-                {client.name}
-              </option>
-            ))}
-          </select>
-          <label
-            htmlFor="productCode"
-            className="text-sm font-medium text-gray-700"
-          >
-            Nome:
-          </label>
-          <input
-            ref={productNameRef}
-            type="text"
-            className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Nome do produto"
-            required
-          />
-          <label
-            htmlFor="productCode"
-            className="text-sm font-medium text-gray-700"
-          >
-            Preço:
-          </label>
-          <input
-            ref={productPriceRef}
-            type="number"
-            className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Preço do produto"
-            step="0.01"
-            required
-          />
-          <label
-            htmlFor="productCode"
-            className="text-sm font-medium text-gray-700"
-          >
-            Código:
-          </label>
-          <input
-            ref={productCodeRef}
-            type="text"
-            className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Código do produto"
-            required
-          />
-          <label
-            htmlFor="productCode"
-            className="text-sm font-medium text-gray-700"
-          >
-            Preço de custo:
-          </label>
-          <input
-            ref={costPriceRef}
-            type="number"
-            className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Preço de custo"
-            step="0.01"
-            required
-          />
-          <label
-            htmlFor="productCode"
-            className="text-sm font-medium text-gray-700"
-          >
-            Fornecedor:
-          </label>
-          <input
-            ref={supplierRef}
-            type="text"
-            className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Fornecedor"
-          />
-          <label
-            htmlFor="productCode"
-            className="text-sm font-medium text-gray-700"
-          >
-            Disponibilidade:
-          </label>
-          <select
-            ref={statusRef}
-            className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="Disponivel">Disponível</option>
-            <option value="Vendido">Vendido</option>
-            <option value="Em Processamento">Em Processamento</option>
-          </select>
-          <label
-            htmlFor="productCode"
-            className="text-sm font-medium text-gray-700"
-          >
-            Descrição:
-          </label>
-          <input
-            ref={descriptionRef}
-            type="text"
-            className="border border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Descrição do produto"
-            required
-          />
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div>
+            <label
+              htmlFor="client"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Cliente
+            </label>
+            <select
+              id="client"
+              value={selectedClientId ?? ''}
+              onChange={(e) =>
+                setSelectedClientId(
+                  e.target.value ? Number(e.target.value) : null,
+                )
+              }
+              required
+              className={`border rounded-lg w-full p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            >
+              <option value="">Nenhum cliente associado</option>
+              {clients.map((client) => (
+                <option key={client.id} value={client.id}>
+                  {client.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label
+              htmlFor="status"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Status <span className="text-red-500">*</span>
+            </label>
+            <select
+              id="status"
+              ref={statusRef}
+              required
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="Disponivel">Disponível</option>
+              <option value="Vendido">Vendido</option>
+              <option value="Em Processamento">Em Processamento</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              htmlFor="productName"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Nome <span className="text-red-500">*</span>
+            </label>
+            <input
+              id="productName"
+              ref={productNameRef}
+              type="text"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Nome"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="productCode"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Código <span className="text-red-500">*</span>
+            </label>
+            <input
+              id="productCode"
+              ref={productCodeRef}
+              type="text"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Código"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="productPrice"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Preço de venda <span className="text-red-500">*</span>
+            </label>
+            <input
+              id="productPrice"
+              ref={productPriceRef}
+              type="number"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Preço de venda"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="costPrice"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Preço de custo <span className="text-red-500">*</span>
+            </label>
+            <input
+              id="costPrice"
+              ref={costPriceRef}
+              type="number"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Preço de custo"
+              step="0.01"
+              required
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="supplier"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Fornecedor
+            </label>
+            <input
+              id="supplier"
+              ref={supplierRef}
+              type="text"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Fornecedor"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="description"
+              className="block text-gray-700 font-medium mb-1"
+            >
+              Descrição do produto <span className="text-red-500">*</span>
+            </label>
+            <input
+              id="description"
+              ref={descriptionRef}
+              type="text"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Descrição do produto"
+              required
+            />
+          </div>
 
           <button
             type="submit"
