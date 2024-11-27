@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react'
 
 export default function Products() {
   const router = useRouter()
+  const [search, setSearch] = useState<string>('')
   const [products, setProducts] = useState<IProduct[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
@@ -35,6 +36,13 @@ export default function Products() {
     }
   }
 
+  const filteredProducts = products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(search.toLowerCase()) ||
+      product.client?.name.toLowerCase().includes(search.toLowerCase()) ||
+      product.product_code?.toLowerCase().includes(search.toLowerCase()),
+  )
+
   return (
     <>
       {loading ? (
@@ -46,7 +54,16 @@ export default function Products() {
           <h1 className="text-2xl font-semibold text-gray-800 mb-6">
             Produtos
           </h1>
+          <div></div>
           <div className="bg-white shadow-md rounded-lg p-8 w-[85%] border border-gray-200 overflow-x-auto">
+            <div className="mb-6 w-full">
+              <input
+                type="text"
+                placeholder="Buscar produtos..."
+                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
             {products.length > 0 ? (
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead>
@@ -84,8 +101,11 @@ export default function Products() {
                   </tr>
                 </thead>
                 <tbody>
-                  {products.map((product) => (
-                    <tr key={product.id} className="border-t">
+                  {filteredProducts.map((product) => (
+                    <tr
+                      key={product.id}
+                      className="border-t ease-linear transition-all even:bg-gray-50 hover:bg-gray-100"
+                    >
                       <td className="py-3 px-4">{product.name}</td>
                       <td className="py-3 px-4">
                         {product.client?.name || '-'}
