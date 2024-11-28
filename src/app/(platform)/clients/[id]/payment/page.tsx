@@ -135,22 +135,34 @@ export default function ClientPayment(props: ClientPaymentProps) {
             <thead>
               <tr>
                 <th className="px-4 py-2 border-b text-left">Produto</th>
-                <th className="px-4 py-2 border-b text-left">Status</th>
-                <th className="px-4 py-2 border-b text-left">Saldo Pendente</th>
+
                 <th className="px-4 py-2 border-b text-left">Preço</th>
+                <th className="px-4 py-2 border-b text-left">Saldo Pendente</th>
+                <th className="px-4 py-2 border-b text-left">Status</th>
               </tr>
             </thead>
             <tbody>
               {products.map((product) => (
                 <tr key={product.id} className="odd:bg-gray-50">
                   <td className="px-4 py-2 border-b">{product.name}</td>
-                  <td className="px-4 py-2 border-b">{product.status}</td>
+
+                  <td className="px-4 py-2 border-b">R$ {product.price}</td>
                   <td className="px-4 py-2 border-b">
                     {product.remaining_balance === 0
                       ? 'Venda finalizada'
-                      : product.remaining_balance || product.price}
+                      : product.remaining_balance || `R$ ${product.price}`}
                   </td>
-                  <td className="px-4 py-2 border-b">{product.price}</td>
+                  <td className="px-4 py-2 border-b">
+                    {product.status === 'Disponivel' && (
+                      <span className="text-green-600">Disponível</span>
+                    )}
+                    {product.status === 'Vendido' && (
+                      <span className="text-red-600">Finalizada</span>
+                    )}
+                    {product.status === 'Em Processamento' && (
+                      <span className="text-yellow-600">Em aberto</span>
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>
