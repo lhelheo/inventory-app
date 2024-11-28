@@ -1,5 +1,6 @@
 'use client'
 import { api } from '@/app/services/api'
+import { formatData } from '@/helpers/format'
 import { baseUrl } from '@/helpers/url'
 import { IClient } from '@/interface/interfaces'
 import { useParams, useRouter } from 'next/navigation'
@@ -48,45 +49,47 @@ export default function Client() {
             <p className="text-gray-600">
               Contato - {client?.email} / {client?.phone}
             </p>
-            <div className="flex justify-center w-full pt-4">
-              <button
-                onClick={() => router.push(`/clients/${id}/payment`)}
-                className="bg-blue-500 hover:bg-blue-700 ease-linear transition-all text-white font-bold py-2 px-4 rounded"
-              >
-                Realizar Pagamento
-              </button>
-            </div>
           </div>
           <div className="w-full max-w-2xl mt-4">
             <p className="font-semibold text-lg mb-2 text-gray-800">Produtos</p>
             <table className="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden">
               <thead>
                 <tr className="bg-gray-200 text-gray-700">
+                  <th className="px-4 py-2 text-left">Data</th>
                   <th className="px-4 py-2 text-left">Nome</th>
-                  <th className="px-4 py-2 text-left">Preço</th>
-                  <th className="px-4 py-2 text-left">Valor pendente</th>
                   <th className="px-4 py-2 text-left">Código</th>
+                  <th className="px-4 py-2 text-left">Preço</th>
                   <th className="px-4 py-2 text-left">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {client?.product?.map((product) => (
                   <tr key={product.id} className="border-t border-gray-200">
+                    <td className="px-4 py-2">
+                      {formatData(product.createAt)}
+                    </td>
                     <td className="px-4 py-2">{product.name}</td>
-                    <td className="px-4 py-2">{product.price}</td>
-                    <td className="px-4 py-2">{product.remaining_balance}</td>
                     <td className="px-4 py-2">{product.product_code}</td>
+                    <td className="px-4 py-2">{product.price}</td>
                     <td className="px-4 py-2">{product.status}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <div className="my-6 p-6 bg-white shadow-md rounded-lg">
-            <h2 className="font-semibold text-xl text-gray-800">
+          <div className="flex flex-col justify-center items-center my-6 p-6 bg-white shadow-md rounded-lg w-full max-w-md">
+            <h2 className="font-semibold text-xl text-gray-800 mb-4">
               Total em produtos vendidos
             </h2>
-            <p className="text-gray-600">R$ {totalSoldPrice?.toFixed(2)}</p>
+            <p className="text-gray-600 text-2xl mb-6">
+              R$ {totalSoldPrice?.toFixed(2)}
+            </p>
+            <button
+              onClick={() => router.push(`/clients/${id}/payment`)}
+              className="bg-blue-500 hover:bg-blue-700 transition ease-in-out duration-300 text-white font-bold py-2 px-6 rounded-full"
+            >
+              Realizar Pagamento
+            </button>
           </div>
         </div>
       )}
