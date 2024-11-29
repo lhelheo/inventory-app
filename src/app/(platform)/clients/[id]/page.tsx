@@ -31,6 +31,14 @@ export default function Client() {
     ?.filter((product) => product.status === 'Vendido')
     .reduce((total, product) => total + Number(product.price), 0)
 
+  const totalPending = client?.product
+    ?.filter(
+      (product) =>
+        product.status === 'Em Processamento' ||
+        product.status === 'Disponivel',
+    )
+    .reduce((total, product) => total + Number(product.price), 0)
+
   return (
     <>
       {loading ? (
@@ -38,17 +46,42 @@ export default function Client() {
           Carregando cliente...
         </p>
       ) : (
-        <div className="flex flex-col h-screen justify-center items-center bg-gray-100">
-          <div className="my-6 p-6 bg-white shadow-md rounded-lg">
-            <h1 className="text-xl text-gray-800">
-              <p>Cliente:</p>
-              <p>
-                {client?.id} - {client?.name}
-              </p>
-            </h1>
-          </div>
-          <div className="w-full max-w-7xl mt-4">
-            <p className="font-semibold text-lg mb-2 text-gray-800">Produtos</p>
+        <div className="flex flex-col h-screen justify-center items-center bg-[#252525]">
+          <div className="flex flex-col w-full max-w-7xl mt-4 items-center">
+            <div className="flex flex-col justify-center items-center my-6 p-6 bg-white shadow-md rounded-lg w-full max-w-md">
+              <h1 className="text-xl text-gray-800">
+                <p>
+                  {client?.id} - {client?.name}
+                </p>
+              </h1>
+              <div className="flex my-4">
+                <div>
+                  <h2 className="font-semibold text-xl text-gray-800 mb-4">
+                    Total em produtos vendidos
+                  </h2>
+                  <p className="text-gray-600 text-2xl mb-6">
+                    R$ {totalSoldPrice?.toFixed(2)}
+                  </p>
+                </div>
+                <div>
+                  <h2 className="font-semibold text-xl text-gray-800 mb-4">
+                    Total em produtos pendentes
+                  </h2>
+                  <p className="text-gray-600 text-2xl mb-6">
+                    R$ {totalPending?.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => router.push(`/clients/${id}/payment`)}
+                className="bg-[#424242] hover:bg-[#252525] transition ease-in-out duration-300 text-white font-bold py-2 px-6 rounded-full"
+              >
+                Realizar Pagamento
+              </button>
+            </div>
+            <p className="font-semibold text-lg mb-2 text-[#e3e3e3]">
+              Produtos
+            </p>
             <table className="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden">
               <thead>
                 <tr className="bg-gray-200 text-gray-700">
@@ -87,20 +120,6 @@ export default function Client() {
                 ))}
               </tbody>
             </table>
-          </div>
-          <div className="flex flex-col justify-center items-center my-6 p-6 bg-white shadow-md rounded-lg w-full max-w-md">
-            <h2 className="font-semibold text-xl text-gray-800 mb-4">
-              Total em produtos vendidos
-            </h2>
-            <p className="text-gray-600 text-2xl mb-6">
-              R$ {totalSoldPrice?.toFixed(2)}
-            </p>
-            <button
-              onClick={() => router.push(`/clients/${id}/payment`)}
-              className="bg-blue-500 hover:bg-blue-700 transition ease-in-out duration-300 text-white font-bold py-2 px-6 rounded-full"
-            >
-              Realizar Pagamento
-            </button>
           </div>
         </div>
       )}

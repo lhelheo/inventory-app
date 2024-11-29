@@ -49,13 +49,13 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-[#252525]">
       <form
         onSubmit={handleLogin}
-        className="flex flex-col w-[400px] border border-gray-200 bg-white rounded shadow p-20"
+        className="flex flex-col w-[400px] border border-gray-200 bg-gray-100 rounded shadow p-20"
       >
         <div className="flex justify-center text-xl">
-          <p className="font-semibold">Acesse sua conta</p>
+          <p className="text-[#252525] font-semibold">Acesse sua conta</p>
         </div>
         <div className="my-4 gap-3 flex flex-col">
           <label>
@@ -83,7 +83,7 @@ export default function LoginPage() {
         <div className="flex flex-col">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ease-linear transition-all"
+            className="px-4 py-2 bg-[#c7c7c7] text-[#181818] rounded hover:bg-[#b4b4b4] ease-linear transition-all"
             disabled={loading}
           >
             {loading ? 'Loading...' : 'Login'}

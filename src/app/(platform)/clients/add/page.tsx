@@ -80,10 +80,10 @@ export default function CreateClient() {
   }
 
   return (
-    <div className="flex h-screen justify-center items-center">
+    <div className="flex h-screen justify-center items-center bg-[#252525]">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 p-6 bg-white shadow-lg rounded-lg"
+        className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 p-6 bg-[#e3e3e3] shadow-lg rounded-lg"
       >
         <h2 className="text-2xl font-semibold text-center">Criar Cliente</h2>
 
@@ -125,51 +125,11 @@ export default function CreateClient() {
           />
         </div>
 
-        <div>Opcional: Criação de produto</div>
-
-        <div className="flex flex-col w-full">
-          <input
-            type="text"
-            id="productName"
-            name="productName"
-            value={formData.productName}
-            onChange={handleChange}
-            placeholder="Nome do produto"
-            className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
-
-        <div className="flex flex-col w-full">
-          <input
-            type="number"
-            id="productPrice"
-            name="productPrice"
-            value={
-              formData.productPrice !== undefined ? formData.productPrice : ''
-            }
-            onChange={handleChange}
-            placeholder="Preço do produto"
-            className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
-
-        <div className="flex flex-col w-full">
-          <input
-            type="text"
-            id="productCode"
-            name="productCode"
-            value={formData.productCode}
-            onChange={handleChange}
-            placeholder="Código do produto"
-            className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
-          />
-        </div>
-
         <button
           type="submit"
-          className="bg-blue-600 text-white rounded-lg py-3 mt-6 w-full hover:bg-blue-500 transition duration-200"
+          className="bg-[#252525] text-white rounded-lg py-3 mt-6 w-full hover:bg-[#424242] transition duration-200"
         >
-          Criar Cliente
+          Salvar
         </button>
       </form>
     </div>

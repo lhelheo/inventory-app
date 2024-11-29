@@ -85,8 +85,8 @@ export default function CreateProduct() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full border border-gray-200">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-[#252525]">
+      <div className="bg-[#e3e3e3] shadow-lg rounded-lg p-8 max-w-sm w-full border border-gray-200">
         <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
           Adicionar Produto
         </h1>
@@ -242,7 +242,7 @@ export default function CreateProduct() {
 
           <button
             type="submit"
-            className="bg-blue-600 text-white rounded-lg py-3 mt-4 hover:bg-blue-500 transition-all focus:ring-4 focus:ring-blue-300 disabled:bg-blue-300"
+            className="bg-[#252525] text-white rounded-lg py-3 mt-4 hover:bg-[#4b4b4b] transition-all focus:ring-4 focus:ring-blue-300 disabled:bg-blue-300"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Adicionar Produto'}

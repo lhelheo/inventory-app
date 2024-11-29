@@ -23,7 +23,7 @@ export const HomeForm = () => {
       <div className="grid grid-cols-2 gap-4">
         <button
           onClick={() => handleNavigation('/clients')}
-          className="bg-blue-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-blue-600 transition-all"
+          className="bg-[#252525] hover:bg-[#3e3e3e] text-white py-4 rounded-lg shadow-md flex flex-col items-center  ease-linear transition-all"
         >
           <CircleDollarSign size={32} className="mb-2" />
           <span className="font-medium">Vendas</span>
@@ -31,7 +31,7 @@ export const HomeForm = () => {
 
         <button
           onClick={() => handleNavigation('/clients/add')}
-          className="bg-green-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-green-600 transition-all"
+          className="bg-[#252525] hover:bg-[#3e3e3e] text-white py-4 rounded-lg shadow-md flex flex-col items-center transition-all"
         >
           <Plus size={32} className="mb-2" />
           <span className="font-medium">Criar Cliente</span>

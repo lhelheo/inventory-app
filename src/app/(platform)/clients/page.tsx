@@ -52,8 +52,11 @@ export default function Clients() {
   )
 
   return (
-    <div className="p-4 flex flex-col justify-center items-center min-h-screen bg-gray-100">
-      <h1 className="text-xl font-semibold text-gray-800 mb-4">Clientes</h1>
+    <div className="p-4 flex flex-col justify-center items-center min-h-screen bg-[#181818]">
+      <h1 className="text-xl font-semibold text-[#e3e3e3] mb-4">Clientes</h1>
+      <p className="text-[#e3e3e3] mb-4">
+        Selecione um cliente para visualizar suas vendas
+      </p>
       <div className="w-full max-w-4xl p-6 bg-white shadow-md rounded-lg">
         <div className="mb-4 w-full">
           <input
@@ -95,12 +98,14 @@ export default function Clients() {
                       <div
                         className="flex items-center font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2"
                         onClick={() => handleDelete(customer.id)}
+                        title="Deletar cliente"
                       >
                         <Trash2 size={18} />
                       </div>
                       <div
                         className="flex items-center font-bold text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all mr-2"
                         onClick={() => router.push(`/clients/${customer.id}`)}
+                        title="Visualizar vendas"
                       >
                         <Eye size={18} />
                       </div>
@@ -109,6 +114,7 @@ export default function Clients() {
                         onClick={() =>
                           router.push(`/clients/${customer.id}/edit`)
                         }
+                        title="Editar cliente"
                       >
                         <Pencil size={18} />
                       </div>
