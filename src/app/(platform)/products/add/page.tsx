@@ -87,7 +87,7 @@ export default function CreateProduct() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-[#252525]">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818]">
       <div className="bg-[#e3e3e3] shadow-lg rounded-lg p-8 max-w-sm w-full border border-gray-200">
         <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
           Adicionar Produto
@@ -108,7 +108,7 @@ export default function CreateProduct() {
                   e.target.value ? Number(e.target.value) : null,
                 )
               }
-              className={`border rounded-lg w-full p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]`}
+              className={`border rounded-lg w-full p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]`}
             >
               <option value="">Nenhum cliente associado</option>
               {clients.map((client) => (
@@ -130,7 +130,7 @@ export default function CreateProduct() {
               id="status"
               ref={statusRef}
               required
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
             >
               <option value="Disponivel">Disponível</option>
               <option value="Vendido">Vendido</option>
@@ -149,7 +149,7 @@ export default function CreateProduct() {
               id="productName"
               ref={productNameRef}
               type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
               placeholder="Nome"
               required
             />
@@ -166,7 +166,7 @@ export default function CreateProduct() {
               id="productCode"
               ref={productCodeRef}
               type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
               placeholder="Código"
               required
             />
@@ -183,7 +183,7 @@ export default function CreateProduct() {
               id="productPrice"
               ref={productPriceRef}
               type="number"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
               placeholder="Preço de venda"
               step="0.01"
               required
@@ -201,7 +201,7 @@ export default function CreateProduct() {
               id="costPrice"
               ref={costPriceRef}
               type="number"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
               placeholder="Preço de custo"
               step="0.01"
               required
@@ -219,7 +219,7 @@ export default function CreateProduct() {
               id="supplier"
               ref={supplierRef}
               type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
               placeholder="Fornecedor"
             />
           </div>
@@ -235,7 +235,7 @@ export default function CreateProduct() {
               id="description"
               ref={descriptionRef}
               type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
               placeholder="Descrição do produto"
               required
             />
@@ -243,7 +243,7 @@ export default function CreateProduct() {
 
           <button
             type="submit"
-            className="bg-[#252525] text-white rounded-lg py-3 mt-4 hover:bg-[#4b4b4b] transition-all focus:ring-4 focus:ring-[#252525] disabled:bg-[#252525]"
+            className="bg-[#181818] text-white rounded-lg py-3 mt-4 hover:bg-[#4b4b4b] transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Adicionar Produto'}

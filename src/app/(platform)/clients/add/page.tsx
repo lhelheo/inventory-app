@@ -80,7 +80,7 @@ export default function CreateClient() {
   }
 
   return (
-    <div className="flex h-screen justify-center items-center bg-[#252525]">
+    <div className="flex h-screen justify-center items-center bg-[#181818]">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 p-6 bg-[#e3e3e3] shadow-lg rounded-lg"
@@ -127,7 +127,7 @@ export default function CreateClient() {
 
         <button
           type="submit"
-          className="bg-[#252525] text-white rounded-lg py-3 mt-6 w-full hover:bg-[#424242] transition duration-200"
+          className="bg-[#181818] text-white rounded-lg py-3 mt-6 w-full hover:bg-[#424242] transition duration-200"
         >
           Salvar
         </button>

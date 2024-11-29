@@ -267,7 +267,7 @@ export default function ProductPage(props: Product) {
 
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-500 transition-all"
+            className="w-full py-3 bg-[#181818] text-white font-semibold rounded-md hover:bg-[#333333] transition-all"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Salvar Alterações'}

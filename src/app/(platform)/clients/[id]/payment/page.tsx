@@ -72,7 +72,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
   }
 
   return (
-    <div className="w-full flex justify-center bg-[#252525] h-screen p-4">
+    <div className="w-full flex justify-center bg-[#181818] h-screen p-4">
       <div className="w-[1200px] bg-[#e3e3e3] rounded p-10">
         <h1 className="text-2xl font-bold mb-4">Realizar Pagamento</h1>
 
@@ -123,7 +123,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
         <button
           onClick={handlePayment}
           disabled={loading || !paymentValue || !selectedProductId}
-          className="w-full bg-[#252525] text-white py-2 rounded-md hover:bg-[#3d3d3d] transition-all ease-linear disabled:bg-gray-300"
+          className="w-full bg-[#181818] text-white py-2 rounded-md hover:bg-[#3d3d3d] transition-all ease-linear disabled:bg-gray-300"
         >
           {loading ? 'Processando...' : 'Pagar'}
         </button>

@@ -41,16 +41,14 @@ export default function Client() {
       0,
     )
 
-  console.log(client?.product)
-
   return (
     <>
       {loading ? (
-        <p className="flex justify-center items-center h-screen">
+        <p className="flex justify-center text-[#e3e3e3] items-center h-screen bg-[#181818]">
           Carregando cliente...
         </p>
       ) : (
-        <div className="flex flex-col h-screen justify-center items-center bg-[#252525]">
+        <div className="flex flex-col h-screen justify-center items-center bg-[#181818]">
           <div className="flex flex-col w-full max-w-7xl mt-4 items-center">
             <div className="flex flex-col justify-center items-center my-6 p-6 bg-white shadow-md rounded-lg w-full max-w-md">
               <h1 className="text-xl text-gray-800">
@@ -78,7 +76,7 @@ export default function Client() {
               </div>
               <button
                 onClick={() => router.push(`/clients/${id}/payment`)}
-                className="bg-[#424242] hover:bg-[#252525] transition ease-in-out duration-300 text-white font-bold py-2 px-6 rounded"
+                className="bg-[#424242] hover:bg-[#181818] transition ease-in-out duration-300 text-white font-bold py-2 px-6 rounded"
               >
                 Realizar Pagamento
               </button>

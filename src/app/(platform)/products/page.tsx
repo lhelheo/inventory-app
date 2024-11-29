@@ -68,11 +68,11 @@ export default function Products() {
   return (
     <>
       {loading ? (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-[#252525]">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818]">
           <p className="text-lg text-[#e3e3e3]">Carregando produtos...</p>
         </div>
       ) : (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-[#252525]">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818]">
           <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6">
             Produtos
           </h1>
