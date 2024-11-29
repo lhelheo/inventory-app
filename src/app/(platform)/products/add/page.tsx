@@ -107,7 +107,7 @@ export default function CreateProduct() {
                 )
               }
               required
-              className={`border rounded-lg w-full p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              className={`border rounded-lg w-full p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]`}
             >
               <option value="">Nenhum cliente associado</option>
               {clients.map((client) => (
@@ -129,7 +129,7 @@ export default function CreateProduct() {
               id="status"
               ref={statusRef}
               required
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
             >
               <option value="Disponivel">Disponível</option>
               <option value="Vendido">Vendido</option>
@@ -148,7 +148,7 @@ export default function CreateProduct() {
               id="productName"
               ref={productNameRef}
               type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
               placeholder="Nome"
               required
             />
@@ -165,7 +165,7 @@ export default function CreateProduct() {
               id="productCode"
               ref={productCodeRef}
               type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
               placeholder="Código"
               required
             />
@@ -182,7 +182,7 @@ export default function CreateProduct() {
               id="productPrice"
               ref={productPriceRef}
               type="number"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
               placeholder="Preço de venda"
               step="0.01"
               required
@@ -200,7 +200,7 @@ export default function CreateProduct() {
               id="costPrice"
               ref={costPriceRef}
               type="number"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
               placeholder="Preço de custo"
               step="0.01"
               required
@@ -218,7 +218,7 @@ export default function CreateProduct() {
               id="supplier"
               ref={supplierRef}
               type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
               placeholder="Fornecedor"
             />
           </div>
@@ -234,7 +234,7 @@ export default function CreateProduct() {
               id="description"
               ref={descriptionRef}
               type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]"
               placeholder="Descrição do produto"
               required
             />
@@ -242,7 +242,7 @@ export default function CreateProduct() {
 
           <button
             type="submit"
-            className="bg-[#252525] text-white rounded-lg py-3 mt-4 hover:bg-[#4b4b4b] transition-all focus:ring-4 focus:ring-blue-300 disabled:bg-blue-300"
+            className="bg-[#252525] text-white rounded-lg py-3 mt-4 hover:bg-[#4b4b4b] transition-all focus:ring-4 focus:ring-[#252525] disabled:bg-[#252525]"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Adicionar Produto'}

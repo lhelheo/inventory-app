@@ -31,13 +31,11 @@ export default function Client() {
     ?.filter((product) => product.status === 'Vendido')
     .reduce((total, product) => total + Number(product.price), 0)
 
-  const totalPending = client?.product
-    ?.filter(
-      (product) =>
-        product.status === 'Em Processamento' ||
-        product.status === 'Disponivel',
-    )
-    .reduce((total, product) => total + Number(product.price), 0)
+  const totalPending = client?.product.reduce(
+    (total, product) =>
+      total + Number(product.remaining_balance ?? product.price),
+    0,
+  )
 
   return (
     <>
@@ -74,13 +72,13 @@ export default function Client() {
               </div>
               <button
                 onClick={() => router.push(`/clients/${id}/payment`)}
-                className="bg-[#424242] hover:bg-[#252525] transition ease-in-out duration-300 text-white font-bold py-2 px-6 rounded-full"
+                className="bg-[#424242] hover:bg-[#252525] transition ease-in-out duration-300 text-white font-bold py-2 px-6 rounded"
               >
                 Realizar Pagamento
               </button>
             </div>
             <p className="font-semibold text-lg mb-2 text-[#e3e3e3]">
-              Produtos
+              Histórico de compras de {client?.name}
             </p>
             <table className="table-auto w-full bg-white shadow-md rounded-lg overflow-hidden">
               <thead>
@@ -98,24 +96,22 @@ export default function Client() {
               <tbody>
                 {client?.product?.map((product) => (
                   <tr key={product.id} className="border-t border-gray-200">
-                    <td className="px-4 py-2 uppercase">
+                    <td className="px-4 py-2">
                       {formatData(product.createAt)}
                     </td>
-                    <td className="px-4 py-2 uppercase">
+                    <td className="px-4 py-2">
                       {product.supplier || 'Não informado'}
                     </td>
-                    <td className="px-4 py-2 uppercase">
-                      {product.description}
+                    <td className="px-4 py-2">{product.description}</td>
+                    <td className="px-4 py-2">{product.name}</td>
+                    <td className="px-4 py-2">{product.product_code}</td>
+                    <td className="px-4 py-2">
+                      {`R$ ${product.price.toFixed(2)}`}
                     </td>
-                    <td className="px-4 py-2 uppercase">{product.name}</td>
-                    <td className="px-4 py-2 uppercase">
-                      {product.product_code}
+                    <td className="px-4 py-2">
+                      {`R$ ${product.cost_price.toFixed(2)}`}
                     </td>
-                    <td className="px-4 py-2 uppercase">R$ {product.price}</td>
-                    <td className="px-4 py-2 uppercase">
-                      R$ {product.cost_price}
-                    </td>
-                    <td className="px-4 py-2 uppercase">{product.status}</td>
+                    <td className="px-4 py-2">{product.status}</td>
                   </tr>
                 ))}
               </tbody>

@@ -86,7 +86,7 @@ export default function LoginPage() {
             className="px-4 py-2 bg-[#c7c7c7] text-[#181818] rounded hover:bg-[#b4b4b4] ease-linear transition-all"
             disabled={loading}
           >
-            {loading ? 'Loading...' : 'Login'}
+            {loading ? 'Carregando...' : 'Login'}
           </button>
           {error && (
             <p className="flex justify-center text-red-500 my-4">{error}</p>
