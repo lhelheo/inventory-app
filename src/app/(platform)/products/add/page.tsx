@@ -4,6 +4,8 @@ import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
 import { IClient } from '@/interface/interfaces'
 
+// TODO: Criar uma trava no backend para que não seja possível criar um produto com cliente e com status disponível ao mesmo tempo
+
 export default function CreateProduct() {
   const [clients, setClients] = useState<IClient[]>([])
   const [selectedClientId, setSelectedClientId] = useState<number | null>(null)
@@ -106,7 +108,6 @@ export default function CreateProduct() {
                   e.target.value ? Number(e.target.value) : null,
                 )
               }
-              required
               className={`border rounded-lg w-full p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#252525]`}
             >
               <option value="">Nenhum cliente associado</option>

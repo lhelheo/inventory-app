@@ -1,12 +1,5 @@
 'use client'
-import {
-  Plus,
-  Eye,
-  PackagePlus,
-  Box,
-  Trash2,
-  CircleDollarSign,
-} from 'lucide-react'
+import { Plus, Eye, PackagePlus, Box, CircleDollarSign } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -39,7 +32,7 @@ export const HomeForm = () => {
 
         <button
           onClick={() => handleNavigation('/products')}
-          className="bg-blue-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-blue-600 transition-all"
+          className="bg-[#252525] text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-[#3e3e3e] transition-all"
         >
           <Eye size={32} className="mb-2" />
           <span className="font-medium">Visualizar Produtos</span>
@@ -47,7 +40,7 @@ export const HomeForm = () => {
 
         <button
           onClick={() => handleNavigation('/products/add')}
-          className="bg-green-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-green-600 transition-all"
+          className="bg-[#252525] text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-[#3e3e3e] transition-all"
         >
           <PackagePlus size={32} className="mb-2" />
           <span className="font-medium">Criar Produto</span>
@@ -55,18 +48,10 @@ export const HomeForm = () => {
 
         <button
           onClick={() => handleNavigation('/stock')}
-          className="bg-blue-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-blue-600 transition-all"
+          className="bg-[#252525] text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-[#3e3e3e] transition-all"
         >
           <Box size={32} className="mb-2" />
           <span className="font-medium">Visualizar estoque</span>
-        </button>
-
-        <button
-          onClick={() => handleNavigation('/products/delete')}
-          className="bg-red-500 text-white py-4 rounded-lg shadow-md flex flex-col items-center hover:bg-red-600 transition-all"
-        >
-          <Trash2 size={32} className="mb-2" />
-          <span className="font-medium">Deletar Produto</span>
         </button>
       </div>
       {loading && (

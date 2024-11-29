@@ -24,12 +24,14 @@ export default function Stock() {
   return (
     <>
       {loading ? (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
-          <p className="text-lg text-gray-600">Carregando produtos...</p>
+        <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818]">
+          <p className="text-lg text-[#e3e3e3]">Carregando produtos...</p>
         </div>
       ) : (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
-          <h1 className="text-2xl font-semibold text-gray-800 mb-6">Estoque</h1>
+        <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818]">
+          <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6">
+            Estoque
+          </h1>
           <div className="bg-white shadow-md rounded-lg p-8 w-[85%] border border-gray-200 overflow-x-auto">
             {products.length > 0 ? (
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">

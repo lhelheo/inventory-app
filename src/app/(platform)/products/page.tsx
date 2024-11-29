@@ -2,7 +2,8 @@
 import { formatData } from '@/helpers/format'
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
-import { Pencil } from 'lucide-react'
+import axios from 'axios'
+import { Pencil, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -11,10 +12,31 @@ export default function Products() {
   const [search, setSearch] = useState<string>('')
   const [products, setProducts] = useState<IProduct[]>([])
   const [loading, setLoading] = useState<boolean>(true)
+  const [message, setMessage] = useState<string | null>(null)
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null)
 
   useEffect(() => {
     loadProducts()
   }, [])
+
+  async function handleDeleteConfirmed() {
+    if (!selectedProduct) return
+    setLoading(true)
+    try {
+      await axios.delete(`${baseUrl}/product/${selectedProduct.id}`)
+      setMessage('Produto deletado com sucesso.')
+      setProducts(
+        products.filter((product) => product.id !== selectedProduct.id),
+      )
+    } catch (error) {
+      setMessage('Erro ao deletar o produto.')
+    } finally {
+      setLoading(false)
+      setShowConfirm(false)
+      setSelectedProduct(null)
+    }
+  }
 
   async function loadProducts() {
     try {
@@ -46,15 +68,14 @@ export default function Products() {
   return (
     <>
       {loading ? (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
-          <p className="text-lg text-gray-600">Carregando produtos...</p>
+        <div className="flex flex-col justify-center items-center min-h-screen bg-[#252525]">
+          <p className="text-lg text-[#e3e3e3]">Carregando produtos...</p>
         </div>
       ) : (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50">
-          <h1 className="text-2xl font-semibold text-gray-800 mb-6">
+        <div className="flex flex-col justify-center items-center min-h-screen bg-[#252525]">
+          <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6">
             Produtos
           </h1>
-          <div></div>
           <div className="bg-white shadow-md rounded-lg p-8 w-[85%] border border-gray-200 overflow-x-auto">
             <div className="mb-6 w-full">
               <input
@@ -96,7 +117,10 @@ export default function Products() {
                       Atualizado em
                     </th>
                     <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
-                      Ações
+                      Editar
+                    </th>
+                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                      Deletar
                     </th>
                   </tr>
                 </thead>
@@ -129,6 +153,15 @@ export default function Products() {
                           className="text-blue-500 hover:text-blue-700 cursor-pointer"
                         />
                       </td>
+                      <td className="py-3 px-4 text-center">
+                        <Trash2
+                          onClick={() => {
+                            setShowConfirm(true)
+                            setSelectedProduct(product)
+                          }}
+                          className="text-red-500 hover:text-red-700 cursor-pointer"
+                        />
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -138,6 +171,35 @@ export default function Products() {
                 Nenhum produto disponível.
               </p>
             )}
+          </div>
+        </div>
+      )}
+
+      {showConfirm && selectedProduct && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-lg font-semibold mb-4">Confirmar Exclusão</h2>
+            <p className="mb-4">
+              Tem certeza que deseja deletar o produto{' '}
+              <span className="font-semibold">{selectedProduct.name}</span>?
+            </p>
+            <div className="flex justify-end">
+              <button
+                onClick={() => {
+                  setShowConfirm(false)
+                  setSelectedProduct(null)
+                }}
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleDeleteConfirmed}
+                className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
+              >
+                Confirmar
+              </button>
+            </div>
           </div>
         </div>
       )}

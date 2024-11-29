@@ -51,6 +51,21 @@ export default function Clients() {
     customer.name.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
+  function formatPhoneNumber(phone: string): string {
+    const cleaned = phone.replace(/\D/g, '')
+
+    if (cleaned.length !== 11) {
+      return phone
+    }
+
+    const ddd = cleaned.slice(0, 2)
+    const firstPart = cleaned.slice(2, 3)
+    const secondPart = cleaned.slice(3, 7)
+    const thirdPart = cleaned.slice(7)
+
+    return `(${ddd}) ${firstPart} ${secondPart}-${thirdPart}`
+  }
+
   return (
     <div className="p-4 flex flex-col justify-center items-center min-h-screen bg-[#181818]">
       <h1 className="text-xl font-semibold text-[#e3e3e3] mb-4">Clientes</h1>
@@ -92,7 +107,7 @@ export default function Clients() {
                       {customer.email || 'Não informado'}
                     </td>
                     <td className="px-4 py-2">
-                      {customer.phone || 'Não informado'}
+                      {formatPhoneNumber(customer.phone) || 'Não informado'}
                     </td>
                     <td className="px-4 py-2 flex">
                       <div
