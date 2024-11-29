@@ -21,7 +21,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
 
-  const fetchClientProducts = async () => {
+  async function fetchClientProducts() {
     try {
       const response = await axios.get(
         `${baseUrl}/client/${props.params.id}/products`,
@@ -40,7 +40,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
     fetchClientProducts()
   }, [])
 
-  const handlePayment = async () => {
+  async function handlePayment() {
     if (!selectedProductId) {
       setError('Por favor, selecione um produto para realizar o pagamento.')
       return

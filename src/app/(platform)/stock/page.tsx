@@ -8,7 +8,7 @@ export default function Stock() {
   const [products, setProducts] = useState<IProduct[]>([])
   const [loading, setLoading] = useState<boolean>(true)
 
-  useEffect(() => {
+  async function loadProducts() {
     fetch(`${baseUrl}/products`)
       .then((response) => response.json())
       .then((data) => {
@@ -19,6 +19,10 @@ export default function Stock() {
         console.error('Error fetching products:', error)
         setLoading(false)
       })
+  }
+
+  useEffect(() => {
+    loadProducts()
   }, [])
 
   return (

@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
@@ -15,7 +15,7 @@ export default function LoginPage() {
     localStorage.removeItem('token')
   }, [])
 
-  const handleLogin = async (event: React.FormEvent) => {
+  async function handleLogin(event: FormEvent) {
     event.preventDefault()
     setError(null)
     setLoading(true)

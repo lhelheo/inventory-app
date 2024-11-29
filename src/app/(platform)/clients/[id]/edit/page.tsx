@@ -18,7 +18,7 @@ export default function EditClientPage(props: EditClientPageProps) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
+  async function loadClient() {
     if (id) {
       axios
         .get(`${baseUrl}/client/${id}`)
@@ -31,6 +31,10 @@ export default function EditClientPage(props: EditClientPageProps) {
           setLoading(false)
         })
     }
+  }
+
+  useEffect(() => {
+    loadClient()
   }, [id])
 
   const handleInputChange = (e) => {

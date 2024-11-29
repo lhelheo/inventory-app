@@ -3,6 +3,8 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { baseUrl } from '@/helpers/url'
 import axios from 'axios'
 
+// TODO: Adicionar feedback visual para o usuario ao concluir ação e clique para visualizar cliente
+
 interface ClientFormData {
   name: string
   email?: string
@@ -30,7 +32,7 @@ export default function CreateClient() {
     }))
   }
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
 
     const token = localStorage.getItem('token')
