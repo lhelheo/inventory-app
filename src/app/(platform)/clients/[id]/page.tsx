@@ -31,11 +31,17 @@ export default function Client() {
     ?.filter((product) => product.status === 'Vendido')
     .reduce((total, product) => total + Number(product.price), 0)
 
-  const totalPending = client?.product.reduce(
-    (total, product) =>
-      total + Number(product.remaining_balance ?? product.price),
-    0,
-  )
+  const totalPending = client?.product
+    .filter(
+      (product) => product.status !== 'Vendido' || product.remaining_balance,
+    )
+    .reduce(
+      (total, product) =>
+        total + Number(product.remaining_balance ?? product.price),
+      0,
+    )
+
+  console.log(client?.product)
 
   return (
     <>

@@ -107,7 +107,8 @@ export default function Clients() {
                       {customer.email || 'Não informado'}
                     </td>
                     <td className="px-4 py-2">
-                      {formatPhoneNumber(customer.phone) || 'Não informado'}
+                      {formatPhoneNumber(customer.phone ?? '') ||
+                        'Não informado'}
                     </td>
                     <td className="px-4 py-2 flex">
                       <div
