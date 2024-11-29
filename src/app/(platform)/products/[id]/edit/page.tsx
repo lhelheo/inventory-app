@@ -118,8 +118,8 @@ export default function ProductPage(props: Product) {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gray-50 p-4">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">Editar Produto</h1>
+    <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] p-4">
+      <h1 className="text-3xl font-bold text-[#e3e3e3] mb-8">Editar Produto</h1>
 
       <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-lg border border-gray-200">
         <form onSubmit={handleSubmit} className="space-y-6">

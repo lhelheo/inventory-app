@@ -12,6 +12,7 @@ export default function Products() {
   const [search, setSearch] = useState<string>('')
   const [products, setProducts] = useState<IProduct[]>([])
   const [loading, setLoading] = useState<boolean>(true)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [message, setMessage] = useState<string | null>(null)
   const [showConfirm, setShowConfirm] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null)
@@ -29,6 +30,7 @@ export default function Products() {
       setProducts(
         products.filter((product) => product.id !== selectedProduct.id),
       )
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setMessage('Erro ao deletar o produto.')
     } finally {
