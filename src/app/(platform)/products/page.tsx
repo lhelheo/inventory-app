@@ -132,22 +132,26 @@ export default function Products() {
                       key={product.id}
                       className="border-t ease-linear transition-all even:bg-gray-50 hover:bg-gray-100"
                     >
-                      <td className="py-3 px-4">{product.name}</td>
-                      <td className="py-3 px-4">
+                      <td className="py-3 px-4 uppercase">{product.name}</td>
+                      <td className="py-3 px-4 uppercase">
                         {product.client?.name || '-'}
                       </td>
-                      <td className="py-3 px-4">{product.status}</td>
-                      <td className="py-3 px-4">{product.product_code}</td>
-                      <td className="py-3 px-4">{`R$ ${product.cost_price}`}</td>
-                      <td className="py-3 px-4">{`R$ ${product.price}`}</td>
-                      <td className="py-3 px-4">{product.description}</td>
-                      <td className="py-3 px-4">
+                      <td className="py-3 px-4 uppercase">{product.status}</td>
+                      <td className="py-3 px-4 uppercase">
+                        {product.product_code}
+                      </td>
+                      <td className="py-3 px-4 uppercase">{`R$ ${product.cost_price}`}</td>
+                      <td className="py-3 px-4 uppercase">{`R$ ${product.price}`}</td>
+                      <td className="py-3 px-4 uppercase">
+                        {product.description}
+                      </td>
+                      <td className="py-3 px-4 uppercase">
                         {formatData(product.createAt)}
                       </td>
-                      <td className="py-3 px-4">
+                      <td className="py-3 px-4 uppercase">
                         {formatData(product.updateAt)}
                       </td>
-                      <td className="py-3 px-4 text-center">
+                      <td className="py-3 px-4 uppercase text-center">
                         <Pencil
                           onClick={() =>
                             router.push(`/products/${product.id}/edit/`)
@@ -155,7 +159,7 @@ export default function Products() {
                           className="text-blue-500 hover:text-blue-700 cursor-pointer"
                         />
                       </td>
-                      <td className="py-3 px-4 text-center">
+                      <td className="py-3 px-4 uppercase text-center">
                         <Trash2
                           onClick={() => {
                             setShowConfirm(true)

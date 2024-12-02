@@ -134,7 +134,7 @@ export default function CreateProduct() {
             >
               <option value="Disponivel">Disponível</option>
               <option value="Vendido">Vendido</option>
-              <option value="Em Processamento">Em Processamento</option>
+              <option value="Em Processamento">Aguardando pagamento...</option>
             </select>
           </div>
 
@@ -143,14 +143,14 @@ export default function CreateProduct() {
               htmlFor="productName"
               className="block text-gray-700 font-medium mb-1"
             >
-              Nome <span className="text-red-500">*</span>
+              Produto <span className="text-red-500">*</span>
             </label>
             <input
               id="productName"
               ref={productNameRef}
               type="text"
               className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
-              placeholder="Nome"
+              placeholder="Produto"
               required
             />
           </div>

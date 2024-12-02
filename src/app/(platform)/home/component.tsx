@@ -19,7 +19,7 @@ export const HomeForm = () => {
           className="bg-[#181818] hover:bg-[#3e3e3e] text-white py-4 rounded-lg shadow-md flex flex-col items-center  ease-linear transition-all"
         >
           <CircleDollarSign size={32} className="mb-2" />
-          <span className="font-medium">Vendas</span>
+          <span className="font-medium">Visualizar Vendas</span>
         </button>
 
         <button

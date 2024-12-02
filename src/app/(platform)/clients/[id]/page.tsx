@@ -100,22 +100,26 @@ export default function Client() {
               <tbody>
                 {client?.product?.map((product) => (
                   <tr key={product.id} className="border-t border-gray-200">
-                    <td className="px-4 py-2">
+                    <td className="px-4 py-2 uppercase">
                       {formatData(product.createAt)}
                     </td>
-                    <td className="px-4 py-2">
+                    <td className="px-4 py-2 uppercase">
                       {product.supplier || 'Não informado'}
                     </td>
-                    <td className="px-4 py-2">{product.description}</td>
-                    <td className="px-4 py-2">{product.name}</td>
-                    <td className="px-4 py-2">{product.product_code}</td>
-                    <td className="px-4 py-2">
+                    <td className="px-4 py-2 uppercase">
+                      {product.description}
+                    </td>
+                    <td className="px-4 py-2 uppercase">{product.name}</td>
+                    <td className="px-4 py-2 uppercase">
+                      {product.product_code}
+                    </td>
+                    <td className="px-4 py-2 uppercase">
                       {`R$ ${product.price.toFixed(2)}`}
                     </td>
-                    <td className="px-4 py-2">
+                    <td className="px-4 py-2 uppercase">
                       {`R$ ${product.cost_price.toFixed(2)}`}
                     </td>
-                    <td className="px-4 py-2">{product.status}</td>
+                    <td className="px-4 py-2 uppercase">{product.status}</td>
                   </tr>
                 ))}
               </tbody>
