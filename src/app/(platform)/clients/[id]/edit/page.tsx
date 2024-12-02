@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
@@ -37,14 +37,14 @@ export default function EditClientPage(props: EditClientPageProps) {
     loadClient()
   }, [id])
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setClient((prevClient) =>
       prevClient ? { ...prevClient, [name]: value } : prevClient,
     )
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setLoading(true)
 
