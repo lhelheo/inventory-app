@@ -3,6 +3,7 @@
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 interface ClientPaymentProps {
@@ -12,6 +13,7 @@ interface ClientPaymentProps {
 }
 
 export default function ClientPayment(props: ClientPaymentProps) {
+  const router = useRouter()
   const [paymentValue, setPaymentValue] = useState('')
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null,
@@ -73,7 +75,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
   return (
     <div className="w-full flex justify-center bg-[#181818] h-screen p-4">
-      <div className="w-[1200px] bg-[#242424] rounded p-10">
+      <div className="w-full max-w-4xl bg-[#242424] rounded p-10">
         <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
           Realizar Pagamento
         </h1>
@@ -166,6 +168,13 @@ export default function ClientPayment(props: ClientPaymentProps) {
             </table>
           </div>
         )}
+        <button
+          onClick={() => router.back()}
+          className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#464646] text-white p-4 rounded shadow-lg transition duration-300"
+          title="Voltar para a página anterior"
+        >
+          ←
+        </button>
       </div>
     </div>
   )

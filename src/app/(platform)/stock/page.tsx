@@ -38,7 +38,7 @@ export default function Stock() {
           <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6">
             Estoque
           </h1>
-          <div className="bg-[#242424] shadow-md rounded-lg p-8 w-[85%] overflow-x-auto">
+          <div className="bg-[#242424] w-full max-w-4xl shadow-md rounded-lg p-8 overflow-x-auto">
             {products.length > 0 ? (
               <table className="min-w-full bg-[#242424] border border-gray-200 rounded-lg">
                 <thead>
