@@ -73,13 +73,15 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
   return (
     <div className="w-full flex justify-center bg-[#181818] h-screen p-4">
-      <div className="w-[1200px] bg-[#e3e3e3] rounded p-10">
-        <h1 className="text-2xl font-bold mb-4">Realizar Pagamento</h1>
+      <div className="w-[1200px] bg-[#242424] rounded p-10">
+        <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
+          Realizar Pagamento
+        </h1>
 
         <div className="mb-4">
           <label
             htmlFor="product"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-[#e3e3e3]"
           >
             Selecione um Produto
           </label>
@@ -105,7 +107,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
         <div className="mb-4">
           <label
             htmlFor="paymentValue"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-[#e3e3e3]"
           >
             Valor do Pagamento
           </label>

@@ -15,6 +15,7 @@ interface ClientFormData {
 }
 
 export default function CreateClient() {
+  const [message, setMessage] = useState<string | null>(null)
   const [formData, setFormData] = useState<ClientFormData>({
     name: '',
     email: '',
@@ -62,7 +63,7 @@ export default function CreateClient() {
         userID,
       })
       console.log(response.data)
-      alert('Cliente criado com sucesso!')
+      setMessage('Cliente criado com sucesso.')
       clearForm()
     } catch (error) {
       console.error('Erro ao criar cliente:', error)
@@ -82,14 +83,25 @@ export default function CreateClient() {
   }
 
   return (
-    <div className="flex h-screen justify-center items-center bg-[#181818]">
+    <div className="flex flex-col h-screen justify-center items-center bg-[#181818]">
+      {message && (
+        <div className="mb-4 text-center text-white bg-green-500 p-2 rounded-lg">
+          {message}
+        </div>
+      )}
+
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 p-6 bg-[#e3e3e3] shadow-lg rounded-lg"
+        className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 p-6 bg-[#242424] shadow-lg rounded-lg"
       >
-        <h2 className="text-2xl font-semibold text-center">Criar Cliente</h2>
+        <h2 className="text-2xl font-semibold text-center text-[#e3e3e3]">
+          Criar Cliente
+        </h2>
 
         <div className="flex flex-col w-full">
+          <label htmlFor="name" className="text-[#e3e3e3] font-medium mb-1">
+            Nome
+          </label>
           <input
             type="text"
             id="name"
@@ -97,24 +109,28 @@ export default function CreateClient() {
             value={formData.name}
             onChange={handleChange}
             required
-            placeholder="Nome"
-            className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="border border-[#444444] rounded-lg p-3 bg-[#333333] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
         <div className="flex flex-col w-full">
+          <label htmlFor="email" className="text-[#e3e3e3] font-medium mb-1">
+            Email
+          </label>
           <input
             type="email"
             id="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="Email"
-            className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="border border-[#444444] rounded-lg p-3 bg-[#333333] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
         <div className="flex flex-col w-full">
+          <label htmlFor="phone" className="text-[#e3e3e3] font-medium mb-1">
+            Telefone
+          </label>
           <input
             type="tel"
             id="phone"
@@ -122,14 +138,13 @@ export default function CreateClient() {
             value={formData.phone}
             onChange={handleChange}
             required
-            placeholder="Telefone"
-            className="border border-gray-300 rounded-lg p-3 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="border border-[#444444] rounded-lg p-3 bg-[#333333] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
         <button
           type="submit"
-          className="bg-[#181818] text-white rounded-lg py-3 mt-6 w-full hover:bg-[#424242] transition duration-200"
+          className="bg-[#181818] text-[#e3e3e3] rounded-lg py-3 mt-6 w-full hover:bg-[#424242] transition duration-200"
         >
           Salvar
         </button>

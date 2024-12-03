@@ -11,6 +11,9 @@ export default function Clients() {
   const [customers, setCustomers] = useState<IClient[]>([])
   const [loading, setLoading] = useState(true)
   const [searchQuery, setSearchQuery] = useState('')
+  const [showConfirm, setShowConfirm] = useState(false)
+  const [selectedClient, setSelectedClient] = useState<IClient | null>(null)
+  const [message, setMessage] = useState<string>('') // Novo estado para a mensagem
 
   useEffect(() => {
     loadCustomers()
@@ -27,23 +30,29 @@ export default function Clients() {
     }
   }
 
-  async function handleDelete(id: number) {
-    try {
-      const response = await api.delete(`${baseUrl}/client/${id}`)
-      if (response.status === 200) {
-        alert('Client deleted successfully!')
+  const handleDeleteConfirmed = async () => {
+    if (!selectedClient) {
+      return
+    }
 
-        const allCustomers = customers.filter((customer) => customer.id !== id)
+    try {
+      const response = await api.delete(
+        `${baseUrl}/client/${selectedClient.id}`,
+      )
+      if (response.status === 200) {
+        // Atualiza o estado para exibir a mensagem de sucesso
+        setMessage('Cliente excluído com sucesso!')
+        const allCustomers = customers.filter(
+          (customer) => customer.id !== selectedClient.id,
+        )
         setCustomers(allCustomers)
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      if (err.response && err.response.status === 404) {
-        alert('Client not found')
-      } else {
-        console.error(err)
-        alert('An error occurred while deleting the client')
-      }
+    } catch {
+      setMessage('Erro ao excluir o cliente. Tente novamente.')
+    } finally {
+      setShowConfirm(false)
+      setSelectedClient(null)
     }
   }
 
@@ -53,10 +62,7 @@ export default function Clients() {
 
   function formatPhoneNumber(phone: string): string {
     const cleaned = phone.replace(/\D/g, '')
-
-    if (cleaned.length !== 11) {
-      return phone
-    }
+    if (cleaned.length !== 11) return phone
 
     const ddd = cleaned.slice(0, 2)
     const firstPart = cleaned.slice(2, 3)
@@ -72,25 +78,32 @@ export default function Clients() {
       <p className="text-[#e3e3e3] mb-4">
         Selecione um cliente para visualizar suas vendas
       </p>
-      <div className="w-full max-w-4xl p-6 bg-white shadow-md rounded-lg">
+      {message && (
+        <div className="mb-4 text-center text-white bg-green-500 p-2 rounded-lg">
+          {message}
+        </div>
+      )}
+
+      <div className="w-full max-w-4xl p-6 bg-[#242424] shadow-lg rounded-lg">
         <div className="mb-4 w-full">
           <input
             type="text"
             placeholder="Pesquise o nome"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white bg-[#333333] placeholder-[#e3e3e3]"
           />
         </div>
+
         {loading ? (
-          <p className="text-gray-600">Carregando clientes...</p>
+          <p className="text-[#e3e3e3]">Carregando clientes...</p>
         ) : filteredCustomers.length === 0 ? (
-          <p className="text-gray-600">Nenhum cliente encontrado</p>
+          <p className="text-[#e3e3e3]">Nenhum cliente encontrado</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="table-auto w-full bg-white shadow-md rounded-lg">
+            <table className="table-auto w-full bg-[#242424] shadow-md rounded-lg text-white">
               <thead>
-                <tr className="bg-gray-200 text-gray-700">
+                <tr className="bg-[#333333] text-gray-300">
                   <th className="px-4 py-2 text-left">Nome</th>
                   <th className="px-4 py-2 text-left">Email</th>
                   <th className="px-4 py-2 text-left">Telefone</th>
@@ -99,7 +112,10 @@ export default function Clients() {
               </thead>
               <tbody>
                 {filteredCustomers.map((customer) => (
-                  <tr key={customer.id} className="border-t border-gray-200">
+                  <tr
+                    key={customer.id}
+                    className="border-t border-[#444444] hover:bg-[#333333] even:bg-[#2c2c2c] transition-all duration-300"
+                  >
                     <td className="px-4 py-2">
                       {customer.name || 'Não informado'}
                     </td>
@@ -113,7 +129,10 @@ export default function Clients() {
                     <td className="px-4 py-2 flex">
                       <div
                         className="flex items-center font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2"
-                        onClick={() => handleDelete(customer.id)}
+                        onClick={() => {
+                          setShowConfirm(true)
+                          setSelectedClient(customer)
+                        }}
                         title="Deletar cliente"
                       >
                         <Trash2 size={18} />
@@ -142,6 +161,35 @@ export default function Clients() {
           </div>
         )}
       </div>
+
+      {showConfirm && selectedClient && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-[#242424] p-6 rounded-lg shadow-lg text-white">
+            <h2 className="text-lg font-semibold mb-4">Confirmar Exclusão</h2>
+            <p className="mb-4">
+              Tem certeza que deseja deletar o cliente{' '}
+              <span className="font-semibold">{selectedClient.name}</span>?
+            </p>
+            <div className="flex justify-end">
+              <button
+                onClick={() => {
+                  setShowConfirm(false)
+                  setSelectedClient(null)
+                }}
+                className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleDeleteConfirmed}
+                className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
+              >
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

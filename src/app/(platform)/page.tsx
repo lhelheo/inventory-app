@@ -59,19 +59,19 @@ export default function LoginPage() {
         </div>
         <div className="my-4 gap-3 flex flex-col">
           <label>
+            Usuário:
             <input
               type="text"
               className="flex border rounded w-full mb-2 p-2"
               value={username}
-              placeholder="Usuário"
               onChange={(e) => setUsername(e.target.value)}
               required
             />
           </label>
           <label>
+            Senha:
             <input
               type="password"
-              placeholder="Senha"
               className="flex border rounded w-full mb-2 p-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}

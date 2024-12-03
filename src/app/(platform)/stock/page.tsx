@@ -36,33 +36,33 @@ export default function Stock() {
           <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6">
             Estoque
           </h1>
-          <div className="bg-white shadow-md rounded-lg p-8 w-[85%] border border-gray-200 overflow-x-auto">
+          <div className="bg-[#242424] shadow-md rounded-lg p-8 w-[85%] overflow-x-auto">
             {products.length > 0 ? (
-              <table className="min-w-full bg-white border border-gray-200 rounded-lg">
+              <table className="min-w-full bg-[#242424] border border-gray-200 rounded-lg">
                 <thead>
                   <tr>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
                       Nome
                     </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
                       Fornecedor
                     </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
                       Preço
                     </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
                       Preço de custo
                     </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
                       Código
                     </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
                       Descrição
                     </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
                       Criado em
                     </th>
-                    <th className="py-3 px-4 bg-gray-100 text-gray-600 font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
                       Atualizado em
                     </th>
                   </tr>
@@ -75,39 +75,42 @@ export default function Stock() {
                         (product.status === 'Disponivel' && !product.client),
                     )
                     .map((product) => (
-                      <tr key={product.id} className="border-t">
-                        <td className="py-3 px-4 text-gray-700">
+                      <tr
+                        key={product.id}
+                        className="border-t ease-linear transition-all even:bg-[#2a2a2a] hover:bg-[#3b3b3b]"
+                      >
+                        <td className="py-3 px-4 text-[#e3e3e3]">
                           {product.name ? product.name : 'Não informado'}
                         </td>
-                        <td className="py-3 px-4 text-gray-700">
+                        <td className="py-3 px-4 text-[#e3e3e3]">
                           {product.supplier
                             ? product.supplier
                             : 'Não informado'}
                         </td>
-                        <td className="py-3 px-4 text-gray-700">
+                        <td className="py-3 px-4 text-[#e3e3e3]">
                           {product.price
                             ? `R$ ${product.price}`
                             : 'Não informado'}
                         </td>
-                        <td className="py-3 px-4 text-gray-700">
+                        <td className="py-3 px-4 text-[#e3e3e3]">
                           {product.price
                             ? `R$ ${product.cost_price}`
                             : 'Não informado'}
                         </td>
-                        <td className="py-3 px-4 text-gray-700">
+                        <td className="py-3 px-4 text-[#e3e3e3]">
                           {product.product_code
                             ? product.product_code
                             : 'Não informado'}
                         </td>
-                        <td className="py-3 px-4 text-gray-700">
+                        <td className="py-3 px-4 text-[#e3e3e3]">
                           {product.description
                             ? product.description
                             : 'Não informado'}
                         </td>
-                        <td className="py-3 px-4 text-gray-700">
+                        <td className="py-3 px-4 text-[#e3e3e3]">
                           {formatData(product.createAt)}
                         </td>
-                        <td className="py-3 px-4 text-gray-700">
+                        <td className="py-3 px-4 text-[#e3e3e3]">
                           {formatData(product.updateAt)}
                         </td>
                       </tr>
@@ -115,7 +118,7 @@ export default function Stock() {
                 </tbody>
               </table>
             ) : (
-              <p className="text-center text-gray-600">
+              <p className="text-center text-[#e3e3e3]">
                 Nenhum produto disponível.
               </p>
             )}

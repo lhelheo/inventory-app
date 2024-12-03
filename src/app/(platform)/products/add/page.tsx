@@ -87,163 +87,161 @@ export default function CreateProduct() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818]">
-      <div className="bg-[#e3e3e3] shadow-lg rounded-lg p-8 max-w-sm w-full border border-gray-200">
-        <h1 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+    <div className="flex col-auto justify-center items-center min-h-screen bg-[#181818]">
+      <div className="bg-[#242424] shadow-lg rounded-lg p-8 max-w-[1200px] w-full border border-[#444444]">
+        <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6 text-center">
           Adicionar Produto
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div>
-            <label
-              htmlFor="client"
-              className="block text-gray-700 font-medium mb-1"
-            >
-              Cliente
-            </label>
-            <select
-              id="client"
-              value={selectedClientId ?? ''}
-              onChange={(e) =>
-                setSelectedClientId(
-                  e.target.value ? Number(e.target.value) : null,
-                )
-              }
-              className={`border rounded-lg w-full p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]`}
-            >
-              <option value="">Nenhum cliente associado</option>
-              {clients.map((client) => (
-                <option key={client.id} value={client.id}>
-                  {client.name}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div>
+              <label
+                htmlFor="client"
+                className="block text-[#e3e3e3] font-medium mb-1"
+              >
+                Cliente
+              </label>
+              <select
+                id="client"
+                value={selectedClientId ?? ''}
+                onChange={(e) =>
+                  setSelectedClientId(
+                    e.target.value ? Number(e.target.value) : null,
+                  )
+                }
+                className="border rounded-lg w-full p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+              >
+                <option value="">Nenhum cliente associado</option>
+                {clients.map((client) => (
+                  <option key={client.id} value={client.id}>
+                    {client.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label
+                htmlFor="status"
+                className="block text-[#e3e3e3] font-medium mb-1"
+              >
+                Status <span className="text-red-500">*</span>
+              </label>
+              <select
+                id="status"
+                ref={statusRef}
+                required
+                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+              >
+                <option value="Disponivel">Disponível</option>
+                <option value="Vendido">Vendido</option>
+                <option value="Em Processamento">
+                  Aguardando pagamento...
                 </option>
-              ))}
-            </select>
-          </div>
+              </select>
+            </div>
 
-          <div>
-            <label
-              htmlFor="status"
-              className="block text-gray-700 font-medium mb-1"
-            >
-              Status <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="status"
-              ref={statusRef}
-              required
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
-            >
-              <option value="Disponivel">Disponível</option>
-              <option value="Vendido">Vendido</option>
-              <option value="Em Processamento">Aguardando pagamento...</option>
-            </select>
-          </div>
+            <div>
+              <label
+                htmlFor="productName"
+                className="block text-[#e3e3e3] font-medium mb-1"
+              >
+                Produto <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="productName"
+                ref={productNameRef}
+                type="text"
+                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                required
+              />
+            </div>
 
-          <div>
-            <label
-              htmlFor="productName"
-              className="block text-gray-700 font-medium mb-1"
-            >
-              Produto <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="productName"
-              ref={productNameRef}
-              type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
-              placeholder="Produto"
-              required
-            />
-          </div>
+            <div>
+              <label
+                htmlFor="productCode"
+                className="block text-[#e3e3e3] font-medium mb-1"
+              >
+                Código <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="productCode"
+                ref={productCodeRef}
+                type="text"
+                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                required
+              />
+            </div>
 
-          <div>
-            <label
-              htmlFor="productCode"
-              className="block text-gray-700 font-medium mb-1"
-            >
-              Código <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="productCode"
-              ref={productCodeRef}
-              type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
-              placeholder="Código"
-              required
-            />
-          </div>
+            <div>
+              <label
+                htmlFor="productPrice"
+                className="block text-[#e3e3e3] font-medium mb-1"
+              >
+                Preço de venda <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="productPrice"
+                ref={productPriceRef}
+                type="number"
+                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                step="0.01"
+                required
+              />
+            </div>
 
-          <div>
-            <label
-              htmlFor="productPrice"
-              className="block text-gray-700 font-medium mb-1"
-            >
-              Preço de venda <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="productPrice"
-              ref={productPriceRef}
-              type="number"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
-              placeholder="Preço de venda"
-              step="0.01"
-              required
-            />
-          </div>
+            <div>
+              <label
+                htmlFor="costPrice"
+                className="block text-[#e3e3e3] font-medium mb-1"
+              >
+                Preço de custo <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="costPrice"
+                ref={costPriceRef}
+                type="number"
+                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                step="0.01"
+                required
+              />
+            </div>
 
-          <div>
-            <label
-              htmlFor="costPrice"
-              className="block text-gray-700 font-medium mb-1"
-            >
-              Preço de custo <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="costPrice"
-              ref={costPriceRef}
-              type="number"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
-              placeholder="Preço de custo"
-              step="0.01"
-              required
-            />
-          </div>
+            <div>
+              <label
+                htmlFor="supplier"
+                className="block text-[#e3e3e3] font-medium mb-1"
+              >
+                Fornecedor
+              </label>
+              <input
+                id="supplier"
+                ref={supplierRef}
+                type="text"
+                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+              />
+            </div>
 
-          <div>
-            <label
-              htmlFor="supplier"
-              className="block text-gray-700 font-medium mb-1"
-            >
-              Fornecedor
-            </label>
-            <input
-              id="supplier"
-              ref={supplierRef}
-              type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
-              placeholder="Fornecedor"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="description"
-              className="block text-gray-700 font-medium mb-1"
-            >
-              Descrição do produto <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="description"
-              ref={descriptionRef}
-              type="text"
-              className="border w-full border-gray-300 rounded-lg p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#181818]"
-              placeholder="Descrição do produto"
-              required
-            />
+            <div>
+              <label
+                htmlFor="description"
+                className="block text-[#e3e3e3] font-medium mb-1"
+              >
+                Descrição do produto <span className="text-red-500">*</span>
+              </label>
+              <input
+                id="description"
+                ref={descriptionRef}
+                type="text"
+                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                required
+              />
+            </div>
           </div>
 
           <button
             type="submit"
-            className="bg-[#181818] text-white rounded-lg py-3 mt-4 hover:bg-[#4b4b4b] transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
+            className="bg-[#181818] text-[#e3e3e3] rounded-lg py-3 mt-4 hover:bg-[#4b4b4b] transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Adicionar Produto'}
