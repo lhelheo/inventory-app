@@ -83,7 +83,7 @@ export default function LoginPage() {
         <div className="flex flex-col">
           <button
             type="submit"
-            className="px-4 py-2 bg-[#c7c7c7] text-[#181818] rounded hover:bg-[#b4b4b4] ease-linear transition-all"
+            className="px-4 py-2 bg-[#181818] text-[#e3e3e3] rounded hover:bg-[#1f1f1f] ease-linear transition-all"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Login'}

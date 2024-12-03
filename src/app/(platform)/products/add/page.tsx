@@ -186,7 +186,7 @@ export default function CreateProduct() {
                 id="productPrice"
                 ref={productPriceRef}
                 type="number"
-                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className="border w-full border-[#444444] focus:outline-none focus:ring-2 focus:ring-[#181818] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] "
                 step="0.01"
                 required
               />
@@ -243,7 +243,7 @@ export default function CreateProduct() {
 
           <button
             type="submit"
-            className="bg-[#181818] text-[#e3e3e3] rounded-lg py-3 mt-4 hover:bg-[#1f1f1f] transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
+            className="bg-[#181818] text-[#e3e3e3] rounded-lg py-3 mt-4 hover:bg-[#1f1f1f] ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Adicionar Produto'}
@@ -256,7 +256,7 @@ export default function CreateProduct() {
 
         <button
           onClick={() => router.back()}
-          className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#464646] text-white p-4 rounded shadow-lg transition duration-300"
+          className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded shadow-lg transition duration-300"
           title="Voltar para a página anterior"
         >
           ←
