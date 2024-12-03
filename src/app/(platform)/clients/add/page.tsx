@@ -146,7 +146,7 @@ export default function CreateClient() {
 
         <button
           type="submit"
-          className="bg-[#181818] text-[#e3e3e3] rounded-lg py-3 mt-6 w-full hover:bg-[#424242] transition duration-200"
+          className="bg-[#181818] text-[#e3e3e3] rounded-lg py-3 mt-6 w-full hover:bg-[#1f1f1f] transition duration-200"
         >
           Salvar
         </button>

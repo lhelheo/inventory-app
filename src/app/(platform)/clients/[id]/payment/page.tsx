@@ -127,7 +127,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
         <button
           onClick={handlePayment}
           disabled={loading || !paymentValue || !selectedProductId}
-          className="w-full bg-[#181818] text-white py-2 rounded-md hover:bg-[#3d3d3d] transition-all ease-linear disabled:bg-gray-300"
+          className="w-full bg-[#181818] text-white py-2 rounded-md hover:bg-[#1f1f1] transition-all ease-linear disabled:bg-gray-400"
         >
           {loading ? 'Processando...' : 'Pagar'}
         </button>

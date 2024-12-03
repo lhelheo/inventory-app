@@ -52,7 +52,7 @@ export default function LoginPage() {
     <div className="flex justify-center items-center h-screen bg-[#181818]">
       <form
         onSubmit={handleLogin}
-        className="flex flex-col w-[400px] bg-[#333333] rounded shadow p-20"
+        className="flex flex-col w-[400px] bg-[#242424] rounded shadow p-20"
       >
         <div className="flex justify-center text-xl">
           <p className="text-[#e3e3e3] font-semibold">Acesse sua conta</p>

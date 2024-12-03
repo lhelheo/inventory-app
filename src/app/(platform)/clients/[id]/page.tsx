@@ -77,7 +77,7 @@ export default function Client() {
 
               <button
                 onClick={() => router.push(`/clients/${id}/payment`)}
-                className="bg-[#424242] hover:bg-[#181818] transition ease-in-out duration-300 text-white font-bold py-2 px-6 rounded-lg mt-4"
+                className="bg-[#181818] hover:bg-[#1f1f1f] transition ease-in-out duration-300 text-white font-bold py-2 px-6 rounded-lg mt-4"
               >
                 Realizar Pagamento
               </button>
