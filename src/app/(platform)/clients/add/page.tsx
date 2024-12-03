@@ -2,6 +2,7 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { baseUrl } from '@/helpers/url'
 import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 // TODO: Adicionar feedback visual para o usuario ao concluir ação e clique para visualizar cliente
 
@@ -15,6 +16,7 @@ interface ClientFormData {
 }
 
 export default function CreateClient() {
+  const router = useRouter()
   const [message, setMessage] = useState<string | null>(null)
   const [formData, setFormData] = useState<ClientFormData>({
     name: '',
@@ -149,6 +151,13 @@ export default function CreateClient() {
           Salvar
         </button>
       </form>
+      <button
+        onClick={() => router.back()}
+        className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#464646] text-white p-4 rounded shadow-lg transition duration-300"
+        title="Voltar para a página anterior"
+      >
+        ←
+      </button>
     </div>
   )
 }

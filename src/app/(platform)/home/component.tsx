@@ -55,7 +55,7 @@ export const HomeForm = () => {
         </button>
       </div>
       {loading && (
-        <p className="mt-6 text-[#181818]">Carregando, por favor aguarde...</p>
+        <p className="mt-6 text-[#e3e3e3]">Carregando, por favor aguarde...</p>
       )}
     </div>
   )

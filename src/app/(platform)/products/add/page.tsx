@@ -3,10 +3,12 @@ import React, { useState, useEffect, useRef, FormEvent } from 'react'
 import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
 import { IClient } from '@/interface/interfaces'
+import { useRouter } from 'next/navigation'
 
 // TODO: Criar uma trava no backend para que não seja possível criar um produto com cliente e com status disponível ao mesmo tempo
 
 export default function CreateProduct() {
+  const router = useRouter()
   const [clients, setClients] = useState<IClient[]>([])
   const [selectedClientId, setSelectedClientId] = useState<number | null>(null)
   const [message, setMessage] = useState<string | null>(null)
@@ -251,6 +253,14 @@ export default function CreateProduct() {
         {message && (
           <p className="mt-4 text-center text-green-600">{message}</p>
         )}
+
+        <button
+          onClick={() => router.back()}
+          className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#464646] text-white p-4 rounded shadow-lg transition duration-300"
+          title="Voltar para a página anterior"
+        >
+          ←
+        </button>
       </div>
     </div>
   )
