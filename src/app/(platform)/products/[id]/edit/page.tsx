@@ -5,6 +5,7 @@ import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
 import { IProduct, IClient } from '@/interface/interfaces'
 import { api } from '@/app/services/api'
+import { useRouter } from 'next/navigation'
 
 interface Product {
   params: {
@@ -13,6 +14,7 @@ interface Product {
 }
 
 export default function ProductPage(props: Product) {
+  const router = useRouter()
   const [product, setProduct] = useState<IProduct | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
@@ -121,11 +123,11 @@ export default function ProductPage(props: Product) {
     <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] p-4">
       <h1 className="text-3xl font-bold text-[#e3e3e3] mb-8">Editar Produto</h1>
 
-      <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-lg border border-gray-200">
+      <div className="bg-[#333333] shadow-md rounded-lg p-8 w-full max-w-lg">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
-              className="block text-gray-700 font-semibold mb-2"
+              className="block text-[#e3e3e3] font-semibold mb-2"
               htmlFor="name"
             >
               Nome do produto
@@ -143,7 +145,7 @@ export default function ProductPage(props: Product) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-gray-700 font-semibold mb-2"
+                className="block text-[#e3e3e3] font-semibold mb-2"
                 htmlFor="price"
               >
                 Preço
@@ -160,7 +162,7 @@ export default function ProductPage(props: Product) {
             </div>
             <div>
               <label
-                className="block text-gray-700 font-semibold mb-2"
+                className="block text-[#e3e3e3] font-semibold mb-2"
                 htmlFor="costPrice"
               >
                 Preço de Custo
@@ -179,7 +181,7 @@ export default function ProductPage(props: Product) {
 
           <div>
             <label
-              className="block text-gray-700 font-semibold mb-2"
+              className="block text-[#e3e3e3] font-semibold mb-2"
               htmlFor="description"
             >
               Descrição
@@ -195,7 +197,7 @@ export default function ProductPage(props: Product) {
 
           <div>
             <label
-              className="block text-gray-700 font-semibold mb-2"
+              className="block text-[#e3e3e3] font-semibold mb-2"
               htmlFor="supplier"
             >
               Fornecedor
@@ -211,7 +213,7 @@ export default function ProductPage(props: Product) {
 
           <div>
             <label
-              className="block text-gray-700 font-semibold mb-2"
+              className="block text-[#e3e3e3] font-semibold mb-2"
               htmlFor="productCode"
             >
               Código do Produto
@@ -227,7 +229,7 @@ export default function ProductPage(props: Product) {
 
           <div>
             <label
-              className="block text-gray-700 font-semibold mb-2"
+              className="block text-[#e3e3e3] font-semibold mb-2"
               htmlFor="status"
             >
               Status
@@ -246,7 +248,7 @@ export default function ProductPage(props: Product) {
 
           <div>
             <label
-              className="block text-gray-700 font-semibold mb-2"
+              className="block text-[#e3e3e3] font-semibold mb-2"
               htmlFor="clientID"
             >
               Cliente
@@ -280,6 +282,13 @@ export default function ProductPage(props: Product) {
           )}
         </form>
       </div>
+      <button
+        onClick={() => router.back()}
+        className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#464646] text-white p-4 rounded shadow-lg transition duration-300"
+        title="Voltar para a página anterior"
+      >
+        ←
+      </button>
     </div>
   )
 }

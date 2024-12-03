@@ -78,7 +78,7 @@ export default function Products() {
           <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6">
             Produtos
           </h1>
-          <div className="bg-[#242424] w-full max-w-4xl shadow-md rounded-lg p-8 overflow-x-auto">
+          <div className="bg-[#242424] w-full max-w-6xl shadow-md rounded-lg p-8 overflow-x-auto">
             <div className="mb-6 w-full">
               <input
                 type="text"
@@ -88,7 +88,7 @@ export default function Products() {
               />
             </div>
             {products.length > 0 ? (
-              <table className="min-w-full bg-[#242424] border border-gray-200 rounded-lg">
+              <table className="min-w-full bg-[#242424] rounded-lg">
                 <thead>
                   <tr>
                     <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
