@@ -52,14 +52,14 @@ export default function LoginPage() {
     <div className="flex justify-center items-center h-screen bg-[#181818]">
       <form
         onSubmit={handleLogin}
-        className="flex flex-col w-[400px] border border-gray-200 bg-gray-100 rounded shadow p-20"
+        className="flex flex-col w-[400px] bg-[#333333] rounded shadow p-20"
       >
         <div className="flex justify-center text-xl">
-          <p className="text-[#252525] font-semibold">Acesse sua conta</p>
+          <p className="text-[#e3e3e3] font-semibold">Acesse sua conta</p>
         </div>
         <div className="my-4 gap-3 flex flex-col">
           <label>
-            Usuário:
+            <p className="text-[#e3e3e3]">Usuário</p>
             <input
               type="text"
               className="flex border rounded w-full mb-2 p-2"
@@ -69,7 +69,7 @@ export default function LoginPage() {
             />
           </label>
           <label>
-            Senha:
+            <p className="text-[#e3e3e3]">Senha</p>
             <input
               type="password"
               className="flex border rounded w-full mb-2 p-2"
