@@ -37,6 +37,11 @@ export default function ProductPage(props: ProductPageProps) {
 
         <div className="space-y-6">
           <div className="flex items-center justify-between">
+            <p className="text-lg font-semibold text-[#b0b0b0]">Cliente:</p>
+            <p className="text-lg">{product?.client.name || 'N/A'}</p>
+          </div>
+
+          <div className="flex items-center justify-between">
             <p className="text-lg font-semibold text-[#b0b0b0]">Descrição:</p>
             <p className="text-lg">{product?.description || 'N/A'}</p>
           </div>

@@ -266,10 +266,10 @@ export default function CreateProduct() {
             Produto criado com sucesso!
           </p>
           <p
-            onClick={() => router.push(`/products`)}
+            onClick={() => router.push(`/products/${newProductId}`)}
             className="mt-4 text-center underline cursor-pointer text-green-600"
           >
-            Clique aqui para visualizar a lista de produtos
+            Clique aqui para visualizar o produto
           </p>
         </div>
       )}
