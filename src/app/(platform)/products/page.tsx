@@ -148,16 +148,19 @@ export default function Products() {
                       </td>
                       <td className="flex py-3 px-4 text-center space-x-2">
                         <Pencil
+                          size={18}
                           onClick={() =>
                             router.push(`/products/${product.id}/edit/`)
                           }
                           className="text-yellow-500 hover:text-yellow-700 cursor-pointer transition duration-200"
                         />
                         <Eye
+                          size={18}
                           onClick={() => router.push(`/products/${product.id}`)}
                           className="text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200"
                         />
                         <Trash2
+                          size={18}
                           onClick={() => {
                             setShowConfirm(true)
                             setSelectedProduct(product)
