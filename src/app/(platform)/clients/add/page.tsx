@@ -86,12 +86,6 @@ export default function CreateClient() {
 
   return (
     <div className="flex flex-col h-screen justify-center items-center bg-[#181818]">
-      {message && (
-        <div className="mb-4 text-center text-white bg-green-500 p-2 rounded-lg">
-          {message}
-        </div>
-      )}
-
       <form
         onSubmit={handleSubmit}
         className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 p-6 bg-[#242424] shadow-lg rounded-lg"
@@ -151,6 +145,21 @@ export default function CreateClient() {
           Salvar
         </button>
       </form>
+
+      {message && (
+        <div className="my-4">
+          <p className="text-center text-green-600">
+            Cliente criado com sucesso!
+          </p>
+          <p
+            onClick={() => router.push(`/clients`)}
+            className="mt-4 text-center underline cursor-pointer text-green-600"
+          >
+            Clique aqui para visualizar a lista de clientes
+          </p>
+        </div>
+      )}
+
       <button
         onClick={() => router.back()}
         className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded shadow-lg transition duration-300"

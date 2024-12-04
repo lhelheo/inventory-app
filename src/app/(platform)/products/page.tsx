@@ -3,7 +3,7 @@ import { formatData } from '@/helpers/format'
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
-import { Pencil, Trash2 } from 'lucide-react'
+import { Eye, Pencil, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -78,51 +78,50 @@ export default function Products() {
           <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6">
             Produtos
           </h1>
-          <div className="bg-[#242424] w-full max-w-6xl shadow-md rounded-lg p-8 overflow-x-auto">
+
+          <div className="bg-[#242424] w-full max-w-[1600px] shadow-md rounded-lg p-8 overflow-x-auto">
             <div className="mb-6 w-full">
               <input
                 type="text"
                 placeholder="Buscar produtos..."
-                className="w-full p-3 border border-gray-300 bg-[#333333] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 border border-gray-300 bg-[#333333] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#e3e3e3]"
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
+
             {products.length > 0 ? (
               <table className="min-w-full bg-[#242424] rounded-lg">
                 <thead>
-                  <tr>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                  <tr className="bg-[#333333]">
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
                       Nome
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
                       Comprador
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
                       Status
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
                       Código
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
                       Custo
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
                       Venda
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
                       Descrição
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
                       Criado em
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
                       Atualizado em
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
-                      Editar
-                    </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
-                      Deletar
+                    <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
+                      Ações
                     </th>
                   </tr>
                 </thead>
@@ -130,46 +129,40 @@ export default function Products() {
                   {filteredProducts.map((product) => (
                     <tr
                       key={product.id}
-                      className="border-t ease-linear transition-all even:bg-[#2a2a2a] hover:bg-[#3b3b3b]"
+                      className="border-t ease-linear transition-all even:bg-[#2a2a2a] hover:bg-[#3b3b3b] text-[#e3e3e3]"
                     >
-                      <td className="py-3 px-4 uppercase text-[#e3e3e3]">
-                        {product.name}
-                      </td>
-                      <td className="py-3 px-4 uppercase text-[#e3e3e3]">
+                      <td className="py-3 px-4">{product.name}</td>
+                      <td className="py-3 px-4">
                         {product.client?.name || '-'}
                       </td>
-                      <td className="py-3 px-4 uppercase text-[#e3e3e3]">
-                        {product.status}
-                      </td>
-                      <td className="py-3 px-4 uppercase text-[#e3e3e3]">
-                        {product.product_code}
-                      </td>
-                      <td className="py-3 px-4 uppercase text-[#e3e3e3]">{`R$ ${product.cost_price}`}</td>
-                      <td className="py-3 px-4 uppercase text-[#e3e3e3]">{`R$ ${product.price}`}</td>
-                      <td className="py-3 px-4 uppercase text-[#e3e3e3]">
-                        {product.description}
-                      </td>
-                      <td className="py-3 px-4 uppercase text-[#e3e3e3]">
+                      <td className="py-3 px-4">{product.status}</td>
+                      <td className="py-3 px-4">{product.product_code}</td>
+                      <td className="py-3 px-4">{`R$ ${product.cost_price}`}</td>
+                      <td className="py-3 px-4">{`R$ ${product.price}`}</td>
+                      <td className="py-3 px-4">{product.description}</td>
+                      <td className="py-3 px-4">
                         {formatData(product.createAt)}
                       </td>
-                      <td className="py-3 px-4 uppercase text-[#e3e3e3]">
+                      <td className="py-3 px-4">
                         {formatData(product.updateAt)}
                       </td>
-                      <td className="py-3 px-4 uppercase text-center">
+                      <td className="flex py-3 px-4 text-center space-x-2">
                         <Pencil
                           onClick={() =>
                             router.push(`/products/${product.id}/edit/`)
                           }
-                          className="text-blue-500 hover:text-blue-700 cursor-pointer"
+                          className="text-yellow-500 hover:text-yellow-700 cursor-pointer transition duration-200"
                         />
-                      </td>
-                      <td className="py-3 px-4 uppercase text-center">
+                        <Eye
+                          onClick={() => router.push(`/products/${product.id}`)}
+                          className="text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200"
+                        />
                         <Trash2
                           onClick={() => {
                             setShowConfirm(true)
                             setSelectedProduct(product)
                           }}
-                          className="text-red-500 hover:text-red-700 cursor-pointer"
+                          className="text-red-500 hover:text-red-700 cursor-pointer transition duration-200"
                         />
                       </td>
                     </tr>
@@ -182,6 +175,7 @@ export default function Products() {
               </p>
             )}
           </div>
+
           <button
             onClick={() => router.back()}
             className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded shadow-lg transition duration-300"

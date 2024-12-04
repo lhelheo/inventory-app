@@ -13,6 +13,7 @@ export default function CreateProduct() {
   const [selectedClientId, setSelectedClientId] = useState<number | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
+  const [setNewProductId] = useState<number | null>(null) // Armazenando o ID do novo produto
 
   const productNameRef = useRef<HTMLInputElement>(null)
   const productPriceRef = useRef<HTMLInputElement>(null)
@@ -59,7 +60,7 @@ export default function CreateProduct() {
       supplier: supplierRef.current?.value || '',
       status: statusRef.current.value,
       description: descriptionRef.current.value,
-      userID: 1, // Aqui poderia ser o ID do usuário autenticado
+      userID: 1,
     }
 
     try {
@@ -69,6 +70,7 @@ export default function CreateProduct() {
 
       const response = await axios.post(endpoint, productData)
       setMessage(`Produto adicionado: ${response.data.name}`)
+      setNewProductId(response.data.id) // Armazenando o ID do novo produto
       clearForm()
     } catch {
       setMessage('Erro ao adicionar o produto.')
@@ -89,7 +91,7 @@ export default function CreateProduct() {
   }
 
   return (
-    <div className="flex col-auto justify-center items-center min-h-screen bg-[#181818]">
+    <div className="flex flex-col col-auto justify-center items-center min-h-screen bg-[#181818]">
       <div className="bg-[#242424] shadow-lg rounded-lg p-8 max-w-[1200px] w-full border border-[#444444]">
         <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6 text-center">
           Adicionar Produto
@@ -250,10 +252,6 @@ export default function CreateProduct() {
           </button>
         </form>
 
-        {message && (
-          <p className="mt-4 text-center text-green-600">{message}</p>
-        )}
-
         <button
           onClick={() => router.back()}
           className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded shadow-lg transition duration-300"
@@ -262,6 +260,20 @@ export default function CreateProduct() {
           ←
         </button>
       </div>
+
+      {message && (
+        <div className="my-4">
+          <p className="text-center text-green-600">
+            Produto criado com sucesso!
+          </p>
+          <p
+            onClick={() => router.push(`/products`)}
+            className="mt-4 text-center underline cursor-pointer text-green-600"
+          >
+            Clique aqui para visualizar a lista de produtos
+          </p>
+        </div>
+      )}
     </div>
   )
 }
