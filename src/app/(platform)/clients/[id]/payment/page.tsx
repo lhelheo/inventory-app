@@ -89,7 +89,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
           </label>
           <select
             id="product"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-[#242424] text-[#e3e3e3]"
             value={selectedProductId || ''}
             onChange={(e) => setSelectedProductId(e.target.value)}
           >
@@ -116,7 +116,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
           <input
             type="number"
             id="paymentValue"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-[#242424] text-[#e3e3e3]"
             value={paymentValue}
             onChange={(e) => setPaymentValue(e.target.value)}
             min="0"
@@ -127,7 +127,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
         <button
           onClick={handlePayment}
           disabled={loading || !paymentValue || !selectedProductId}
-          className="w-full bg-[#181818] text-white py-2 rounded-md hover:bg-[#1f1f1] transition-all ease-linear disabled:bg-gray-400"
+          className="w-full bg-[#181818] hover:bg-[#1f1f1f] text-white py-2 rounded-md transition-all ease-linear disabled:bg-gray-400"
         >
           {loading ? 'Processando...' : 'Pagar'}
         </button>
@@ -140,17 +140,15 @@ export default function ClientPayment(props: ClientPaymentProps) {
             <h2 className="text-xl font-bold mb-4 text-[#e3e3e3]">
               Status dos Produtos
             </h2>
-            <table className="min-w-full table-auto border-collapse border border-gray-300">
+            <table className="min-w-full table-auto  border border-[#e3e3e3] border-opacity-25">
               <thead>
                 <tr>
-                  <th className="px-4 py-2 border-b text-left text-[#e3e3e3]">
+                  <th className="px-4 py-2 text-left text-[#e3e3e3]">
                     Produto
                   </th>
 
-                  <th className="px-4 py-2 border-b text-left text-[#e3e3e3]">
-                    Preço
-                  </th>
-                  <th className="px-4 py-2 border-b text-left text-[#e3e3e3]">
+                  <th className="px-4 py-2 text-left text-[#e3e3e3]">Preço</th>
+                  <th className="px-4 py-2 text-left text-[#e3e3e3]">
                     Saldo Pendente
                   </th>
                 </tr>
@@ -159,11 +157,14 @@ export default function ClientPayment(props: ClientPaymentProps) {
                 {products
                   .filter((product) => product.status !== 'Vendido')
                   .map((product) => (
-                    <tr key={product.id} className="odd:bg-gray-50">
-                      <td className="px-4 py-2 border-b">{product.name}</td>
+                    <tr
+                      key={product.id}
+                      className="odd:bg-[#181818] text-[#e3e3e3] bg-[#1f1f1f]"
+                    >
+                      <td className="px-4 py-2 ">{product.name}</td>
 
-                      <td className="px-4 py-2 border-b">{`R$ ${product.price}`}</td>
-                      <td className="px-4 py-2 border-b">
+                      <td className="px-4 py-2 ">{`R$ ${product.price}`}</td>
+                      <td className="px-4 py-2 ">
                         {product.remaining_balance === 0
                           ? 'Venda finalizada'
                           : `R$ ${product.remaining_balance ?? product.price}`}
