@@ -35,7 +35,7 @@ export default function EditClientPage(props: EditClientPageProps) {
 
   useEffect(() => {
     loadClient()
-  }, [id])
+  }, [])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target

@@ -5,15 +5,14 @@ import { baseUrl } from '@/helpers/url'
 import { IClient } from '@/interface/interfaces'
 import { useRouter } from 'next/navigation'
 
-// TODO: Criar uma trava no backend para que não seja possível criar um produto com cliente e com status disponível ao mesmo tempo
-
 export default function CreateProduct() {
   const router = useRouter()
   const [clients, setClients] = useState<IClient[]>([])
   const [selectedClientId, setSelectedClientId] = useState<number | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
-  const [setNewProductId] = useState<number | null>(null) // Armazenando o ID do novo produto
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [newProductId, setNewProductId] = useState<number | null>(null)
 
   const productNameRef = useRef<HTMLInputElement>(null)
   const productPriceRef = useRef<HTMLInputElement>(null)
@@ -70,7 +69,7 @@ export default function CreateProduct() {
 
       const response = await axios.post(endpoint, productData)
       setMessage(`Produto adicionado: ${response.data.name}`)
-      setNewProductId(response.data.id) // Armazenando o ID do novo produto
+      setNewProductId(response.data.id)
       clearForm()
     } catch {
       setMessage('Erro ao adicionar o produto.')
