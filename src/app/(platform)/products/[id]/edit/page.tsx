@@ -6,6 +6,7 @@ import { baseUrl } from '@/helpers/url'
 import { IProduct, IClient } from '@/interface/interfaces'
 import { api } from '@/app/services/api'
 import { useRouter } from 'next/navigation'
+import { Undo2 } from 'lucide-react'
 
 interface Product {
   params: {
@@ -284,10 +285,10 @@ export default function ProductPage(props: Product) {
       </div>
       <button
         onClick={() => router.back()}
-        className="fixed bottom-4 right-4 bg-[#333333] text-[#e3e3e3] hover:bg-[#1f1f1f] p-4 rounded shadow-lg transition duration-300"
+        className="fixed bottom-4 right-4 bg-[#333333] text-[#e3e3e3] hover:bg-[#1f1f1f] p-4 rounded-full shadow-lg transition duration-300"
         title="Voltar para a página anterior"
       >
-        ←
+        <Undo2 />
       </button>
     </div>
   )

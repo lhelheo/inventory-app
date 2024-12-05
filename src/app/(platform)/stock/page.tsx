@@ -2,6 +2,7 @@
 import { formatData } from '@/helpers/format'
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
+import { Undo2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -38,7 +39,7 @@ export default function Stock() {
           <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6">
             Estoque
           </h1>
-          <div className="bg-[#242424] w-full max-w-4xl shadow-md rounded-lg p-8 overflow-x-auto">
+          <div className="bg-[#242424] w-full max-w-4xl shadow-md rounded-lg p-8 max-h-[600px] overflow-x-auto">
             {products.length > 0 ? (
               <table className="min-w-full bg-[#242424] rounded-lg">
                 <thead>
@@ -127,10 +128,10 @@ export default function Stock() {
           </div>
           <button
             onClick={() => router.back()}
-            className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded shadow-lg transition duration-300"
+            className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
             title="Voltar para a página anterior"
           >
-            ←
+            <Undo2 />
           </button>
         </div>
       )}

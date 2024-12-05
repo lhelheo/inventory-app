@@ -3,6 +3,7 @@ import { api } from '@/app/services/api'
 import { formatData } from '@/helpers/format'
 import { baseUrl } from '@/helpers/url'
 import { IClient } from '@/interface/interfaces'
+import { Undo2 } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -132,10 +133,10 @@ export default function Client() {
 
           <button
             onClick={() => router.back()}
-            className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded shadow-lg transition duration-300"
+            className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
             title="Voltar para a página anterior"
           >
-            ←
+            <Undo2 />
           </button>
         </div>
       )}

@@ -3,7 +3,7 @@ import { formatData } from '@/helpers/format'
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
-import { Eye, Pencil, Trash2 } from 'lucide-react'
+import { Eye, Pencil, Trash2, Undo2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -79,7 +79,7 @@ export default function Products() {
             Produtos
           </h1>
 
-          <div className="bg-[#242424] w-full max-w-[1600px] shadow-md rounded-lg p-8 overflow-x-auto">
+          <div className="bg-[#242424] w-full max-w-[1600px] shadow-md rounded-lg p-8 max-h-[600px] overflow-x-auto">
             <div className="mb-6 w-full">
               <input
                 type="text"
@@ -181,10 +181,10 @@ export default function Products() {
 
           <button
             onClick={() => router.back()}
-            className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded shadow-lg transition duration-300"
+            className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
             title="Voltar para a página anterior"
           >
-            ←
+            <Undo2 />
           </button>
         </div>
       )}

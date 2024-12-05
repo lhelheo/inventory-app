@@ -3,6 +3,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { baseUrl } from '@/helpers/url'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { Undo2 } from 'lucide-react'
 
 // TODO: Adicionar feedback visual para o usuario ao concluir ação e clique para visualizar cliente
 
@@ -162,10 +163,10 @@ export default function CreateClient() {
 
       <button
         onClick={() => router.back()}
-        className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded shadow-lg transition duration-300"
+        className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
         title="Voltar para a página anterior"
       >
-        ←
+        <Undo2 />
       </button>
     </div>
   )

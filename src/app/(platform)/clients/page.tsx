@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { api } from '@/app/services/api'
-import { Eye, Pencil, Trash2 } from 'lucide-react'
+import { Eye, Pencil, Trash2, Undo2 } from 'lucide-react'
 import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'
@@ -84,7 +84,7 @@ export default function Clients() {
         </div>
       )}
 
-      <div className="w-full max-w-4xl p-6 bg-[#242424] shadow-lg rounded-lg">
+      <div className="w-full max-w-4xl p-6 bg-[#242424] shadow-lg rounded-lg max-h-[600px] overflow-x-auto">
         <div className="mb-4 w-full">
           <input
             type="text"
@@ -193,10 +193,10 @@ export default function Clients() {
 
       <button
         onClick={() => router.back()}
-        className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded shadow-lg transition duration-300"
+        className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
         title="Voltar para a página anterior"
       >
-        ←
+        <Undo2 />
       </button>
     </div>
   )
