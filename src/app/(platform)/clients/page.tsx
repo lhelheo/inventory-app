@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { api } from '@/app/services/api'
-import { Eye, Pencil, Trash2, Undo2 } from 'lucide-react'
+import { Eye, Home, Pencil, Trash2, Undo2 } from 'lucide-react'
 import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'
@@ -91,7 +91,7 @@ export default function Clients() {
             placeholder="Pesquise o nome"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-white bg-[#333333] placeholder-[#e3e3e3]"
+            className="w-full p-3 bg-[#181818] shadow-md rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-[#e3e3e3]"
           />
         </div>
 
@@ -192,11 +192,11 @@ export default function Clients() {
       )}
 
       <button
-        onClick={() => router.back()}
+        onClick={() => router.push('/home')}
         className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
         title="Voltar para a página anterior"
       >
-        <Undo2 />
+        <Home />
       </button>
     </div>
   )

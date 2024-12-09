@@ -87,7 +87,7 @@ export default function EditClientPage(props: EditClientPageProps) {
               name="name"
               value={client?.name || ''}
               onChange={handleInputChange}
-              className="p-2 border border-gray-300 rounded"
+              className="p-2 border border-opacity-30 border-gray-300 rounded bg-[#181818] shadow-md text-[#e3e3e3]"
             />
           </div>
           <div className="flex flex-col">
@@ -97,7 +97,7 @@ export default function EditClientPage(props: EditClientPageProps) {
               name="email"
               value={client?.email || ''}
               onChange={handleInputChange}
-              className="p-2 border border-gray-300 rounded"
+              className="p-2 border border-opacity-30 border-gray-300 rounded bg-[#181818] shadow-md text-[#e3e3e3]"
             />
           </div>
           <div className="flex flex-col">
@@ -107,7 +107,7 @@ export default function EditClientPage(props: EditClientPageProps) {
               name="phone"
               value={client?.phone || ''}
               onChange={handleInputChange}
-              className="p-2 border border-gray-300 rounded"
+              className="p-2 border border-opacity-30 border-gray-300 rounded bg-[#181818] shadow-md text-[#e3e3e3]"
             />
           </div>
           <button

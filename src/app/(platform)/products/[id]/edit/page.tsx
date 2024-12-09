@@ -124,7 +124,7 @@ export default function ProductPage(props: Product) {
     <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] p-4">
       <h1 className="text-3xl font-bold text-[#e3e3e3] mb-8">Editar Produto</h1>
 
-      <div className="bg-[#333333] text-[#e3e3e3] shadow-md rounded-lg p-8 w-full max-w-lg">
+      <div className="bg-[#242424] text-[#e3e3e3] shadow-md rounded-lg p-8 w-full max-w-lg">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label
@@ -137,7 +137,7 @@ export default function ProductPage(props: Product) {
               ref={nameRef}
               type="text"
               id="name"
-              className="input w-full bg-[#333333] text-[#e3e3e3] border border-[#e3e3e3] border-opacity-20 p-2 shadow rounded-lg"
+              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
               placeholder="Nome do produto"
               required
             />
@@ -156,7 +156,7 @@ export default function ProductPage(props: Product) {
                 type="number"
                 step="0.01"
                 id="price"
-                className="input w-full p-2 shadow rounded-lg bg-[#333333] text-[#e3e3e3] border border-[#e3e3e3] border-opacity-20"
+                className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
                 placeholder="Preço do produto"
                 required
               />
@@ -173,7 +173,7 @@ export default function ProductPage(props: Product) {
                 type="number"
                 step="0.01"
                 id="costPrice"
-                className="input w-full p-2 shadow rounded-lg bg-[#333333] text-[#e3e3e3] border border-[#e3e3e3] border-opacity-20 "
+                className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
                 placeholder="Preço de Custo"
                 required
               />
@@ -191,7 +191,7 @@ export default function ProductPage(props: Product) {
               ref={descriptionRef}
               type="text"
               id="description"
-              className="input w-full p-2 shadow rounded-lg bg-[#333333] text-[#e3e3e3] border border-[#e3e3e3] border-opacity-20 "
+              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
               placeholder="Descrição do produto"
             />
           </div>
@@ -207,7 +207,7 @@ export default function ProductPage(props: Product) {
               ref={supplierRef}
               type="text"
               id="supplier"
-              className="input w-full p-2 shadow rounded-lg bg-[#333333] text-[#e3e3e3] border border-[#e3e3e3] border-opacity-20 "
+              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
               placeholder="Fornecedor"
             />
           </div>
@@ -223,7 +223,7 @@ export default function ProductPage(props: Product) {
               ref={productCodeRef}
               type="text"
               id="productCode"
-              className="input w-full p-2 shadow rounded-lg bg-[#333333] text-[#e3e3e3] border border-[#e3e3e3] border-opacity-20 "
+              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
               placeholder="Código do Produto"
             />
           </div>
@@ -238,7 +238,7 @@ export default function ProductPage(props: Product) {
             <select
               ref={statusRef}
               id="status"
-              className="input w-full p-2 shadow rounded-lg bg-[#333333] text-[#e3e3e3] border border-[#e3e3e3] border-opacity-20 "
+              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
               required
             >
               <option value="Disponivel">Disponível</option>
@@ -257,7 +257,7 @@ export default function ProductPage(props: Product) {
             <select
               ref={clientIDRef}
               id="clientID"
-              className="input w-full p-2 shadow rounded-lg bg-[#333333] text-[#e3e3e3] border border-[#e3e3e3] border-opacity-20 "
+              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
             >
               <option value="">Selecione um cliente (opcional)</option>
               {customers.map((client) => (

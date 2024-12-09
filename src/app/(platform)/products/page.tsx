@@ -3,7 +3,7 @@ import { formatData } from '@/helpers/format'
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
-import { Eye, Pencil, Trash2, Undo2 } from 'lucide-react'
+import { Eye, Home, Pencil, Trash2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -84,7 +84,7 @@ export default function Products() {
               <input
                 type="text"
                 placeholder="Buscar produtos..."
-                className="w-full p-3 border border-gray-300 bg-[#333333] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#e3e3e3]"
+                className="w-full p-3 bg-[#181818] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#e3e3e3]"
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
@@ -180,11 +180,11 @@ export default function Products() {
           </div>
 
           <button
-            onClick={() => router.back()}
+            onClick={() => router.push('/home')}
             className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
             title="Voltar para a página anterior"
           >
-            <Undo2 />
+            <Home />
           </button>
         </div>
       )}

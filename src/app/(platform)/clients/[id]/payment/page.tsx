@@ -3,6 +3,7 @@
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
+import { Undo2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -89,7 +90,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
           </label>
           <select
             id="product"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-[#242424] text-[#e3e3e3]"
+            className="mt-1 block w-full p-2  rounded-md bg-[#181818] text-[#e3e3e3]"
             value={selectedProductId || ''}
             onChange={(e) => setSelectedProductId(e.target.value)}
           >
@@ -116,7 +117,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
           <input
             type="number"
             id="paymentValue"
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-[#242424] text-[#e3e3e3]"
+            className="mt-1 block w-full p-2  rounded-md bg-[#181818] text-[#e3e3e3]"
             value={paymentValue}
             onChange={(e) => setPaymentValue(e.target.value)}
             min="0"
@@ -179,7 +180,9 @@ export default function ClientPayment(props: ClientPaymentProps) {
           onClick={() => router.back()}
           className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
           title="Voltar para a página anterior"
-        ></button>
+        >
+          <Undo2 />
+        </button>
       </div>
     </div>
   )

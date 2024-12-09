@@ -4,7 +4,7 @@ import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
 import { IClient } from '@/interface/interfaces'
 import { useRouter } from 'next/navigation'
-import { Undo2 } from 'lucide-react'
+import { Home } from 'lucide-react'
 
 export default function CreateProduct() {
   const router = useRouter()
@@ -92,7 +92,7 @@ export default function CreateProduct() {
 
   return (
     <div className="flex flex-col col-auto justify-center items-center min-h-screen bg-[#181818]">
-      <div className="bg-[#242424] shadow-lg rounded-lg p-8 max-w-[1200px] w-full border border-[#444444]">
+      <div className="bg-[#242424] shadow-lg rounded-lg p-8 max-w-[1200px] w-full  ">
         <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-6 text-center">
           Adicionar Produto
         </h1>
@@ -113,7 +113,7 @@ export default function CreateProduct() {
                     e.target.value ? Number(e.target.value) : null,
                   )
                 }
-                className="border rounded-lg w-full p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className="rounded-lg w-full p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
               >
                 <option value="">Nenhum cliente associado</option>
                 {clients.map((client) => (
@@ -135,7 +135,7 @@ export default function CreateProduct() {
                 id="status"
                 ref={statusRef}
                 required
-                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
               >
                 <option value="Disponivel">Disponível</option>
                 <option value="Vendido">Vendido</option>
@@ -156,7 +156,7 @@ export default function CreateProduct() {
                 id="productName"
                 ref={productNameRef}
                 type="text"
-                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
                 required
               />
             </div>
@@ -172,7 +172,7 @@ export default function CreateProduct() {
                 id="productCode"
                 ref={productCodeRef}
                 type="text"
-                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
                 required
               />
             </div>
@@ -188,7 +188,7 @@ export default function CreateProduct() {
                 id="productPrice"
                 ref={productPriceRef}
                 type="number"
-                className="border w-full border-[#444444] focus:outline-none focus:ring-2 focus:ring-[#181818] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] "
+                className=" w-full  focus:outline-none focus:ring-2 focus:ring-[#181818] rounded-lg p-3 text-[#e3e3e3] bg-[#181818] "
                 step="0.01"
                 required
               />
@@ -205,7 +205,7 @@ export default function CreateProduct() {
                 id="costPrice"
                 ref={costPriceRef}
                 type="number"
-                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
                 step="0.01"
                 required
               />
@@ -222,7 +222,7 @@ export default function CreateProduct() {
                 id="supplier"
                 ref={supplierRef}
                 type="text"
-                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
               />
             </div>
 
@@ -237,7 +237,7 @@ export default function CreateProduct() {
                 id="description"
                 ref={descriptionRef}
                 type="text"
-                className="border w-full border-[#444444] rounded-lg p-3 text-[#e3e3e3] bg-[#333333] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
                 required
               />
             </div>
@@ -253,11 +253,11 @@ export default function CreateProduct() {
         </form>
 
         <button
-          onClick={() => router.back()}
-          className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
+          onClick={() => router.push('/home')}
+          className="fixed bottom-4 right-4 bg-[#181818] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
           title="Voltar para a página anterior"
         >
-          <Undo2 />
+          <Home />
         </button>
       </div>
 

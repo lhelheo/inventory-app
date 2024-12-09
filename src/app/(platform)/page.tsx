@@ -62,7 +62,7 @@ export default function LoginPage() {
             <p className="text-[#e3e3e3]">Usuário</p>
             <input
               type="text"
-              className="flex border border-[#e3e3e3] border-opacity-30 rounded w-full mb-2 p-2 bg-[#242424] text-[#e3e3e3]"
+              className="flex rounded w-full mb-2 p-2 bg-[#181818] shadow-md text-[#e3e3e3]"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -72,7 +72,7 @@ export default function LoginPage() {
             <p className="text-[#e3e3e3]">Senha</p>
             <input
               type="password"
-              className="flex border border-[#e3e3e3] border-opacity-30 bg-[#242424] text-[#e3e3e3] rounded w-full mb-2 p-2"
+              className="flex bg-[#181818] shadow-md text-[#e3e3e3] rounded w-full mb-2 p-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required

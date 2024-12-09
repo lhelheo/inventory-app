@@ -3,7 +3,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { baseUrl } from '@/helpers/url'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { Undo2 } from 'lucide-react'
+import { Home, Undo2 } from 'lucide-react'
 
 // TODO: Adicionar feedback visual para o usuario ao concluir ação e clique para visualizar cliente
 
@@ -106,7 +106,7 @@ export default function CreateClient() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="border border-[#444444] rounded-lg p-3 bg-[#333333] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className=" rounded-lg p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
@@ -120,7 +120,7 @@ export default function CreateClient() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="border border-[#444444] rounded-lg p-3 bg-[#333333] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className=" rounded-lg p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
@@ -135,7 +135,7 @@ export default function CreateClient() {
             value={formData.phone}
             onChange={handleChange}
             required
-            className="border border-[#444444] rounded-lg p-3 bg-[#333333] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className=" rounded-lg p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
@@ -162,11 +162,11 @@ export default function CreateClient() {
       )}
 
       <button
-        onClick={() => router.back()}
-        className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
+        onClick={() => router.push('/home')}
+        className="fixed bottom-4 right-4 bg-[#181818] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
         title="Voltar para a página anterior"
       >
-        <Undo2 />
+        <Home />
       </button>
     </div>
   )
