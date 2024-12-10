@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { api } from '@/app/services/api'
-import { Eye, Home, Pencil, Trash2, Undo2 } from 'lucide-react'
+import { Eye, Home, Pencil, Trash2 } from 'lucide-react'
 import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'

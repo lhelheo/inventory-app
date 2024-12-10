@@ -3,7 +3,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { baseUrl } from '@/helpers/url'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { Home, Undo2 } from 'lucide-react'
+import { Home } from 'lucide-react'
 
 // TODO: Adicionar feedback visual para o usuario ao concluir ação e clique para visualizar cliente
 
