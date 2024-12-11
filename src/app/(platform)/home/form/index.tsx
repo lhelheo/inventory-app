@@ -16,7 +16,7 @@ export const HomeForm = () => {
       <div className="grid grid-cols-2 gap-4">
         <button
           onClick={() => handleNavigation('/clients')}
-          className="bg-[#181818] hover:bg-[#1f1f1f] text-white py-4 rounded-lg shadow-md flex flex-col items-center  ease-linear transition-all ease-linear"
+          className="bg-[#181818] hover:bg-[#1f1f1f] text-white py-4 rounded-lg shadow-md flex flex-col items-center  ease-linear transition-all"
         >
           <CircleDollarSign size={32} className="mb-2" />
           <span className="font-medium">Visualizar Vendas</span>

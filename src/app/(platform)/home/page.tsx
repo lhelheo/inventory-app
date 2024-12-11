@@ -1,5 +1,4 @@
-'use client'
-import { HomeForm } from './component'
+import { HomeForm } from './form'
 
 export default function Login() {
   return (
