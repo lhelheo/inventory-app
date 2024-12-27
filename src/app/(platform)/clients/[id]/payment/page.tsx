@@ -3,7 +3,7 @@
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
 import axios from 'axios'
-import { Undo2 } from 'lucide-react'
+import { Eye, Undo2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -75,7 +75,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
   }
 
   return (
-    <div className="w-full flex justify-center bg-[#181818] h-screen p-4">
+    <div className="w-full flex justify-center items-center bg-[#181818] h-screen p-4">
       <div className="w-full max-w-4xl bg-[#242424] rounded p-10">
         <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
           Realizar Pagamento
@@ -141,7 +141,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
             <h2 className="text-xl font-bold mb-4 text-[#e3e3e3]">
               Status dos Produtos
             </h2>
-            <table className="min-w-full table-auto  border border-[#e3e3e3] border-opacity-25">
+            <table className="w-full table-auto border border-[#e3e3e3] border-opacity-25">
               <thead>
                 <tr>
                   <th className="px-4 py-2 text-left text-[#e3e3e3]">
@@ -152,6 +152,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
                   <th className="px-4 py-2 text-left text-[#e3e3e3]">
                     Saldo Pendente
                   </th>
+                  <th className="px-4 py-2 text-left text-[#e3e3e3]">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -162,13 +163,24 @@ export default function ClientPayment(props: ClientPaymentProps) {
                       key={product.id}
                       className="odd:bg-[#181818] text-[#e3e3e3] bg-[#1f1f1f]"
                     >
-                      <td className="px-4 py-2 ">{product.name}</td>
+                      <td className="px-4 py-2">{product.name}</td>
 
-                      <td className="px-4 py-2 ">{`R$ ${product.price}`}</td>
-                      <td className="px-4 py-2 ">
+                      <td className="px-4 py-2">{`R$ ${product.price}`}</td>
+                      <td className="px-4 py-2">
                         {product.remaining_balance === 0
                           ? 'Venda finalizada'
                           : `R$ ${product.remaining_balance ?? product.price}`}
+                      </td>
+                      <td className="px-4 py-2">
+                        <div title="Visualizar produto">
+                          <Eye
+                            size={18}
+                            onClick={() =>
+                              router.push(`/products/${product.id}`)
+                            }
+                            className="text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200"
+                          />
+                        </div>
                       </td>
                     </tr>
                   ))}
