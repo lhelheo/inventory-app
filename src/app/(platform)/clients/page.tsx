@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { api } from '@/app/services/api'
-import { Eye, Home, Pencil, Trash2 } from 'lucide-react'
+import { DollarSign, Home, Pencil, Trash2 } from 'lucide-react'
 import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'
@@ -138,11 +138,11 @@ export default function Clients() {
                         <Trash2 size={18} />
                       </div>
                       <div
-                        className="flex items-center font-bold text-blue-500 hover:text-blue-700 cursor-pointer ease-linear transition-all mr-2"
+                        className="flex items-center font-bold text-green-500 hover:text-green-700 cursor-pointer ease-linear transition-all mr-2"
                         onClick={() => router.push(`/clients/${customer.id}`)}
                         title="Visualizar vendas"
                       >
-                        <Eye size={18} />
+                        <DollarSign size={18} />
                       </div>
                       <div
                         className="flex items-center font-bold text-yellow-500 hover:text-yellow-700 cursor-pointer ease-linear transition-all"
