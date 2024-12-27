@@ -1,5 +1,5 @@
 'use client'
-import { Plus, Eye, PackagePlus, Box, CircleDollarSign } from 'lucide-react'
+import { Plus, Eye, PackagePlus, Box, User } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -18,8 +18,8 @@ export const HomeForm = () => {
           onClick={() => handleNavigation('/clients')}
           className="bg-[#181818] hover:bg-[#1f1f1f] text-white py-4 rounded-lg shadow-md flex flex-col items-center  ease-linear transition-all"
         >
-          <CircleDollarSign size={32} className="mb-2" />
-          <span className="font-medium">Visualizar Vendas</span>
+          <User size={32} className="mb-2" />
+          <span className="font-medium">Visualizar Clientes</span>
         </button>
 
         <button
