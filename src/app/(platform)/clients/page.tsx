@@ -126,9 +126,25 @@ export default function Clients() {
                       {formatPhoneNumber(customer.phone ?? '') ||
                         'Não informado'}
                     </td>
-                    <td className="px-4 py-2 flex">
+                    <td className="px-4 py-2 flex justify-between">
                       <div
-                        className="flex items-center font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2"
+                        className="flex font-bold text-green-500 hover:text-green-700 cursor-pointer ease-linear transition-all"
+                        onClick={() => router.push(`/clients/${customer.id}`)}
+                        title="Visualizar vendas"
+                      >
+                        <DollarSign size={18} />
+                      </div>
+                      <div
+                        className="flex font-bold text-yellow-500 hover:text-yellow-700 cursor-pointer ease-linear transition-all"
+                        onClick={() =>
+                          router.push(`/clients/${customer.id}/edit`)
+                        }
+                        title="Editar cliente"
+                      >
+                        <Pencil size={18} />
+                      </div>
+                      <div
+                        className="flex font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2"
                         onClick={() => {
                           setShowConfirm(true)
                           setSelectedClient(customer)
@@ -136,22 +152,6 @@ export default function Clients() {
                         title="Deletar cliente"
                       >
                         <Trash2 size={18} />
-                      </div>
-                      <div
-                        className="flex items-center font-bold text-green-500 hover:text-green-700 cursor-pointer ease-linear transition-all mr-2"
-                        onClick={() => router.push(`/clients/${customer.id}`)}
-                        title="Visualizar vendas"
-                      >
-                        <DollarSign size={18} />
-                      </div>
-                      <div
-                        className="flex items-center font-bold text-yellow-500 hover:text-yellow-700 cursor-pointer ease-linear transition-all"
-                        onClick={() =>
-                          router.push(`/clients/${customer.id}/edit`)
-                        }
-                        title="Editar cliente"
-                      >
-                        <Pencil size={18} />
                       </div>
                     </td>
                   </tr>
