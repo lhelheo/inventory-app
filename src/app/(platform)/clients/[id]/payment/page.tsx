@@ -1,10 +1,11 @@
 'use client'
 
+import { api } from '@/app/services/api'
 import { baseUrl } from '@/helpers/url'
-import { IProduct } from '@/interface/interfaces'
+import { IClient, IProduct } from '@/interface/interfaces'
 import axios from 'axios'
 import { Eye, Undo2 } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 interface ClientPaymentProps {
@@ -15,6 +16,8 @@ interface ClientPaymentProps {
 
 export default function ClientPayment(props: ClientPaymentProps) {
   const router = useRouter()
+  const { id } = useParams<{ id: string }>()
+  const [client, setClient] = useState<IClient>()
   const [paymentValue, setPaymentValue] = useState('')
   const [selectedProductId, setSelectedProductId] = useState<string | null>(
     null,
@@ -74,127 +77,192 @@ export default function ClientPayment(props: ClientPaymentProps) {
     }
   }
 
+  useEffect(() => {
+    loadCustomers()
+  }, [])
+
+  async function loadCustomers() {
+    try {
+      const response = await api.get(`${baseUrl}/client/${id}`)
+      setClient(response.data)
+    } catch (error) {
+      console.error('Failed to load customers', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const totalSoldPrice = client?.product
+    ?.filter((product) => product.status === 'Vendido')
+    .reduce((total, product) => total + Number(product.price), 0)
+
+  const totalPending = client?.product
+    .filter(
+      (product) => product.status !== 'Vendido' || product.remaining_balance,
+    )
+    .reduce(
+      (total, product) =>
+        total + Number(product.remaining_balance ?? product.price),
+      0,
+    )
+
   return (
-    <div className="w-full flex justify-center items-center bg-[#181818] h-screen p-4">
-      <div className="w-full max-w-4xl bg-[#242424] rounded p-10">
-        <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
-          Realizar Pagamento
-        </h1>
+    <div className="w-full flex justify-center items-center bg-[#181818] h-full p-4">
+      <div className="flex flex-col justify-center items-center">
+        <div className="bg-[#181818]">
+          <div className="flex justify-center w-full max-w-7xl mt-4 items-center">
+            <div className="flex flex-col justify-center items-center my-6 p-6 bg-[#242424] md:min-w-full shadow-lg rounded-lg w-full max-w-md ">
+              <h1 className="text-2xl text-white font-semibold mb-4">
+                {client?.id} - {client?.name}
+              </h1>
 
-        <div className="mb-4">
-          <label
-            htmlFor="product"
-            className="block text-sm font-medium text-[#e3e3e3]"
-          >
-            Selecione um Produto
-          </label>
-          <select
-            id="product"
-            className="mt-1 block w-full p-2  rounded-md bg-[#181818] text-[#e3e3e3]"
-            value={selectedProductId || ''}
-            onChange={(e) => setSelectedProductId(e.target.value)}
-          >
-            <option value="" disabled>
-              Escolha um produto
-            </option>
-            {products
-              .filter((product) => product.status !== 'Vendido')
-              .map((product) => (
-                <option key={product.id} value={product.id}>
-                  {product.name}
-                </option>
-              ))}
-          </select>
-        </div>
+              <div className="flex my-6 gap-12">
+                <div className="text-center">
+                  <h2 className="font-semibold text-lg text-white mb-2">
+                    Total em produtos vendidos
+                  </h2>
+                  <p className="text-3xl text-green-400 font-bold">
+                    R$ {totalSoldPrice?.toFixed(2)}
+                  </p>
+                </div>
 
-        <div className="mb-4">
-          <label
-            htmlFor="paymentValue"
-            className="block text-sm font-medium text-[#e3e3e3]"
-          >
-            Valor do Pagamento
-          </label>
-          <input
-            type="number"
-            id="paymentValue"
-            className="mt-1 block w-full p-2  rounded-md bg-[#181818] text-[#e3e3e3]"
-            value={paymentValue}
-            onChange={(e) => setPaymentValue(e.target.value)}
-            min="0"
-            step="0.01"
-          />
-        </div>
-
-        <button
-          onClick={handlePayment}
-          disabled={loading || !paymentValue || !selectedProductId}
-          className="w-full bg-[#181818] hover:bg-[#1f1f1f] text-white py-2 rounded-md transition-all ease-linear disabled:bg-gray-400"
-        >
-          {loading ? 'Processando...' : 'Pagar'}
-        </button>
-
-        {message && <p className="text-green-600 mt-4">{message}</p>}
-        {error && <p className="text-red-600 mt-4">{error}</p>}
-
-        {products.length > 0 && (
-          <div className="mt-8">
-            <h2 className="text-xl font-bold mb-4 text-[#e3e3e3]">
-              Status dos Produtos
-            </h2>
-            <table className="w-full table-auto border border-[#e3e3e3] border-opacity-25">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 text-left text-[#e3e3e3]">
-                    Produto
-                  </th>
-
-                  <th className="px-4 py-2 text-left text-[#e3e3e3]">Preço</th>
-                  <th className="px-4 py-2 text-left text-[#e3e3e3]">
-                    Saldo Pendente
-                  </th>
-                  <th className="px-4 py-2 text-left text-[#e3e3e3]">Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products
-                  .filter((product) => product.status !== 'Vendido')
-                  .map((product) => (
-                    <tr
-                      key={product.id}
-                      className="odd:bg-[#181818] text-[#e3e3e3] bg-[#1f1f1f]"
-                    >
-                      <td className="px-4 py-2">{product.name}</td>
-
-                      <td className="px-4 py-2">{`R$ ${product.price}`}</td>
-                      <td className="px-4 py-2">
-                        {product.remaining_balance === 0
-                          ? 'Venda finalizada'
-                          : `R$ ${product.remaining_balance ?? product.price}`}
-                      </td>
-                      <td className="px-4 py-2">
-                        <div title="Visualizar produto">
-                          <Eye
-                            size={18}
-                            onClick={() =>
-                              router.push(`/products/${product.id}`)
-                            }
-                            className="text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200"
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+                <div className="text-center">
+                  <h2 className="font-semibold text-lg text-white mb-2">
+                    Total em produtos pendentes
+                  </h2>
+                  <p className="text-3xl text-yellow-400 font-bold">
+                    R$ {totalPending?.toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-        )}
-        <button
-          onClick={() => router.back()}
-          className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
-          title="Voltar para a página anterior"
-        >
-          <Undo2 />
-        </button>
+        </div>
+
+        <div className="w-full max-w-4xl bg-[#242424] rounded p-10">
+          <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
+            Realizar Pagamento
+          </h1>
+
+          <div className="mb-4">
+            <label
+              htmlFor="product"
+              className="block text-sm font-medium text-[#e3e3e3]"
+            >
+              Selecione um Produto
+            </label>
+            <select
+              id="product"
+              className="mt-1 block w-full p-2  rounded-md bg-[#181818] text-[#e3e3e3]"
+              value={selectedProductId || ''}
+              onChange={(e) => setSelectedProductId(e.target.value)}
+            >
+              <option value="" disabled>
+                Escolha um produto
+              </option>
+              {products
+                .filter((product) => product.status !== 'Vendido')
+                .map((product) => (
+                  <option key={product.id} value={product.id}>
+                    {product.name}
+                  </option>
+                ))}
+            </select>
+          </div>
+
+          <div className="mb-4">
+            <label
+              htmlFor="paymentValue"
+              className="block text-sm font-medium text-[#e3e3e3]"
+            >
+              Valor do Pagamento
+            </label>
+            <input
+              type="number"
+              id="paymentValue"
+              className="mt-1 block w-full p-2  rounded-md bg-[#181818] text-[#e3e3e3]"
+              value={paymentValue}
+              onChange={(e) => setPaymentValue(e.target.value)}
+              min="0"
+              step="0.01"
+            />
+          </div>
+
+          <button
+            onClick={handlePayment}
+            disabled={loading || !paymentValue || !selectedProductId}
+            className="w-full bg-[#181818] hover:bg-[#1f1f1f] text-white py-2 rounded-md transition-all ease-linear disabled:bg-gray-400"
+          >
+            {loading ? 'Processando...' : 'Pagar'}
+          </button>
+
+          {message && <p className="text-green-600 mt-4">{message}</p>}
+          {error && <p className="text-red-600 mt-4">{error}</p>}
+
+          {products.length > 0 && (
+            <div className="mt-8">
+              <h2 className="text-xl font-bold mb-4 text-[#e3e3e3]">
+                Status dos Produtos
+              </h2>
+              <table className="w-full table-auto border border-[#e3e3e3] border-opacity-25">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-2 text-left text-[#e3e3e3]">
+                      Produto
+                    </th>
+
+                    <th className="px-4 py-2 text-left text-[#e3e3e3]">
+                      Preço
+                    </th>
+                    <th className="px-4 py-2 text-left text-[#e3e3e3]">
+                      Saldo Pendente
+                    </th>
+                    <th className="px-4 py-2 text-left text-[#e3e3e3]">
+                      Ações
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {products
+                    .filter((product) => product.status !== 'Vendido')
+                    .map((product) => (
+                      <tr
+                        key={product.id}
+                        className="odd:bg-[#181818] text-[#e3e3e3] bg-[#1f1f1f]"
+                      >
+                        <td className="px-4 py-2">{product.name}</td>
+
+                        <td className="px-4 py-2">{`R$ ${product.price}`}</td>
+                        <td className="px-4 py-2">
+                          {product.remaining_balance === 0
+                            ? 'Venda finalizada'
+                            : `R$ ${product.remaining_balance ?? product.price}`}
+                        </td>
+                        <td className="px-4 py-2">
+                          <div title="Visualizar produto">
+                            <Eye
+                              size={18}
+                              onClick={() =>
+                                router.push(`/products/${product.id}`)
+                              }
+                              className="text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200"
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          <button
+            onClick={() => router.back()}
+            className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
+            title="Voltar para a página anterior"
+          >
+            <Undo2 />
+          </button>
+        </div>
       </div>
     </div>
   )
