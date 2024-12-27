@@ -50,7 +50,7 @@ export default function Client() {
         </p>
       ) : (
         <div className="flex flex-col h-screen justify-center items-center bg-[#181818]">
-          <div className="flex flex-col w-full max-w-7xl mt-4 items-center">
+          <div className="flex justify-center w-full max-w-7xl mt-4 items-center">
             <div className="flex flex-col justify-center items-center my-6 p-6 bg-[#242424] shadow-lg rounded-lg w-full max-w-md">
               <h1 className="text-2xl text-white font-semibold mb-4">
                 {client?.id} - {client?.name}
@@ -82,52 +82,6 @@ export default function Client() {
               >
                 Realizar Pagamento
               </button>
-            </div>
-
-            <p className="font-semibold text-lg mb-2 text-[#e3e3e3]">
-              Histórico de compras de {client?.name}
-            </p>
-
-            <div className="overflow-x-auto w-full bg-[#242424] shadow-lg rounded-lg">
-              <table className="table-auto w-full text-sm text-left text-white">
-                <thead className="bg-[#333333] text-gray-300">
-                  <tr>
-                    <th className="px-4 py-3">DATA COMPRA</th>
-                    <th className="px-4 py-3">FORNECEDOR</th>
-                    <th className="px-4 py-3">DESCRIÇÃO</th>
-                    <th className="px-4 py-3">PRODUTO</th>
-                    <th className="px-4 py-3">REFERÊNCIA</th>
-                    <th className="px-4 py-3">VALOR VENDA</th>
-                    <th className="px-4 py-3">VALOR CUSTO</th>
-                    <th className="px-4 py-3">SITUAÇÃO</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {client?.product?.map((product) => (
-                    <tr
-                      key={product.id}
-                      className="border-t border-[#444444] hover:bg-[#333333] transition-all duration-300"
-                    >
-                      <td className="px-4 py-3">
-                        {formatData(product.createAt)}
-                      </td>
-                      <td className="px-4 py-3">
-                        {product.supplier || 'Não informado'}
-                      </td>
-                      <td className="px-4 py-3">{product.description}</td>
-                      <td className="px-4 py-3">{product.name}</td>
-                      <td className="px-4 py-3">{product.product_code}</td>
-                      <td className="px-4 py-3">
-                        R$ {product.price.toFixed(2)}
-                      </td>
-                      <td className="px-4 py-3">
-                        R$ {product.cost_price.toFixed(2)}
-                      </td>
-                      <td className="px-4 py-3">{product.status}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
             </div>
           </div>
 
