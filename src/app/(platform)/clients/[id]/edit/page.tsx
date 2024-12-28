@@ -75,7 +75,7 @@ export default function EditClientPage(props: EditClientPageProps) {
 
   return (
     <div className="bg-[#181818] h-screen">
-      <div className="container mx-auto p-4 max-w-[900px]">
+      <div className="bg-[#242424] rounded container mx-auto flex-col justify-center items-center p-4 max-w-[900px]">
         <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
           Editar cliente
         </h1>
