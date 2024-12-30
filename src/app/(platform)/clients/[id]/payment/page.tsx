@@ -81,6 +81,12 @@ export default function ClientPayment(props: ClientPaymentProps) {
     loadCustomers()
   }, [])
 
+  useEffect(() => {
+    if (message) {
+      loadCustomers()
+    }
+  }, [message])
+
   async function loadCustomers() {
     try {
       const response = await api.get(`${baseUrl}/client/${id}`)
@@ -92,9 +98,10 @@ export default function ClientPayment(props: ClientPaymentProps) {
     }
   }
 
-  const totalSoldPrice = client?.product
-    ?.filter((product) => product.status === 'Vendido')
-    .reduce((total, product) => total + Number(product.price), 0)
+  const total = client?.product.reduce(
+    (total, product) => total + Number(product.price),
+    0,
+  )
 
   const totalPending = client?.product
     .filter(
@@ -106,11 +113,13 @@ export default function ClientPayment(props: ClientPaymentProps) {
       0,
     )
 
+  const totalSoldPrice = (total ?? 0) - (totalPending ?? 0)
+
   return (
-    <div className="w-full flex justify-center items-center bg-[#181818] h-full p-4">
-      <div className="flex flex-col justify-center items-center">
+    <div className="w-full flex justify-center items-center bg-[#181818] h-screen p-4">
+      <div className="flex gap-10 justify-center items-center">
         <div className="bg-[#181818]">
-          <div className="flex justify-center w-full max-w-7xl mt-4 items-center">
+          <div className="flex justify-center w-[500px] items-center">
             <div className="flex flex-col justify-center items-center my-6 p-6 bg-[#242424] md:min-w-full shadow-lg rounded-lg w-full max-w-md ">
               <h1 className="text-2xl text-white font-semibold mb-4">
                 {client?.id} - {client?.name}
@@ -218,7 +227,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
                       Saldo Pendente
                     </th>
                     <th className="px-4 py-2 text-left text-[#e3e3e3]">
-                      Ações
+                      Visualizar
                     </th>
                   </tr>
                 </thead>
