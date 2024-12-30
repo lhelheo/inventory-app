@@ -75,56 +75,62 @@ export default function EditClientPage(props: EditClientPageProps) {
 
   return (
     <div className="bg-[#181818] h-screen">
-      <div className="bg-[#242424] rounded container mx-auto flex-col justify-center items-center p-4 max-w-[900px]">
-        <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
-          Editar cliente
-        </h1>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col">
-            <label className="mb-1 font-semibold text-[#e3e3e3]">Name:</label>
-            <input
-              type="text"
-              name="name"
-              value={client?.name || ''}
-              onChange={handleInputChange}
-              className="p-2 border border-opacity-30 border-gray-300 rounded bg-[#181818] shadow-md text-[#e3e3e3]"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-1 font-semibold text-[#e3e3e3]">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={client?.email || ''}
-              onChange={handleInputChange}
-              className="p-2 border border-opacity-30 border-gray-300 rounded bg-[#181818] shadow-md text-[#e3e3e3]"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-1 font-semibold text-[#e3e3e3]">Phone:</label>
-            <input
-              type="text"
-              name="phone"
-              value={client?.phone || ''}
-              onChange={handleInputChange}
-              className="p-2 border border-opacity-30 border-gray-300 rounded bg-[#181818] shadow-md text-[#e3e3e3]"
-            />
-          </div>
-          <button
-            type="submit"
-            className="px-4 py-2 bg-[#252525] text-white rounded hover:bg-[#414141] ease-linear transition-all"
-          >
-            Salvar
-          </button>
-        </form>
+      <div className="flex justify-center items-center h-full">
+        <div className="bg-[#242424] rounded container mx-auto flex-col justify-center items-center p-4 max-w-[600px]">
+          <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
+            Editar cliente
+          </h1>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="flex flex-col">
+              <label className="mb-1 font-semibold text-[#e3e3e3]">Name:</label>
+              <input
+                type="text"
+                name="name"
+                value={client?.name || ''}
+                onChange={handleInputChange}
+                className="p-2 shadow rounded bg-[#181818] text-[#e3e3e3]"
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="mb-1 font-semibold text-[#e3e3e3]">
+                Email:
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={client?.email || ''}
+                onChange={handleInputChange}
+                className="p-2 shadow rounded bg-[#181818] text-[#e3e3e3]"
+              />
+            </div>
+            <div className="flex flex-col">
+              <label className="mb-1 font-semibold text-[#e3e3e3]">
+                Phone:
+              </label>
+              <input
+                type="text"
+                name="phone"
+                value={client?.phone || ''}
+                onChange={handleInputChange}
+                className="p-2 mb-4 shadow rounded bg-[#181818] text-[#e3e3e3]"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full px-4 py-2 bg-[#181818] text-white rounded hover:bg-[#1f1f1f] ease-linear transition-all"
+            >
+              Salvar
+            </button>
+          </form>
+        </div>
+        <button
+          onClick={() => router.back()}
+          className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
+          title="Voltar para a página anterior"
+        >
+          <Undo2 />
+        </button>
       </div>
-      <button
-        onClick={() => router.back()}
-        className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
-        title="Voltar para a página anterior"
-      >
-        <Undo2 />
-      </button>
     </div>
   )
 }
