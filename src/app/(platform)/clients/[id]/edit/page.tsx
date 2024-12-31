@@ -22,7 +22,7 @@ export default function EditClientPage(props: EditClientPageProps) {
   async function loadClient() {
     if (id) {
       axios
-        .get(`${baseUrl}/client/${id}`)
+        .get(`${baseUrl}/clients/${id}`)
         .then((response) => {
           setClient(response.data)
           setLoading(false)
@@ -50,7 +50,7 @@ export default function EditClientPage(props: EditClientPageProps) {
     setLoading(true)
 
     try {
-      await axios.put(`${baseUrl}/product/${id}/client`, client)
+      await axios.put(`${baseUrl}/products/${id}/clients`, client)
       router.push('/clients')
     } catch (error) {
       console.error('Failed to update client', error)

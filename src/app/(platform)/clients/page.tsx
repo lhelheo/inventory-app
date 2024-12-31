@@ -37,7 +37,7 @@ export default function Clients() {
 
     try {
       const response = await api.delete(
-        `${baseUrl}/client/${selectedClient.id}`,
+        `${baseUrl}/clients/${selectedClient.id}`,
       )
       if (response.status === 200) {
         // Atualiza o estado para exibir a mensagem de sucesso

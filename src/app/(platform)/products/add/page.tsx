@@ -65,8 +65,8 @@ export default function CreateProduct() {
 
     try {
       const endpoint = selectedClientId
-        ? `${baseUrl}/client/${selectedClientId}/product`
-        : `${baseUrl}/product`
+        ? `${baseUrl}/clients/${selectedClientId}/products`
+        : `${baseUrl}/products`
 
       const response = await axios.post(endpoint, productData)
       setMessage(`Produto adicionado: ${response.data.name}`)

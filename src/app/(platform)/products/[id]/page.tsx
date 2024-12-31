@@ -18,7 +18,7 @@ export default function ProductPage(props: ProductPageProps) {
 
   useEffect(() => {
     if (id) {
-      fetch(`${baseUrl}/product/${id}`)
+      fetch(`${baseUrl}/products/${id}`)
         .then((response) => response.json())
         .then((data) => setProduct(data))
         .catch((error) => console.error('Error fetching product:', error))

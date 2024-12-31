@@ -30,7 +30,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
   async function fetchClientProducts() {
     try {
       const response = await axios.get(
-        `${baseUrl}/client/${props.params.id}/products`,
+        `${baseUrl}/clients/${props.params.id}/products`,
       )
       setProducts(response.data)
     } catch (error) {
@@ -58,7 +58,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
     try {
       const response = await axios.patch(
-        `${baseUrl}/client/${props.params.id}/product/${selectedProductId}/pay`,
+        `${baseUrl}/clients/${props.params.id}/products/${selectedProductId}/pay`,
         { amount: parseFloat(paymentValue) },
       )
 
@@ -89,7 +89,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
   async function loadCustomers() {
     try {
-      const response = await api.get(`${baseUrl}/client/${id}`)
+      const response = await api.get(`${baseUrl}/clients/${id}`)
       setClient(response.data)
     } catch (error) {
       console.error('Failed to load customers', error)

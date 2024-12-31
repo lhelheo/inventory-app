@@ -61,7 +61,7 @@ export default function CreateClient() {
     }
 
     try {
-      const response = await axios.post(`${baseUrl}/client`, {
+      const response = await axios.post(`${baseUrl}/clients`, {
         ...formData,
         userID,
       })

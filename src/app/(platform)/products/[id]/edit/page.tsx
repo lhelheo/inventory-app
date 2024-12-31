@@ -50,7 +50,7 @@ export default function ProductPage(props: Product) {
       if (!props.params.id) return
       try {
         const response = await axios.get(
-          `${baseUrl}/product/${props.params.id}`,
+          `${baseUrl}/products/${props.params.id}`,
         )
         setProduct(response.data)
       } catch (error) {
@@ -93,7 +93,7 @@ export default function ProductPage(props: Product) {
     }
 
     try {
-      await axios.put(`${baseUrl}/product/${props.params.id}`, updatedProduct)
+      await axios.put(`${baseUrl}/products/${props.params.id}`, updatedProduct)
       setMessage('Produto atualizado com sucesso.')
       clearForm()
     } catch (error) {

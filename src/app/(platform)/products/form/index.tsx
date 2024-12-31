@@ -26,7 +26,7 @@ export const ProductsForm = (props: ProductsFormProps) => {
     if (!selectedProduct) return
     setLoading(true)
     try {
-      await axios.delete(`${baseUrl}/product/${selectedProduct.id}`)
+      await axios.delete(`${baseUrl}/products/${selectedProduct.id}`)
       setMessage('Produto deletado com sucesso.')
       setProducts(
         props.products.filter((product) => product.id !== selectedProduct.id),

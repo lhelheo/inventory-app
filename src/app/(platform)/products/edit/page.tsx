@@ -70,7 +70,10 @@ export default function EditProduct() {
     }
 
     try {
-      await axios.put(`${baseUrl}/product/${selectedProductId}`, updatedProduct)
+      await axios.put(
+        `${baseUrl}/products/${selectedProductId}`,
+        updatedProduct,
+      )
       setMessage('Produto atualizado com sucesso.')
       clearForm()
     } catch (error) {
