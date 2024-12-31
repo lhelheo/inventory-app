@@ -7,6 +7,7 @@ import { IProduct, IClient } from '@/interface/interfaces'
 import { api } from '@/app/services/api'
 import { useRouter } from 'next/navigation'
 import { Undo2 } from 'lucide-react'
+import { LoadingCircle } from '@/component/loadingCircle'
 
 interface Product {
   params: {
@@ -18,7 +19,7 @@ export default function ProductPage(props: Product) {
   const router = useRouter()
   const [product, setProduct] = useState<IProduct | null>(null)
   const [message, setMessage] = useState<string | null>(null)
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [customers, setCustomers] = useState<IClient[]>([])
 
   const nameRef = useRef<HTMLInputElement>(null)
@@ -64,14 +65,20 @@ export default function ProductPage(props: Product) {
 
   useEffect(() => {
     if (product) {
-      nameRef.current!.value = product.name
-      priceRef.current!.value = product.price.toString()
-      descriptionRef.current!.value = product.description ?? 'Não informado'
-      statusRef.current!.value = product.status ?? 'Disponivel'
-      supplierRef.current!.value = product.supplier ?? 'Não informado'
-      costPriceRef.current!.value = product.cost_price.toString()
-      productCodeRef.current!.value = product.product_code ?? ''
-      clientIDRef.current!.value = product.clientID?.toString() || ''
+      if (nameRef.current) nameRef.current.value = product.name
+      if (priceRef.current) priceRef.current.value = product.price.toString()
+      if (descriptionRef.current)
+        descriptionRef.current.value = product.description ?? 'Não informado'
+      if (statusRef.current)
+        statusRef.current.value = product.status ?? 'Disponivel'
+      if (supplierRef.current)
+        supplierRef.current.value = product.supplier ?? 'Não informado'
+      if (costPriceRef.current)
+        costPriceRef.current.value = product.cost_price.toString()
+      if (productCodeRef.current)
+        productCodeRef.current.value = product.product_code ?? ''
+      if (clientIDRef.current)
+        clientIDRef.current.value = product.clientID?.toString() ?? ''
     }
   }, [product])
 
@@ -121,175 +128,185 @@ export default function ProductPage(props: Product) {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] p-4">
-      <h1 className="text-3xl font-bold text-[#e3e3e3] mb-8">Editar Produto</h1>
+    <div>
+      {loading ? (
+        <LoadingCircle />
+      ) : (
+        <>
+          <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] p-4">
+            <h1 className="text-3xl font-bold text-[#e3e3e3] mb-8">
+              Editar Produto
+            </h1>
 
-      <div className="bg-[#242424] text-[#e3e3e3] shadow-md rounded-lg p-8 w-full max-w-lg">
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label
-              className="block text-[#e3e3e3] font-semibold mb-2"
-              htmlFor="name"
-            >
-              Nome do produto
-            </label>
-            <input
-              ref={nameRef}
-              type="text"
-              id="name"
-              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
-              placeholder="Nome do produto"
-              required
-            />
-          </div>
+            <div className="bg-[#242424] text-[#e3e3e3] shadow-md rounded-lg p-8 w-full max-w-lg">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label
+                    className="block text-[#e3e3e3] font-semibold mb-2"
+                    htmlFor="name"
+                  >
+                    Nome do produto
+                  </label>
+                  <input
+                    ref={nameRef}
+                    type="text"
+                    id="name"
+                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    placeholder="Nome do produto"
+                    required
+                  />
+                </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label
-                className="block text-[#e3e3e3] font-semibold mb-2"
-                htmlFor="price"
-              >
-                Preço
-              </label>
-              <input
-                ref={priceRef}
-                type="number"
-                step="0.01"
-                id="price"
-                className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
-                placeholder="Preço do produto"
-                required
-              />
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      className="block text-[#e3e3e3] font-semibold mb-2"
+                      htmlFor="price"
+                    >
+                      Preço
+                    </label>
+                    <input
+                      ref={priceRef}
+                      type="number"
+                      step="0.01"
+                      id="price"
+                      className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                      placeholder="Preço do produto"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="block text-[#e3e3e3] font-semibold mb-2"
+                      htmlFor="costPrice"
+                    >
+                      Preço de Custo
+                    </label>
+                    <input
+                      ref={costPriceRef}
+                      type="number"
+                      step="0.01"
+                      id="costPrice"
+                      className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                      placeholder="Preço de Custo"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    className="block text-[#e3e3e3] font-semibold mb-2"
+                    htmlFor="description"
+                  >
+                    Descrição
+                  </label>
+                  <input
+                    ref={descriptionRef}
+                    type="text"
+                    id="description"
+                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    placeholder="Descrição do produto"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    className="block text-[#e3e3e3] font-semibold mb-2"
+                    htmlFor="supplier"
+                  >
+                    Fornecedor
+                  </label>
+                  <input
+                    ref={supplierRef}
+                    type="text"
+                    id="supplier"
+                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    placeholder="Fornecedor"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    className="block text-[#e3e3e3] font-semibold mb-2"
+                    htmlFor="productCode"
+                  >
+                    Código do Produto
+                  </label>
+                  <input
+                    ref={productCodeRef}
+                    type="text"
+                    id="productCode"
+                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    placeholder="Código do Produto"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    className="block text-[#e3e3e3] font-semibold mb-2"
+                    htmlFor="status"
+                  >
+                    Status
+                  </label>
+                  <select
+                    ref={statusRef}
+                    id="status"
+                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    required
+                  >
+                    <option value="Disponivel">Disponível</option>
+                    <option value="Vendido">Vendido</option>
+                    <option value="Em pagamento">Em pagamento</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    className="block text-[#e3e3e3] font-semibold mb-2"
+                    htmlFor="clientID"
+                  >
+                    Cliente
+                  </label>
+                  <select
+                    ref={clientIDRef}
+                    id="clientID"
+                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                  >
+                    <option value="">Selecione um cliente (opcional)</option>
+                    {customers.map((client) => (
+                      <option key={client.id} value={client.id}>
+                        {client.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3 bg-[#181818] font-semibold rounded-md hover:bg-[#1f1f1f] text-[#e3e3e3] transition-all"
+                  disabled={loading}
+                >
+                  {loading ? 'Carregando...' : 'Salvar Alterações'}
+                </button>
+
+                {message && (
+                  <p className="mt-4 text-center text-green-600 font-semibold">
+                    {message}
+                  </p>
+                )}
+              </form>
             </div>
-            <div>
-              <label
-                className="block text-[#e3e3e3] font-semibold mb-2"
-                htmlFor="costPrice"
-              >
-                Preço de Custo
-              </label>
-              <input
-                ref={costPriceRef}
-                type="number"
-                step="0.01"
-                id="costPrice"
-                className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
-                placeholder="Preço de Custo"
-                required
-              />
-            </div>
+            <button
+              onClick={() => router.back()}
+              className="fixed bottom-4 right-4 bg-[#333333] text-[#e3e3e3] hover:bg-[#1f1f1f] p-4 rounded-full shadow-lg transition duration-300"
+              title="Voltar para a página anterior"
+            >
+              <Undo2 />
+            </button>
           </div>
-
-          <div>
-            <label
-              className="block text-[#e3e3e3] font-semibold mb-2"
-              htmlFor="description"
-            >
-              Descrição
-            </label>
-            <input
-              ref={descriptionRef}
-              type="text"
-              id="description"
-              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
-              placeholder="Descrição do produto"
-            />
-          </div>
-
-          <div>
-            <label
-              className="block text-[#e3e3e3] font-semibold mb-2"
-              htmlFor="supplier"
-            >
-              Fornecedor
-            </label>
-            <input
-              ref={supplierRef}
-              type="text"
-              id="supplier"
-              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
-              placeholder="Fornecedor"
-            />
-          </div>
-
-          <div>
-            <label
-              className="block text-[#e3e3e3] font-semibold mb-2"
-              htmlFor="productCode"
-            >
-              Código do Produto
-            </label>
-            <input
-              ref={productCodeRef}
-              type="text"
-              id="productCode"
-              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
-              placeholder="Código do Produto"
-            />
-          </div>
-
-          <div>
-            <label
-              className="block text-[#e3e3e3] font-semibold mb-2"
-              htmlFor="status"
-            >
-              Status
-            </label>
-            <select
-              ref={statusRef}
-              id="status"
-              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
-              required
-            >
-              <option value="Disponivel">Disponível</option>
-              <option value="Vendido">Vendido</option>
-              <option value="Em pagamento">Em pagamento</option>
-            </select>
-          </div>
-
-          <div>
-            <label
-              className="block text-[#e3e3e3] font-semibold mb-2"
-              htmlFor="clientID"
-            >
-              Cliente
-            </label>
-            <select
-              ref={clientIDRef}
-              id="clientID"
-              className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
-            >
-              <option value="">Selecione um cliente (opcional)</option>
-              {customers.map((client) => (
-                <option key={client.id} value={client.id}>
-                  {client.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-3 bg-[#181818] font-semibold rounded-md hover:bg-[#1f1f1f] text-[#e3e3e3] transition-all"
-            disabled={loading}
-          >
-            {loading ? 'Carregando...' : 'Salvar Alterações'}
-          </button>
-
-          {message && (
-            <p className="mt-4 text-center text-green-600 font-semibold">
-              {message}
-            </p>
-          )}
-        </form>
-      </div>
-      <button
-        onClick={() => router.back()}
-        className="fixed bottom-4 right-4 bg-[#333333] text-[#e3e3e3] hover:bg-[#1f1f1f] p-4 rounded-full shadow-lg transition duration-300"
-        title="Voltar para a página anterior"
-      >
-        <Undo2 />
-      </button>
+        </>
+      )}
     </div>
   )
 }
