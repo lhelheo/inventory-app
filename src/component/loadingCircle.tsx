@@ -1,8 +1,8 @@
 export const LoadingCircle = () => {
   return (
-    <div className="flex justify-center items-center absolute inset-0 bg-[#181818] z-50">
+    <div className="fixed inset-0 flex justify-center items-center bg-[#181818] bg-opacity-90 z-50">
       <svg
-        className="animate-spin h-12 w-12 text-[#e3e3e3]"
+        className="animate-spin h-8 w-8 text-[#e3e3e3]"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

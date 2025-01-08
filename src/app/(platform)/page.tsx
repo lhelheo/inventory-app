@@ -56,12 +56,11 @@ export default function LoginPage() {
       ) : (
         <form
           onSubmit={handleLogin}
-          className="flex flex-col w-[480px] bg-[#242424] rounded shadow md:p-16 p-10"
+          className="flex flex-col w-[420px] bg-[#242424] rounded shadow md:p-16 p-10"
         >
           <div className="flex flex-col text-[#e3e3e3] justify-center items-center text-xl">
-            <p className="text-3xl font-bold text-center">
-              Duda Brandão Gestão
-            </p>
+            <p className="text-3xl font-bold text-center">Duda Brandão</p>
+            <p className="text-3xl font-thin">Gestão</p>
             <p className="font-semibold mt-4">Acesse sua conta</p>
           </div>
           <div className="my-4 gap-3 flex flex-col">
