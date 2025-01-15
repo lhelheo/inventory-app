@@ -4,7 +4,7 @@ import { api } from '@/app/services/api'
 import { baseUrl } from '@/helpers/url'
 import { IClient, IProduct } from '@/interface/interfaces'
 import axios from 'axios'
-import { Eye, Undo2 } from 'lucide-react'
+import { Eye, Mail, Phone, Undo2, User } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -121,9 +121,18 @@ export default function ClientPayment(props: ClientPaymentProps) {
         <div className="bg-[#181818]">
           <div className="flex justify-center w-[500px] items-center">
             <div className="flex flex-col justify-center items-center my-6 p-6 bg-[#242424] md:min-w-full shadow-lg rounded-lg w-full max-w-md ">
-              <h1 className="text-2xl text-white font-semibold mb-4">
+              <h1 className="flex gap-2 items-center text-2xl text-white mb-4">
+                <User />
                 {client?.id} - {client?.name}
               </h1>
+              <p className="flex gap-2 text-white mb-4">
+                <Mail />
+                <strong>Email:</strong> {client?.email}
+              </p>
+              <p className="flex gap-2 text-white mb-4">
+                <Phone />
+                <strong>Telefone:</strong> {client?.phone}
+              </p>
 
               <div className="flex my-6 gap-12">
                 <div className="text-center">

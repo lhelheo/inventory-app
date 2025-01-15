@@ -79,14 +79,24 @@ export default function Clients() {
         <LoadingCircle />
       ) : (
         <div className="p-4 flex flex-col justify-center items-center min-h-screen bg-[#181818]">
-          <div className="flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center mb-4 w-full max-w-4xl">
             <h1 className="text-xl font-semibold text-[#e3e3e3] mb-4">
               Clientes
             </h1>
             <p className="text-[#e3e3e3] mb-4">
               Selecione um cliente para visualizar suas vendas
             </p>
+            <div className="w-full flex justify-start">
+              <div
+                className="flex text-[#e3e3e3] bg-[#242424] min-w-[160px] justify-center px-2 py-4 rounded hover:cursor-pointer"
+                onClick={() => router.push('/clients/add')}
+              >
+                <Plus />
+                <p>Criar cliente</p>
+              </div>
+            </div>
           </div>
+
           {message && (
             <div className="mb-4 text-center text-white bg-green-500 p-2 rounded-lg">
               {message}
@@ -94,12 +104,6 @@ export default function Clients() {
           )}
 
           <div className="w-full max-w-4xl p-6 bg-[#242424] shadow-lg rounded-lg max-h-[600px] overflow-x-auto">
-            <div className="w-full">
-              <div className="flex text-[#e3e3e3] bg-[#242424] min-w-[100px] px-2 py-4 rounded">
-                <Plus />
-                <p>Criar cliente</p>
-              </div>
-            </div>
             <div className="mb-4 w-full">
               <input
                 type="text"

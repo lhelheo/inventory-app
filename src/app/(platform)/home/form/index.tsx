@@ -25,17 +25,7 @@ export const HomeForm = () => {
           >
             <div className="flex items-center gap-3">
               <User size={32} />
-              <span className="font-medium">Visualizar Clientes</span>
-            </div>
-          </button>
-
-          <button
-            onClick={() => handleNavigation('/clients/add')}
-            className="bg-[#181818] hover:bg-[#1f1f1f] text-white py-4 rounded-lg shadow-md flex p-6 justify-start items-center  ease-linear transition-all "
-          >
-            <div className="flex items-center gap-3">
-              <Plus size={32} />
-              <span className="font-medium">Criar Cliente</span>
+              <span className="font-medium">Gerenciar Clientes</span>
             </div>
           </button>
 
