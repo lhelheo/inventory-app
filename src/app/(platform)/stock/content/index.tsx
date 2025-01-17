@@ -11,7 +11,7 @@ interface Product {
 export const StockPage = (props: Product) => {
   const router = useRouter()
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818]">
+    <div className="flex flex-col p-10 items-center min-h-screen bg-[#181818]">
       {props.products && (
         <>
           <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-4">
@@ -21,7 +21,7 @@ export const StockPage = (props: Product) => {
             Visualize abaixo os produtos que não possuem cliente associado
           </p>
 
-          <div className="bg-[#242424] w-full max-w-6xl shadow-md rounded-lg p-8 max-h-[600px] overflow-x-auto">
+          <div className="bg-[#242424] w-full shadow-md rounded-lg p-8 overflow-x-auto ">
             {props.products.length > 0 ? (
               <table className="min-w-full bg-[#242424] rounded-lg">
                 <thead>

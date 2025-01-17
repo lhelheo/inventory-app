@@ -74,61 +74,64 @@ export default function EditClientPage(props: EditClientPageProps) {
     )
 
   return (
-    <div className="bg-[#181818] h-screen">
-      <div className="flex justify-center items-center h-full">
-        <div className="bg-[#242424] rounded container mx-auto flex-col justify-center items-center p-4 max-w-[600px]">
-          <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
-            Editar cliente
-          </h1>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="flex flex-col">
-              <label className="mb-1 font-semibold text-[#e3e3e3]">Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={client?.name || ''}
-                onChange={handleInputChange}
-                className="p-2 shadow rounded bg-[#181818] text-[#e3e3e3]"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="mb-1 font-semibold text-[#e3e3e3]">
-                Email:
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={client?.email || ''}
-                onChange={handleInputChange}
-                className="p-2 shadow rounded bg-[#181818] text-[#e3e3e3]"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label className="mb-1 font-semibold text-[#e3e3e3]">
-                Phone:
-              </label>
-              <input
-                type="text"
-                name="phone"
-                value={client?.phone || ''}
-                onChange={handleInputChange}
-                className="p-2 mb-4 shadow rounded bg-[#181818] text-[#e3e3e3]"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full px-4 py-2 bg-[#181818] text-white rounded hover:bg-[#1f1f1f] ease-linear transition-all"
-            >
-              Salvar
-            </button>
-          </form>
-        </div>
+    <div className="bg-[#181818] min-h-screen flex items-center justify-center">
+      <div className="bg-[#242424] rounded-lg shadow-lg container mx-auto max-w-lg p-6">
+        <h1 className="text-3xl font-bold text-center mb-6 text-[#e3e3e3]">
+          Editar cliente
+        </h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex flex-col">
+            <label className="mb-2 text-sm font-semibold text-[#e3e3e3]">
+              Nome:
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={client?.name || ''}
+              onChange={handleInputChange}
+              className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+              placeholder="Digite o nome"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="mb-2 text-sm font-semibold text-[#e3e3e3]">
+              Email:
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={client?.email || ''}
+              onChange={handleInputChange}
+              className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+              placeholder="Digite o email"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="mb-2 text-sm font-semibold text-[#e3e3e3]">
+              Telefone:
+            </label>
+            <input
+              type="text"
+              name="phone"
+              value={client?.phone || ''}
+              onChange={handleInputChange}
+              className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+              placeholder="Digite o telefone"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full py-3 bg-[#3b82f6] text-white font-semibold rounded hover:bg-[#2563eb] transition duration-300 ease-in-out shadow-lg"
+          >
+            Salvar
+          </button>
+        </form>
         <button
           onClick={() => router.back()}
-          className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
+          className="mt-6 w-full py-3 bg-[#374151] text-white font-semibold rounded hover:bg-[#4b5563] transition duration-300 ease-in-out shadow-lg"
           title="Voltar para a página anterior"
         >
-          <Undo2 />
+          Voltar
         </button>
       </div>
     </div>
