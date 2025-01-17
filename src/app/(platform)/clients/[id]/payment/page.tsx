@@ -116,25 +116,27 @@ export default function ClientPayment(props: ClientPaymentProps) {
   const totalSoldPrice = (total ?? 0) - (totalPending ?? 0)
 
   return (
-    <div className="w-full flex justify-center items-center bg-[#181818] h-screen p-4">
-      <div className="flex gap-10 justify-center items-center">
-        <div className="bg-[#181818]">
-          <div className="flex justify-center w-[500px] items-center">
-            <div className="flex flex-col justify-center items-center my-6 p-6 bg-[#242424] md:min-w-full shadow-lg rounded-lg w-full max-w-md ">
-              <h1 className="flex gap-2 items-center text-2xl text-white mb-4">
-                <User />
-                {client?.id} - {client?.name}
-              </h1>
-              <p className="flex gap-2 text-white mb-4">
-                <Mail />
-                <strong>Email:</strong> {client?.email}
-              </p>
-              <p className="flex gap-2 text-white mb-4">
-                <Phone />
-                <strong>Telefone:</strong> {client?.phone}
-              </p>
+    <div className="w-full flex bg-[#181818] h-screen p-4">
+      <div className="flex flex-col w-full px-10">
+        <div className="bg-[#181818] w-full">
+          <div className="flex justify-center items-center">
+            <div className="flex flex-col justify-center p-6 gap-6 items-center rounded-lg w-full">
+              <div className="flex gap-6">
+                <h1 className="flex gap-2 text-white mb-4">
+                  <User size={24} />
+                  <strong>Nome: </strong> {client?.name}
+                </h1>
+                <p className="flex gap-2 text-white mb-4">
+                  <Mail size={24} />
+                  <strong>Email:</strong> {client?.email}
+                </p>
+                <p className="flex gap-2 text-white mb-4">
+                  <Phone size={24} />
+                  <strong>Telefone:</strong> {client?.phone}
+                </p>
+              </div>
 
-              <div className="flex my-6 gap-12">
+              <div className="flex gap-6">
                 <div className="text-center">
                   <h2 className="font-semibold text-lg text-white mb-2">
                     Total em produtos vendidos
@@ -156,8 +158,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
             </div>
           </div>
         </div>
-
-        <div className="w-full max-w-4xl bg-[#242424] rounded p-10">
+        <div className="w-full bg-[#242424] rounded p-10 mx-auto mt-4">
           <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
             Realizar Pagamento
           </h1>
@@ -188,7 +189,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
             </select>
           </div>
 
-          <div className="mb-4">
+          <div className="mb-4 ">
             <label
               htmlFor="paymentValue"
               className="block text-sm font-medium text-[#e3e3e3]"

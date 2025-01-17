@@ -88,7 +88,7 @@ export default function Clients() {
             </p>
             <div className="w-full flex justify-start">
               <div
-                className="flex text-[#e3e3e3] bg-[#242424] min-w-[160px] justify-center px-2 py-4 rounded hover:cursor-pointer"
+                className="flex text-[#e3e3e3] bg-[#242424] hover:bg-[#202020] ease-linear transition-all min-w-[160px] justify-center px-2 py-4 rounded hover:cursor-pointer"
                 onClick={() => router.push('/clients/add')}
               >
                 <Plus />
