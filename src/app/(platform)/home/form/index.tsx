@@ -1,5 +1,5 @@
 'use client'
-import { Plus, Eye, PackagePlus, Box, User } from 'lucide-react'
+import { Eye, PackagePlus, Box, User } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
@@ -13,8 +13,8 @@ export const HomeForm = () => {
   }
   return (
     <>
+      <h1 className="text-3xl font-bold text-[#e3e3e3] mb-4">Início</h1>
       <div className="bg-[#242424] shadow-lg rounded-lg p-8 max-w-xl w-full text-center">
-        <h1 className="text-3xl font-bold text-[#e3e3e3] mb-4">Início</h1>
         <p className="text-lg text-[#e3e3e3] mb-6">
           Selecione uma ação abaixo para prosseguir:
         </p>

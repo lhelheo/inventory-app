@@ -11,12 +11,10 @@ interface Product {
 export const StockPage = (props: Product) => {
   const router = useRouter()
   return (
-    <div className="flex flex-col p-10 items-center min-h-screen bg-[#181818]">
+    <div className="flex flex-col px-20 py-10 items-center min-h-screen bg-[#181818]">
       {props.products && (
         <>
-          <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-4">
-            Estoque
-          </h1>
+          <h1 className="text-3xl font-bold text-[#e3e3e3] mb-4">Estoque</h1>
           <p className="text-[#e3e3e3] mb-6">
             Visualize abaixo os produtos que não possuem cliente associado
           </p>

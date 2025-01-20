@@ -50,8 +50,8 @@ export const ProductsForm = (props: ProductsFormProps) => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] p-10">
-        <h1 className="text-2xl font-semibold text-[#e3e3e3] mb-2">Produtos</h1>
+      <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] px-20 py-10">
+        <h1 className="text-3xl font-bold text-[#e3e3e3] mb-2">Produtos</h1>
         <p className="text-[#e3e3e3] mb-6">
           Visualize abaixo os produtos que possuem cliente associado
         </p>

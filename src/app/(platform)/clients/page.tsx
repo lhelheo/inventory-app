@@ -78,11 +78,9 @@ export default function Clients() {
       {loading ? (
         <LoadingCircle />
       ) : (
-        <div className="flex flex-col items-center min-h-screen bg-[#181818] p-10">
+        <div className="flex flex-col items-center min-h-screen bg-[#181818] px-20 py-10">
           <div className="flex flex-col justify-center items-center mb-4 w-full max-w-4xl">
-            <h1 className="text-xl font-semibold text-[#e3e3e3] mb-4">
-              Clientes
-            </h1>
+            <h1 className="text-3xl font-bold text-[#e3e3e3] mb-4">Clientes</h1>
             <p className="text-[#e3e3e3] mb-4">
               Selecione um cliente para visualizar suas vendas
             </p>

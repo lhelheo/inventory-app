@@ -4,7 +4,6 @@ import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'
-import { Undo2 } from 'lucide-react'
 
 interface EditClientPageProps {
   params: {
@@ -74,11 +73,11 @@ export default function EditClientPage(props: EditClientPageProps) {
     )
 
   return (
-    <div className="bg-[#181818] min-h-screen flex items-center justify-center">
+    <div className="bg-[#181818] min-h-screen flex flex-col items-center justify-center">
+      <h1 className="text-3xl font-bold text-center mb-6 text-[#e3e3e3]">
+        Editar cliente
+      </h1>
       <div className="bg-[#242424] rounded-lg shadow-lg container mx-auto max-w-lg p-6">
-        <h1 className="text-3xl font-bold text-center mb-6 text-[#e3e3e3]">
-          Editar cliente
-        </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
             <label className="mb-2 text-sm font-semibold text-[#e3e3e3]">

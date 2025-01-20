@@ -151,7 +151,7 @@ export default function ProductPage(props: Product) {
                     ref={nameRef}
                     type="text"
                     id="name"
-                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none w-full"
                     placeholder="Nome do produto"
                     required
                   />
@@ -170,7 +170,7 @@ export default function ProductPage(props: Product) {
                       type="number"
                       step="0.01"
                       id="price"
-                      className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                      className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none w-full"
                       placeholder="Preço do produto"
                       required
                     />
@@ -187,7 +187,7 @@ export default function ProductPage(props: Product) {
                       type="number"
                       step="0.01"
                       id="costPrice"
-                      className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                      className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none w-full"
                       placeholder="Preço de Custo"
                       required
                     />
@@ -205,7 +205,7 @@ export default function ProductPage(props: Product) {
                     ref={descriptionRef}
                     type="text"
                     id="description"
-                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none w-full"
                     placeholder="Descrição do produto"
                   />
                 </div>
@@ -221,7 +221,7 @@ export default function ProductPage(props: Product) {
                     ref={supplierRef}
                     type="text"
                     id="supplier"
-                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none w-full"
                     placeholder="Fornecedor"
                   />
                 </div>
@@ -237,7 +237,7 @@ export default function ProductPage(props: Product) {
                     ref={productCodeRef}
                     type="text"
                     id="productCode"
-                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none w-full"
                     placeholder="Código do Produto"
                   />
                 </div>
@@ -252,7 +252,7 @@ export default function ProductPage(props: Product) {
                   <select
                     ref={statusRef}
                     id="status"
-                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none w-full"
                     required
                   >
                     <option value="Disponivel">Disponível</option>
@@ -271,7 +271,7 @@ export default function ProductPage(props: Product) {
                   <select
                     ref={clientIDRef}
                     id="clientID"
-                    className="input w-full bg-[#181818] text-[#e3e3e3] p-2 shadow-lg rounded-lg"
+                    className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none w-full"
                   >
                     <option value="">Selecione um cliente (opcional)</option>
                     {customers.map((client) => (

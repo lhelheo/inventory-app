@@ -117,7 +117,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
   return (
     <div className="w-full flex bg-[#181818] h-screen p-4">
-      <div className="flex flex-col w-full px-10">
+      <div className="flex flex-col w-full px-20">
         <div className="bg-[#181818] w-full">
           <div className="flex justify-center items-center">
             <div className="flex flex-col justify-center p-6 gap-6 items-center rounded-lg w-full">
@@ -158,11 +158,10 @@ export default function ClientPayment(props: ClientPaymentProps) {
             </div>
           </div>
         </div>
+        <h1 className="text-2xl flex justify-center font-bold my-4 text-[#e3e3e3]">
+          Realizar Pagamento
+        </h1>
         <div className="w-full bg-[#242424] rounded p-10 mx-auto mt-4">
-          <h1 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
-            Realizar Pagamento
-          </h1>
-
           <div className="mb-4">
             <label
               htmlFor="product"
