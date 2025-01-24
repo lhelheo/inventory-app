@@ -19,7 +19,7 @@ export const StockPage = (props: Product) => {
             Visualize abaixo os produtos que não possuem cliente associado
           </p>
 
-          <div className="bg-[#242424] w-full shadow-md rounded-lg p-8 overflow-x-auto ">
+          <div className="bg-[#242424] w-full shadow-md rounded-lg py-8 px-10 overflow-x-auto ">
             {props.products.length > 0 ? (
               <table className="min-w-full bg-[#242424] rounded-lg">
                 <thead>

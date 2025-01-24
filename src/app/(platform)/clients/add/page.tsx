@@ -89,7 +89,7 @@ export default function CreateClient() {
     <div className="flex flex-col h-screen justify-center items-center bg-[#181818]">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 p-6 bg-[#242424] shadow-lg rounded-lg"
+        className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 px-10 py-8 bg-[#242424] shadow-lg rounded-lg"
       >
         <h2 className="text-2xl font-semibold text-center text-[#e3e3e3]">
           Criar Cliente
@@ -141,7 +141,7 @@ export default function CreateClient() {
 
         <button
           type="submit"
-          className="bg-[#181818] text-[#e3e3e3] rounded-lg py-3 mt-6 w-full hover:bg-[#1f1f1f] transition duration-200"
+          className="bg-[#3b82f6] hover:bg-[#2563eb] text-[#e3e3e3] rounded-lg py-3 mt-6 w-full transition duration-200"
         >
           Salvar
         </button>

@@ -14,7 +14,7 @@ export const HomeForm = () => {
   return (
     <>
       <h1 className="text-3xl font-bold text-[#e3e3e3] mb-4">Início</h1>
-      <div className="bg-[#242424] shadow-lg rounded-lg p-8 max-w-xl w-full text-center">
+      <div className="bg-[#242424] shadow-lg rounded-lg px-10 py-7 max-w-xl w-full text-center">
         <p className="text-lg text-[#e3e3e3] mb-6">
           Selecione uma ação abaixo para prosseguir:
         </p>

@@ -56,7 +56,7 @@ export const ProductsForm = (props: ProductsFormProps) => {
           Visualize abaixo os produtos que possuem cliente associado
         </p>
 
-        <div className="bg-[#242424] w-full shadow-md rounded-lg p-8 overflow-x-auto">
+        <div className="bg-[#242424] w-full shadow-md rounded-lg px-10 py-8 overflow-x-auto">
           <div className="mb-6 w-full">
             <input
               type="text"

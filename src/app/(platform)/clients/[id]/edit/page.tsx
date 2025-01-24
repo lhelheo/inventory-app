@@ -4,6 +4,7 @@ import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'
+import { Undo2 } from 'lucide-react'
 
 interface EditClientPageProps {
   params: {
@@ -77,7 +78,7 @@ export default function EditClientPage(props: EditClientPageProps) {
       <h1 className="text-3xl font-bold text-center mb-6 text-[#e3e3e3]">
         Editar cliente
       </h1>
-      <div className="bg-[#242424] rounded-lg shadow-lg container mx-auto max-w-lg p-6">
+      <div className="bg-[#242424] rounded-lg shadow-lg container mx-auto max-w-lg px-10 py-7">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
             <label className="mb-2 text-sm font-semibold text-[#e3e3e3]">
@@ -88,7 +89,7 @@ export default function EditClientPage(props: EditClientPageProps) {
               name="name"
               value={client?.name || ''}
               onChange={handleInputChange}
-              className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+              className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               placeholder="Digite o nome"
             />
           </div>
@@ -101,7 +102,7 @@ export default function EditClientPage(props: EditClientPageProps) {
               name="email"
               value={client?.email || ''}
               onChange={handleInputChange}
-              className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+              className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               placeholder="Digite o email"
             />
           </div>
@@ -114,23 +115,24 @@ export default function EditClientPage(props: EditClientPageProps) {
               name="phone"
               value={client?.phone || ''}
               onChange={handleInputChange}
-              className="p-3 rounded bg-[#1e1e1e] text-[#e3e3e3] shadow focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
+              className="p-3 mb-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none focus:ring-2 focus:ring-[#3b82f6]"
               placeholder="Digite o telefone"
             />
           </div>
           <button
             type="submit"
-            className="w-full py-3 bg-[#3b82f6] text-white font-semibold rounded hover:bg-[#2563eb] transition duration-300 ease-in-out shadow-lg"
+            className="w-full bg-[#3b82f6] hover:bg-[#2563eb] text-[#e3e3e3] rounded-lg py-3 ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
+            disabled={loading}
           >
-            Salvar
+            {loading ? 'Carregando...' : 'Adicionar Produto'}
           </button>
         </form>
         <button
           onClick={() => router.back()}
-          className="mt-6 w-full py-3 bg-[#374151] text-white font-semibold rounded hover:bg-[#4b5563] transition duration-300 ease-in-out shadow-lg"
+          className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
           title="Voltar para a página anterior"
         >
-          Voltar
+          <Undo2 />
         </button>
       </div>
     </div>

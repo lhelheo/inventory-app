@@ -95,7 +95,7 @@ export default function CreateProduct() {
       <h1 className="text-3xl font-bold text-[#e3e3e3] mb-6 text-center">
         Adicionar Produto
       </h1>
-      <div className="bg-[#242424] shadow-lg rounded-lg p-8 max-w-[1200px] w-full  ">
+      <div className="bg-[#242424] shadow-lg rounded-lg px-10 py-8 max-w-[1200px] w-full  ">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
@@ -245,7 +245,7 @@ export default function CreateProduct() {
 
           <button
             type="submit"
-            className="bg-[#181818] text-[#e3e3e3] rounded-lg py-3 mt-4 hover:bg-[#1f1f1f] ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
+            className="bg-[#3b82f6] hover:bg-[#2563eb] text-[#e3e3e3] rounded-lg py-3 mt-4 ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Adicionar Produto'}

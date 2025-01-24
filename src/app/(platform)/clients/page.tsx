@@ -101,7 +101,7 @@ export default function Clients() {
             </div>
           )}
 
-          <div className="w-full p-6 bg-[#242424] shadow-lg rounded-lg max-h-[600px] overflow-x-auto">
+          <div className="w-full px-10 py-8 bg-[#242424] shadow-lg rounded-lg max-h-[600px] overflow-x-auto">
             <div className="mb-4 w-full">
               <input
                 type="text"
