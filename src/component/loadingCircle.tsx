@@ -17,7 +17,6 @@ export const LoadingCircle = () => {
           stroke="#c4c4c4"
           strokeWidth="4"
         ></circle>
-
         <circle
           className="opacity-100"
           cx="12"
@@ -27,8 +26,21 @@ export const LoadingCircle = () => {
           strokeWidth="4"
           strokeDasharray="80"
           strokeDashoffset="60"
+          style={{
+            animation: 'dash 1.5s linear infinite',
+          }}
         ></circle>
       </svg>
+      <style jsx>{`
+        @keyframes dash {
+          0% {
+            stroke-dashoffset: 80;
+          }
+          100% {
+            stroke-dashoffset: 0;
+          }
+        }
+      `}</style>
     </div>
   )
 }
