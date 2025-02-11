@@ -4,7 +4,7 @@ import { api } from '@/app/services/api'
 import { baseUrl } from '@/helpers/url'
 import { IClient, IProduct } from '@/interface/interfaces'
 import axios from 'axios'
-import { Eye, Mail, Phone, Undo2, User } from 'lucide-react'
+import { Eye, Undo2 } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -117,125 +117,124 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
   return (
     <div className="w-full flex bg-[#181818] h-screen p-4">
-      <div className="flex flex-col w-full px-20">
-        <div className="bg-[#181818] w-full">
-          <div className="flex justify-center items-center">
-            <div className="flex flex-col justify-center p-6 gap-6 items-center rounded-lg w-full">
-              <div className="flex gap-6">
-                <h1 className="flex gap-2 text-white mb-4">
-                  <User size={24} />
-                  <strong>Nome: </strong> {client?.name}
-                </h1>
-                <p className="flex gap-2 text-white mb-4">
-                  <Mail size={24} />
+      <div className="flex flex-col w-full px-8 md:px-20">
+        <h1 className="text-3xl font-bold my-4 text-gray-200">
+          Realizar Pagamento
+        </h1>
+
+        <div className="w-full">
+          <div className="flex flex-col md:flex-row gap-6">
+            <div className="w-full md:w-1/2">
+              <div className="mb-4">
+                <label
+                  htmlFor="product"
+                  className="block text-sm font-medium text-gray-200"
+                >
+                  Selecione um Produto
+                </label>
+                <select
+                  id="product"
+                  className="mt-1 block w-full p-2 rounded-md bg-[#181818] text-gray-200 border border-gray-700 focus:ring focus:ring-blue-500"
+                  value={selectedProductId || ''}
+                  onChange={(e) => setSelectedProductId(e.target.value)}
+                >
+                  <option value="" disabled>
+                    Escolha um produto
+                  </option>
+                  {products
+                    .filter((product) => product.status !== 'Vendido')
+                    .map((product) => (
+                      <option key={product.id} value={product.id}>
+                        {product.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              <div className="mb-4">
+                <label
+                  htmlFor="paymentValue"
+                  className="block text-sm font-medium text-gray-200"
+                >
+                  Valor do Pagamento
+                </label>
+                <input
+                  type="number"
+                  id="paymentValue"
+                  className="mt-1 block w-full p-2 rounded-md bg-[#181818] text-gray-200 border border-gray-700 focus:ring focus:ring-blue-500"
+                  value={paymentValue}
+                  onChange={(e) => setPaymentValue(e.target.value)}
+                  min="0"
+                  step="0.01"
+                />
+              </div>
+
+              <button
+                onClick={handlePayment}
+                disabled={loading || !paymentValue || !selectedProductId}
+                className="w-full bg-[#242424] hover:bg-[#333333] hover:scale-[101%] text-white py-2 rounded-md transition disabled:bg-gray-500"
+              >
+                {loading ? 'Processando...' : 'Pagar'}
+              </button>
+            </div>
+
+            <div className="w-full md:w-1/2 flex flex-col gap-6">
+              <div className="rounded-lg shadow-lg p-6 bg-[#181818]">
+                <p className="text-gray-200 text-xl font-medium mb-3">
+                  Informações do Cliente
+                </p>
+                <p className="text-gray-200">
+                  <strong>Nome:</strong> {client?.name}
+                </p>
+                <p className="text-gray-200">
                   <strong>Email:</strong> {client?.email}
                 </p>
-                <p className="flex gap-2 text-white mb-4">
-                  <Phone size={24} />
+                <p className="text-gray-200">
                   <strong>Telefone:</strong> {client?.phone}
                 </p>
               </div>
 
-              <div className="flex gap-6">
-                <div className="text-center">
-                  <h2 className="font-semibold text-lg text-white mb-2">
-                    Total em produtos vendidos
-                  </h2>
-                  <p className="text-3xl text-green-400 font-bold">
+              <div className="rounded-lg shadow-lg p-6 bg-[#181818]">
+                <p className="text-gray-200 text-xl font-medium mb-3">
+                  Informações de Vendas
+                </p>
+                <p className="text-gray-200">
+                  <strong>Total Vendido:</strong>{' '}
+                  <span className="text-green-400">
                     R$ {totalSoldPrice?.toFixed(2)}
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <h2 className="font-semibold text-lg text-white mb-2">
-                    Total em produtos pendentes
-                  </h2>
-                  <p className="text-3xl text-yellow-400 font-bold">
+                  </span>
+                </p>
+                <p className="text-gray-200">
+                  <strong>Total Pendentes:</strong>{' '}
+                  <span className="text-yellow-400">
                     R$ {totalPending?.toFixed(2)}
-                  </p>
-                </div>
+                  </span>
+                </p>
               </div>
             </div>
           </div>
         </div>
-        <h1 className="text-2xl flex justify-center font-bold my-4 text-[#e3e3e3]">
-          Realizar Pagamento
-        </h1>
-        <div className="w-full bg-[#242424] rounded p-10 mx-auto mt-4">
-          <div className="mb-4">
-            <label
-              htmlFor="product"
-              className="block text-sm font-medium text-[#e3e3e3]"
-            >
-              Selecione um Produto
-            </label>
-            <select
-              id="product"
-              className="mt-1 block w-full p-2  rounded-md bg-[#181818] text-[#e3e3e3]"
-              value={selectedProductId || ''}
-              onChange={(e) => setSelectedProductId(e.target.value)}
-            >
-              <option value="" disabled>
-                Escolha um produto
-              </option>
-              {products
-                .filter((product) => product.status !== 'Vendido')
-                .map((product) => (
-                  <option key={product.id} value={product.id}>
-                    {product.name}
-                  </option>
-                ))}
-            </select>
-          </div>
 
-          <div className="mb-4 ">
-            <label
-              htmlFor="paymentValue"
-              className="block text-sm font-medium text-[#e3e3e3]"
-            >
-              Valor do Pagamento
-            </label>
-            <input
-              type="number"
-              id="paymentValue"
-              className="mt-1 block w-full p-2  rounded-md bg-[#181818] text-[#e3e3e3]"
-              value={paymentValue}
-              onChange={(e) => setPaymentValue(e.target.value)}
-              min="0"
-              step="0.01"
-            />
-          </div>
-
-          <button
-            onClick={handlePayment}
-            disabled={loading || !paymentValue || !selectedProductId}
-            className="w-full bg-[#181818] hover:bg-[#1f1f1f] text-white py-2 rounded-md transition-all ease-linear disabled:bg-gray-400"
-          >
-            {loading ? 'Processando...' : 'Pagar'}
-          </button>
-
-          {message && <p className="text-green-600 mt-4">{message}</p>}
-          {error && <p className="text-red-600 mt-4">{error}</p>}
+        <div className="w-full bg-[#181818] rounded p-6 mx-auto mt-4">
+          {message && <p className="text-green-500 mt-4">{message}</p>}
+          {error && <p className="text-red-500 mt-4">{error}</p>}
 
           {products.length > 0 && (
             <div className="mt-8">
-              <h2 className="text-xl font-bold mb-4 text-[#e3e3e3]">
+              <h2 className="text-xl font-bold mb-4 text-gray-200">
                 Status dos Produtos
               </h2>
-              <table className="w-full table-auto border border-[#e3e3e3] border-opacity-25">
+              <table className="w-full table-auto border border-gray-700">
                 <thead>
-                  <tr>
-                    <th className="px-4 py-2 text-left text-[#e3e3e3]">
+                  <tr className="bg-[#1]">
+                    <th className="px-4 py-2 text-left text-gray-200">
                       Produto
                     </th>
-
-                    <th className="px-4 py-2 text-left text-[#e3e3e3]">
-                      Preço
-                    </th>
-                    <th className="px-4 py-2 text-left text-[#e3e3e3]">
+                    <th className="px-4 py-2 text-left text-gray-200">Preço</th>
+                    <th className="px-4 py-2 text-left text-gray-200">
                       Saldo Pendente
                     </th>
-                    <th className="px-4 py-2 text-left text-[#e3e3e3]">
+                    <th className="px-4 py-2 text-left text-gray-200">
                       Visualizar
                     </th>
                   </tr>
@@ -246,26 +245,25 @@ export default function ClientPayment(props: ClientPaymentProps) {
                     .map((product) => (
                       <tr
                         key={product.id}
-                        className="odd:bg-[#181818] text-[#e3e3e3] bg-[#1f1f1f]"
+                        className="odd:bg-[#242424] even:bg-[#181818] text-gray-200"
                       >
                         <td className="px-4 py-2">{product.name}</td>
-
-                        <td className="px-4 py-2">{`R$ ${product.price}`}</td>
+                        <td className="px-4 py-2">R$ {product.price}</td>
                         <td className="px-4 py-2">
                           {product.remaining_balance === 0
                             ? 'Venda finalizada'
                             : `R$ ${product.remaining_balance ?? product.price}`}
                         </td>
                         <td className="px-4 py-2">
-                          <div title="Visualizar produto">
-                            <Eye
-                              size={18}
-                              onClick={() =>
-                                router.push(`/products/${product.id}`)
-                              }
-                              className="text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200"
-                            />
-                          </div>
+                          <button
+                            title="Visualizar produto"
+                            onClick={() =>
+                              router.push(`/products/${product.id}`)
+                            }
+                            className="text-blue-400 hover:text-blue-600 transition duration-200"
+                          >
+                            <Eye size={18} />
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -273,9 +271,10 @@ export default function ClientPayment(props: ClientPaymentProps) {
               </table>
             </div>
           )}
+
           <button
             onClick={() => router.back()}
-            className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
+            className="fixed bottom-4 right-4 bg-[#242424] hover:bg-[#181818] text-white p-4 rounded-full shadow-lg transition duration-300"
             title="Voltar para a página anterior"
           >
             <Undo2 />
