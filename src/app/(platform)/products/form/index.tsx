@@ -51,14 +51,14 @@ export const ProductsForm = (props: ProductsFormProps) => {
   return (
     <>
       <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] px-20 py-10">
-        <div className="bg-[#242424] w-full shadow-md rounded-lg px-10 py-8 overflow-x-auto">
+        <div className="bg-[#181818] border border-gray-500 border-opacity-35 w-full shadow-md rounded-lg px-10 py-8 overflow-x-auto">
           <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">Produtos</h1>
 
           <div className="mb-6 w-full">
             <input
               type="text"
               placeholder="Digite para pesquisar..."
-              className="w-full p-3 bg-[#181818] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#e3e3e3]"
+              className="w-full p-3 bg-[#181818] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#e3e3e3] border border-gray-500 border-opacity-35"
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>

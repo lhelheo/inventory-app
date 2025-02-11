@@ -85,7 +85,7 @@ export default function Clients() {
             </div>
           )}
 
-          <div className="w-full px-10 py-8 bg-[#242424] shadow-lg rounded-lg max-h-[600px] overflow-x-auto">
+          <div className="w-full px-10 py-8 bg-[#181818] border border-gray-500 border-opacity-35 shadow-lg rounded-lg max-h-[600px] overflow-x-auto">
             <div className="flex justify-between mb-6 w-full">
               <div className="flex items-center">
                 <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">
@@ -94,7 +94,7 @@ export default function Clients() {
               </div>
               <div>
                 <div
-                  className="flex text-[#e3e3e3] bg-[#181818] hover:bg-[#333333] hover:scale-[101%] ease-linear transition-all min-w-[160px] justify-center px-2 py-4 rounded hover:cursor-pointer"
+                  className="flex text-[#e3e3e3] bg-[#242424] hover:bg-[#333333] hover:scale-[101%] ease-linear transition-all min-w-[160px] justify-center px-2 py-4 rounded hover:cursor-pointer"
                   onClick={() => router.push('/clients/add')}
                 >
                   <Plus />
@@ -108,7 +108,7 @@ export default function Clients() {
                 placeholder="Pesquise o nome"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full p-3 bg-[#181818] shadow-md rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-[#e3e3e3]"
+                className="w-full p-3 bg-[#181818] border border-gray-500 border-opacity-35 shadow-md rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-[#e3e3e3]"
               />
             </div>
 

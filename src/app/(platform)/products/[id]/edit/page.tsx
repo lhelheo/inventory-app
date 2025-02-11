@@ -152,7 +152,7 @@ export default function ProductPage(props: Product) {
                       ref={nameRef}
                       type="text"
                       id="name"
-                      className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
+                      className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                       placeholder="Nome do produto"
                       required
                     />
@@ -170,7 +170,7 @@ export default function ProductPage(props: Product) {
                       type="number"
                       step="0.01"
                       id="price"
-                      className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
+                      className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                       placeholder="Preço do produto"
                       required
                     />
@@ -187,7 +187,7 @@ export default function ProductPage(props: Product) {
                       type="number"
                       step="0.01"
                       id="costPrice"
-                      className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
+                      className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                       placeholder="Preço de Custo"
                       required
                     />
@@ -204,7 +204,7 @@ export default function ProductPage(props: Product) {
                       ref={descriptionRef}
                       type="text"
                       id="description"
-                      className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
+                      className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                       placeholder="Descrição do produto"
                     />
                   </div>
@@ -220,7 +220,7 @@ export default function ProductPage(props: Product) {
                       ref={supplierRef}
                       type="text"
                       id="supplier"
-                      className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
+                      className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                       placeholder="Fornecedor"
                     />
                   </div>
@@ -236,7 +236,7 @@ export default function ProductPage(props: Product) {
                       ref={productCodeRef}
                       type="text"
                       id="productCode"
-                      className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
+                      className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                       placeholder="Código do Produto"
                     />
                   </div>
@@ -251,7 +251,7 @@ export default function ProductPage(props: Product) {
                     <select
                       ref={statusRef}
                       id="status"
-                      className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
+                      className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                       required
                     >
                       <option value="Disponivel">Disponível</option>
@@ -270,7 +270,7 @@ export default function ProductPage(props: Product) {
                     <select
                       ref={clientIDRef}
                       id="clientID"
-                      className="p-3 rounded bg-[#181818] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
+                      className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                     >
                       <option value="">Selecione um cliente (opcional)</option>
                       {customers.map((client) => (

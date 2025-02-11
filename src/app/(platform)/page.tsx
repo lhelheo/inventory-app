@@ -61,7 +61,7 @@ export default function LoginPage() {
           </div>
           <form
             onSubmit={handleLogin}
-            className="flex flex-col space-y-2 w-[460px] bg-[#242424] rounded-lg shadow px-6 py-4"
+            className="flex flex-col space-y-2 w-[460px] bg-[#181818] border border-gray-500 border-opacity-35 rounded-lg shadow px-6 py-4"
           >
             <h2 className="text-2xl my-3 font-medium text-center text-[#e3e3e3]">
               Login
@@ -71,7 +71,7 @@ export default function LoginPage() {
                 <p className="text-[#e3e3e3] mb-2">Usuário</p>
                 <input
                   type="text"
-                  className="flex rounded w-full mb-2 py-3 px-4 bg-[#181818] shadow-md text-[#e3e3e3]"
+                  className="flex rounded w-full mb-2 py-3 px-4 bg-[#242424] border border-gray-500 border-opacity-35 shadow-md text-[#e3e3e3]"
                   value={username}
                   placeholder="Digite seu usuário"
                   onChange={(e) => setUsername(e.target.value)}
@@ -82,7 +82,7 @@ export default function LoginPage() {
                 <p className="text-[#e3e3e3] mb-2">Senha</p>
                 <input
                   type="password"
-                  className="flex bg-[#181818] shadow-md text-[#e3e3e3] rounded w-full mb-2 py-3 px-4"
+                  className="flex bg-[#242424] shadow-md text-[#e3e3e3] border border-gray-500 border-opacity-35 rounded w-full mb-2 py-3 px-4"
                   value={password}
                   placeholder="Digite sua senha"
                   onChange={(e) => setPassword(e.target.value)}
@@ -94,7 +94,7 @@ export default function LoginPage() {
             <div className="relative">
               <button
                 type="submit"
-                className={`px-4 py-3 my-3 bg-[#181818] font-medium text-[#e3e3e3] rounded w-full hover:scale-[101%] hover:bg-[#1f1f1f] ease-linear transition-all ${
+                className={`px-4 py-3 my-3 bg-[#242424] hover:bg-[#333333] font-medium text-[#e3e3e3] rounded w-full hover:scale-[101%] ease-linear transition-all ${
                   loading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 disabled={loading}

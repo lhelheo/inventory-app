@@ -107,7 +107,7 @@ export default function CreateClient() {
             onChange={handleChange}
             required
             placeholder="Digite o nome do cliente"
-            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#242424] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
@@ -122,7 +122,7 @@ export default function CreateClient() {
             value={formData.email}
             onChange={handleChange}
             placeholder="Ex: teste@gmail.com"
-            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#242424] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
@@ -138,7 +138,7 @@ export default function CreateClient() {
             onChange={handleChange}
             required
             placeholder="Ex: (11) 91234-5678"
-            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#242424] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 

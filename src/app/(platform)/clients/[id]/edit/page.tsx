@@ -91,7 +91,7 @@ export default function EditClientPage(props: EditClientPageProps) {
               value={client?.name}
               onChange={handleInputChange}
               required
-              className="w-full p-2 bg-[#181818] rounded text-[#e3e3e3] border border-gray-500 border-opacity-35"
+              className="w-full p-2 rounded text-[#e3e3e3] bg-[#242424] border border-gray-500 border-opacity-35"
             />
           </div>
           <div className="space-y-2">
@@ -106,7 +106,7 @@ export default function EditClientPage(props: EditClientPageProps) {
               value={client?.email}
               onChange={handleInputChange}
               required
-              className="w-full p-2 rounded bg-[#181818] text-[#e3e3e3] border border-gray-500 border-opacity-35"
+              className="w-full p-2 rounded bg-[#242424] text-[#e3e3e3] border border-gray-500 border-opacity-35"
             />
           </div>
           <div className="space-y-2">
@@ -121,7 +121,7 @@ export default function EditClientPage(props: EditClientPageProps) {
               value={client?.phone}
               onChange={handleInputChange}
               required
-              className="w-full p-2 bg-[#181818] rounded text-[#e3e3e3] border border-gray-500 border-opacity-35"
+              className="w-full p-2 bg-[#242424] rounded text-[#e3e3e3] border border-gray-500 border-opacity-35"
             />
           </div>
           <div className="col-span-2 mt-4">

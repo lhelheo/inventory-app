@@ -113,7 +113,7 @@ export default function CreateProduct() {
                     e.target.value ? Number(e.target.value) : null,
                   )
                 }
-                className="rounded-lg w-full p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                className="rounded-lg w-full p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
               >
                 <option value="">Nenhum cliente associado</option>
                 {clients.map((client) => (
@@ -135,7 +135,7 @@ export default function CreateProduct() {
                 id="status"
                 ref={statusRef}
                 required
-                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
               >
                 <option value="Disponivel">Disponível</option>
                 <option value="Vendido">Vendido</option>
@@ -156,7 +156,7 @@ export default function CreateProduct() {
                 id="productName"
                 ref={productNameRef}
                 type="text"
-                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
                 placeholder='Ex: "Camiseta preta"'
                 required
               />
@@ -173,7 +173,7 @@ export default function CreateProduct() {
                 id="productCode"
                 ref={productCodeRef}
                 type="text"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
                 placeholder='Ex: "123456"'
                 required
               />
@@ -190,7 +190,7 @@ export default function CreateProduct() {
                 id="productPrice"
                 ref={productPriceRef}
                 type="number"
-                className=" w-full  focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35 rounded-lg p-3 text-[#e3e3e3] bg-[#181818]"
+                className=" w-full  focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35 rounded-lg p-3 text-[#e3e3e3] bg-[#242424]"
                 placeholder='Ex: "100.00"'
                 step="0.01"
                 required
@@ -208,7 +208,7 @@ export default function CreateProduct() {
                 id="costPrice"
                 ref={costPriceRef}
                 type="number"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
                 placeholder='Ex: "50.00"'
                 step="0.01"
                 required
@@ -226,7 +226,7 @@ export default function CreateProduct() {
                 id="supplier"
                 ref={supplierRef}
                 type="text"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
                 placeholder='Ex: "Fornecedor X"'
               />
             </div>
@@ -242,7 +242,7 @@ export default function CreateProduct() {
                 id="description"
                 ref={descriptionRef}
                 type="text"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
                 placeholder='Ex: "Camiseta preta de algodão"'
                 required
               />
@@ -251,7 +251,7 @@ export default function CreateProduct() {
 
           <button
             type="submit"
-            className="bg-[#242424] hover:bg-[#333333] hover:scale-[101%] font-medium text-[#e3e3e3] rounded-lg py-3 mt-4 ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
+            className="bg-[#242424] hover:bg-[#333333] hover:scale-[101%] font-medium text-[#e3e3e3] rounded-lg py-3 mt-4 ease-linear transition-all focus:ring-4 focus:ring-[#242424] disabled:bg-[#242424]"
             disabled={loading}
           >
             {loading ? 'Carregando...' : 'Salvar'}
@@ -260,7 +260,7 @@ export default function CreateProduct() {
 
         <button
           onClick={() => router.push('/home')}
-          className="fixed bottom-4 right-4 bg-[#181818] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
+          className="fixed bottom-4 right-4 bg-[#242424] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
           title="Voltar para a página anterior"
         >
           <Home />
