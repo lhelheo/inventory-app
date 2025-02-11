@@ -6,6 +6,7 @@ import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'
 import { LoadingCircle } from '@/component/loadingCircle'
+import router from 'next/router'
 
 export default function Clients() {
   const router = useRouter()
@@ -143,9 +144,9 @@ export default function Clients() {
                           {formatPhoneNumber(customer.phone ?? '') ||
                             'Não informado'}
                         </td>
-                        <td className="px-4 py-2 flex justify-between">
+                        <td className="flex py-3 px-4 text-center space-x-2">
                           <div
-                            className="flex font-bold text-green-500 hover:text-green-700 cursor-pointer ease-linear transition-all"
+                            className="flex font-bold text-green-500 hover:text-green-700 cursor-pointer ease-linear transition-all border border-gray-500 border-opacity-35 p-3"
                             onClick={() =>
                               router.push(`/clients/${customer.id}/payment`)
                             }
@@ -154,7 +155,7 @@ export default function Clients() {
                             <DollarSign size={18} />
                           </div>
                           <div
-                            className="flex font-bold text-yellow-500 hover:text-yellow-700 cursor-pointer ease-linear transition-all"
+                            className="flex font-bold text-yellow-500 border border-gray-500 border-opacity-35 p-3 rounded hover:text-yellow-700 cursor-pointer ease-linear transition-all"
                             onClick={() =>
                               router.push(`/clients/${customer.id}/edit`)
                             }
@@ -163,7 +164,7 @@ export default function Clients() {
                             <Pencil size={18} />
                           </div>
                           <div
-                            className="flex font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2"
+                            className="flex font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2 border border-gray-500 border-opacity-35 p-3"
                             onClick={() => {
                               setShowConfirm(true)
                               setSelectedClient(customer)
