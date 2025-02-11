@@ -50,57 +50,63 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen bg-[#181818]">
+    <div className="flex flex-col justify-center items-center h-screen bg-[#181818]">
       {loading ? (
         <LoadingCircle />
       ) : (
-        <form
-          onSubmit={handleLogin}
-          className="flex flex-col w-[420px] bg-[#242424] rounded shadow p-10"
-        >
-          <div className="flex flex-col text-[#e3e3e3] justify-center items-center text-xl">
-            <p className="text-3xl font-bold text-center">Duda Brandão</p>
-            <p className="text-3xl font-thin">Gestão</p>
-            <p className="font-semibold mt-4">Acesse sua conta</p>
+        <>
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-[#e3e3e3]">Duda Brandão</h1>
+            <p className="text-xl text-[#e3e3e3]">Sistema de Gestão</p>
           </div>
-          <div className="my-4 gap-3 flex flex-col">
-            <label>
-              <p className="text-[#e3e3e3]">Usuário</p>
-              <input
-                type="text"
-                className="flex rounded w-full mb-2 p-2 bg-[#181818] shadow-md text-[#e3e3e3]"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              <p className="text-[#e3e3e3]">Senha</p>
-              <input
-                type="password"
-                className="flex bg-[#181818] shadow-md text-[#e3e3e3] rounded w-full mb-2 p-2"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </label>
-          </div>
+          <form
+            onSubmit={handleLogin}
+            className="flex flex-col space-y-2 w-[460px] bg-[#242424] rounded-lg shadow px-6 py-4"
+          >
+            <h2 className="text-2xl my-3 font-medium text-center text-[#e3e3e3]">
+              Login
+            </h2>
+            <div className="my-4 gap-5 flex flex-col">
+              <label>
+                <p className="text-[#e3e3e3] mb-2">Usuário</p>
+                <input
+                  type="text"
+                  className="flex rounded w-full mb-2 py-3 px-4 bg-[#181818] shadow-md text-[#e3e3e3]"
+                  value={username}
+                  placeholder="Digite seu usuário"
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                <p className="text-[#e3e3e3] mb-2">Senha</p>
+                <input
+                  type="password"
+                  className="flex bg-[#181818] shadow-md text-[#e3e3e3] rounded w-full mb-2 py-3 px-4"
+                  value={password}
+                  placeholder="Digite sua senha"
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+            </div>
 
-          <div className="relative">
-            <button
-              type="submit"
-              className={`px-4 py-2 mt-4 bg-[#181818] text-[#e3e3e3] rounded w-full hover:bg-[#1f1f1f] ease-linear transition-all ${
-                loading ? 'opacity-50 cursor-not-allowed' : ''
-              }`}
-              disabled={loading}
-            >
-              {loading ? 'Carregando...' : 'Login'}
-            </button>
-            {error && (
-              <p className="flex justify-center text-red-500 my-4">{error}</p>
-            )}
-          </div>
-        </form>
+            <div className="relative">
+              <button
+                type="submit"
+                className={`px-4 py-3 my-3 bg-[#181818] font-medium text-[#e3e3e3] rounded w-full hover:bg-[#1f1f1f] ease-linear transition-all ${
+                  loading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+                disabled={loading}
+              >
+                {loading ? 'Carregando...' : 'Entrar'}
+              </button>
+              {error && (
+                <p className="flex justify-center text-red-500 my-4">{error}</p>
+              )}
+            </div>
+          </form>
+        </>
       )}
     </div>
   )
