@@ -14,12 +14,8 @@ export const StockPage = (props: Product) => {
     <div className="flex flex-col px-20 py-10 items-center min-h-screen bg-[#181818]">
       {props.products && (
         <>
-          <h1 className="text-3xl font-bold text-[#e3e3e3] mb-4">Estoque</h1>
-          <p className="text-[#e3e3e3] mb-6">
-            Visualize abaixo os produtos que não possuem cliente associado
-          </p>
-
-          <div className="bg-[#242424] w-full shadow-md rounded-lg py-8 px-10 overflow-x-auto ">
+          <div className="bg-[#242424] w-full shadow-md rounded-lg py-8 px-10 overflow-x-auto">
+            <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">Estoque</h1>
             {props.products.length > 0 ? (
               <table className="min-w-full bg-[#242424] rounded-lg">
                 <thead>

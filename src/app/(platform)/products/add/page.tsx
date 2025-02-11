@@ -92,10 +92,10 @@ export default function CreateProduct() {
 
   return (
     <div className="flex flex-col col-auto justify-center items-center min-h-screen bg-[#181818]">
-      <h1 className="text-3xl font-bold text-[#e3e3e3] mb-6 text-center">
-        Adicionar Produto
-      </h1>
-      <div className="bg-[#242424] shadow-lg rounded-lg px-10 py-8 max-w-[1200px] w-full  ">
+      <div className="border border-gray-500 border-opacity-35 shadow-lg rounded-lg px-10 py-8 max-w-[1200px] w-full">
+        <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">
+          Adicionar Produto
+        </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
@@ -113,7 +113,7 @@ export default function CreateProduct() {
                     e.target.value ? Number(e.target.value) : null,
                   )
                 }
-                className="rounded-lg w-full p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className="rounded-lg w-full p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
               >
                 <option value="">Nenhum cliente associado</option>
                 {clients.map((client) => (
@@ -135,7 +135,7 @@ export default function CreateProduct() {
                 id="status"
                 ref={statusRef}
                 required
-                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
               >
                 <option value="Disponivel">Disponível</option>
                 <option value="Vendido">Vendido</option>
@@ -156,7 +156,8 @@ export default function CreateProduct() {
                 id="productName"
                 ref={productNameRef}
                 type="text"
-                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                placeholder='Ex: "Camiseta preta"'
                 required
               />
             </div>
@@ -172,7 +173,8 @@ export default function CreateProduct() {
                 id="productCode"
                 ref={productCodeRef}
                 type="text"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                placeholder='Ex: "123456"'
                 required
               />
             </div>
@@ -188,7 +190,8 @@ export default function CreateProduct() {
                 id="productPrice"
                 ref={productPriceRef}
                 type="number"
-                className=" w-full  focus:outline-none focus:ring-2 focus:ring-[#181818] rounded-lg p-3 text-[#e3e3e3] bg-[#181818] "
+                className=" w-full  focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35 rounded-lg p-3 text-[#e3e3e3] bg-[#181818]"
+                placeholder='Ex: "100.00"'
                 step="0.01"
                 required
               />
@@ -205,7 +208,8 @@ export default function CreateProduct() {
                 id="costPrice"
                 ref={costPriceRef}
                 type="number"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                placeholder='Ex: "50.00"'
                 step="0.01"
                 required
               />
@@ -222,7 +226,8 @@ export default function CreateProduct() {
                 id="supplier"
                 ref={supplierRef}
                 type="text"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                placeholder='Ex: "Fornecedor X"'
               />
             </div>
 
@@ -237,7 +242,8 @@ export default function CreateProduct() {
                 id="description"
                 ref={descriptionRef}
                 type="text"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818] border border-gray-500 border-opacity-35"
+                placeholder='Ex: "Camiseta preta de algodão"'
                 required
               />
             </div>
@@ -245,10 +251,10 @@ export default function CreateProduct() {
 
           <button
             type="submit"
-            className="bg-[#3b82f6] hover:bg-[#2563eb] text-[#e3e3e3] rounded-lg py-3 mt-4 ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
+            className="bg-[#242424] hover:bg-[#333333] hover:scale-[101%] font-medium text-[#e3e3e3] rounded-lg py-3 mt-4 ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
             disabled={loading}
           >
-            {loading ? 'Carregando...' : 'Adicionar Produto'}
+            {loading ? 'Carregando...' : 'Salvar'}
           </button>
         </form>
 

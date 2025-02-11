@@ -47,7 +47,7 @@ function DashboardCard({
 }) {
   return (
     <Link href={href} className="block">
-      <div className="bg-[#242424] rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300">
+      <div className="bg-[#242424] rounded-lg shadow-md p-6 hover:shadow-lg transition-all hover:scale-[101%] hover:bg-[#333333] ease-linear cursor-pointer">
         <div className="flex items-center space-x-4">
           <div className="bg-[#181818] p-3 rounded-full">{icon}</div>
           <h2 className="text-xl font-semibold text-[#e3e3e3]">{title}</h2>

@@ -89,7 +89,7 @@ export default function CreateClient() {
     <div className="flex flex-col h-screen justify-center items-center bg-[#181818]">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 px-10 py-8 bg-[#242424] shadow-lg rounded-lg"
+        className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 px-10 py-8 border border-gray-500 border-opacity-35 shadow-lg rounded"
       >
         <h2 className="text-2xl font-semibold text-center text-[#e3e3e3]">
           Criar Cliente
@@ -106,7 +106,8 @@ export default function CreateClient() {
             value={formData.name}
             onChange={handleChange}
             required
-            className=" rounded-lg p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="Digite o nome do cliente"
+            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
@@ -120,7 +121,8 @@ export default function CreateClient() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className=" rounded-lg p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="Ex: teste@gmail.com"
+            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
@@ -135,13 +137,14 @@ export default function CreateClient() {
             value={formData.phone}
             onChange={handleChange}
             required
-            className=" rounded-lg p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="Ex: (11) 91234-5678"
+            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#181818] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
         </div>
 
         <button
           type="submit"
-          className="bg-[#3b82f6] hover:bg-[#2563eb] text-[#e3e3e3] rounded-lg py-3 mt-6 w-full transition duration-200"
+          className="bg-[#242424] hover:bg-[#333333] text-[#e3e3e3] rounded py-3 mt-6 w-full transition duration-200"
         >
           Salvar
         </button>

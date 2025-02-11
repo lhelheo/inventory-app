@@ -51,16 +51,13 @@ export const ProductsForm = (props: ProductsFormProps) => {
   return (
     <>
       <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] px-20 py-10">
-        <h1 className="text-3xl font-bold text-[#e3e3e3] mb-2">Produtos</h1>
-        <p className="text-[#e3e3e3] mb-6">
-          Visualize abaixo os produtos que possuem cliente associado
-        </p>
-
         <div className="bg-[#242424] w-full shadow-md rounded-lg px-10 py-8 overflow-x-auto">
+          <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">Produtos</h1>
+
           <div className="mb-6 w-full">
             <input
               type="text"
-              placeholder="Buscar produtos..."
+              placeholder="Digite para pesquisar..."
               className="w-full p-3 bg-[#181818] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#e3e3e3]"
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -106,7 +103,7 @@ export const ProductsForm = (props: ProductsFormProps) => {
                 {filteredProducts.map((product) => (
                   <tr
                     key={product.id}
-                    className="border-t ease-linear transition-all even:bg-[#2a2a2a] hover:bg-[#3b3b3b] text-[#e3e3e3]"
+                    className="border-t border-gray-500 border-opacity-35 ease-linear transition-all even:bg-[#2a2a2a] hover:bg-[#3b3b3b] text-[#e3e3e3]"
                   >
                     <td className="py-3 px-4">{product.name}</td>
                     <td className="py-3 px-4">{product.client?.name || '-'}</td>
@@ -122,26 +119,29 @@ export const ProductsForm = (props: ProductsFormProps) => {
                       {formatData(product.updateAt)}
                     </td>
                     <td className="flex py-3 px-4 text-center space-x-2">
-                      <Pencil
-                        size={18}
+                      <div
+                        className="border border-gray-500 border-opacity-35 rounded-lg p-2 text-yellow-500 hover:text-yellow-700 cursor-pointer transition duration-200"
                         onClick={() =>
                           router.push(`/products/${product.id}/edit/`)
                         }
-                        className="text-yellow-500 hover:text-yellow-700 cursor-pointer transition duration-200"
-                      />
-                      <Eye
-                        size={18}
+                      >
+                        <Pencil size={18} />
+                      </div>
+                      <div
+                        className="border border-gray-500 border-opacity-35 rounded-lg p-2 text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200"
                         onClick={() => router.push(`/products/${product.id}`)}
-                        className="text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200"
-                      />
-                      <Trash2
-                        size={18}
+                      >
+                        <Eye size={18} />
+                      </div>
+                      <div
+                        className="border border-gray-500 border-opacity-35 rounded-lg p-2 text-red-500 hover:text-red-700 cursor-pointer transition duration-200"
                         onClick={() => {
                           setShowConfirm(true)
                           setSelectedProduct(product)
                         }}
-                        className="text-red-500 hover:text-red-700 cursor-pointer transition duration-200"
-                      />
+                      >
+                        <Trash2 size={18} />
+                      </div>
                     </td>
                   </tr>
                 ))}
