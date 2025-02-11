@@ -79,18 +79,6 @@ export default function Clients() {
         <LoadingCircle />
       ) : (
         <div className="flex flex-col items-center min-h-screen bg-[#181818] px-20 py-10">
-          <div className="flex flex-col justify-center items-center mb-4 w-full max-w-4xl">
-            <div className="w-full flex justify-center">
-              <div
-                className="flex text-[#e3e3e3] bg-[#242424] hover:bg-[#202020] ease-linear transition-all min-w-[160px] justify-center px-2 py-4 rounded hover:cursor-pointer"
-                onClick={() => router.push('/clients/add')}
-              >
-                <Plus />
-                <p>Criar cliente</p>
-              </div>
-            </div>
-          </div>
-
           {message && (
             <div className="mb-4 text-center text-white bg-green-500 p-2 rounded-lg">
               {message}
@@ -98,7 +86,22 @@ export default function Clients() {
           )}
 
           <div className="w-full px-10 py-8 bg-[#242424] shadow-lg rounded-lg max-h-[600px] overflow-x-auto">
-            <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">Clientes</h1>
+            <div className="flex justify-between mb-6 w-full">
+              <div className="flex items-center">
+                <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">
+                  Clientes
+                </h1>
+              </div>
+              <div>
+                <div
+                  className="flex text-[#e3e3e3] bg-[#181818] hover:bg-[#333333] hover:scale-[101%] ease-linear transition-all min-w-[160px] justify-center px-2 py-4 rounded hover:cursor-pointer"
+                  onClick={() => router.push('/clients/add')}
+                >
+                  <Plus />
+                  <p>Criar cliente</p>
+                </div>
+              </div>
+            </div>
             <div className="mb-4 w-full">
               <input
                 type="text"
