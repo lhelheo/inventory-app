@@ -5,6 +5,9 @@ import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'
 import { Undo2 } from 'lucide-react'
+import { Title } from '@/component/title'
+import { InputField } from '@/component/inputField'
+import { Form } from '@/component/form'
 
 interface EditClientPageProps {
   params: {
@@ -76,54 +79,38 @@ export default function EditClientPage(props: EditClientPageProps) {
   return (
     <div className="bg-[#181818] min-h-screen flex flex-col items-center justify-center">
       <div className="w-full border border-gray-500 border-opacity-35 max-w-2xl mx-auto rounded-lg p-6 bg-[#181818]">
-        <h2 className="text-2xl font-bold mb-4 text-[#e3e3e3]">
-          Editando cliente
-        </h2>
-        <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-2">
-            <label htmlFor="name" className="block font-medium text-[#e3e3e3]">
-              Nome
-            </label>
-            <input
-              id="name"
-              name="name"
-              placeholder="Digite o nome do cliente"
-              value={client?.name}
-              onChange={handleInputChange}
-              required
-              className="w-full p-2 rounded text-[#e3e3e3] bg-[#242424] border border-gray-500 border-opacity-35"
-            />
-          </div>
-          <div className="space-y-2">
-            <label htmlFor="email" className="block font-medium text-[#e3e3e3]">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Digite o email do cliente"
-              value={client?.email}
-              onChange={handleInputChange}
-              required
-              className="w-full p-2 rounded bg-[#242424] text-[#e3e3e3] border border-gray-500 border-opacity-35"
-            />
-          </div>
-          <div className="space-y-2">
-            <label htmlFor="phone" className="block font-medium text-[#e3e3e3]">
-              Telefone
-            </label>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              placeholder="Digite o telefone do cliente"
-              value={client?.phone}
-              onChange={handleInputChange}
-              required
-              className="w-full p-2 bg-[#242424] rounded text-[#e3e3e3] border border-gray-500 border-opacity-35"
-            />
-          </div>
+        <Title title="Editando cliente" />
+        <Form onSubmit={handleSubmit}>
+          <InputField
+            label="Nome"
+            name="name"
+            id="name"
+            placeholder="Digite o nome do cliente"
+            value={client?.name}
+            onChange={handleInputChange}
+            type="text"
+          />
+
+          <InputField
+            label="Email"
+            name="email"
+            id="email"
+            placeholder="Digite o email do cliente"
+            value={client?.email}
+            onChange={handleInputChange}
+            type="email"
+          />
+
+          <InputField
+            label="Telefone"
+            name="phone"
+            id="phone"
+            placeholder="Digite o telefone do cliente"
+            value={client?.phone}
+            onChange={handleInputChange}
+            type="tel"
+          />
+
           <div className="col-span-2 mt-4">
             <button
               type="submit"
@@ -132,7 +119,7 @@ export default function EditClientPage(props: EditClientPageProps) {
               Salvar
             </button>
           </div>
-        </form>
+        </Form>
       </div>
       <button
         onClick={() => router.back()}

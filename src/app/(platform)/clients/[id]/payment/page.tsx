@@ -1,10 +1,12 @@
 'use client'
 
 import { api } from '@/app/services/api'
+import GenericTable from '@/component/genericTable'
+import { Title } from '@/component/title'
 import { baseUrl } from '@/helpers/url'
 import { IClient, IProduct } from '@/interface/interfaces'
 import axios from 'axios'
-import { Eye, Undo2 } from 'lucide-react'
+import { Undo2 } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
@@ -117,10 +119,8 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
   return (
     <div className="w-full flex bg-[#181818] h-screen p-4">
-      <div className="flex flex-col w-full px-8 md:px-20">
-        <h1 className="text-3xl font-bold my-4 text-gray-200">
-          Realizar Pagamento
-        </h1>
+      <div className="flex flex-col w-full px-8 md:px-20 mt-6">
+        <Title title="Realizar Pagamento" />
 
         <div className="w-full">
           <div className="flex flex-col md:flex-row gap-6">
@@ -180,36 +180,41 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
             <div className="w-full md:w-1/2 flex flex-col gap-6">
               <div className="rounded-lg shadow-lg p-6 bg-[#181818]">
-                <p className="text-gray-200 text-xl font-medium mb-3">
-                  Informações do Cliente
-                </p>
-                <p className="text-gray-200">
-                  <strong>Nome:</strong> {client?.name}
-                </p>
-                <p className="text-gray-200">
-                  <strong>Email:</strong> {client?.email}
-                </p>
-                <p className="text-gray-200">
-                  <strong>Telefone:</strong> {client?.phone}
-                </p>
+                <Title title="Informações do Cliente" />
+                {client && (
+                  <>
+                    {[
+                      { label: 'Nome', value: client.name },
+                      { label: 'Email', value: client.email },
+                      { label: 'Telefone', value: client.phone },
+                    ].map((info, index) => (
+                      <p key={index} className="text-gray-200">
+                        <strong>{info.label}:</strong> {info.value}
+                      </p>
+                    ))}
+                  </>
+                )}
               </div>
 
               <div className="rounded-lg shadow-lg p-6 bg-[#181818]">
-                <p className="text-gray-200 text-xl font-medium mb-3">
-                  Informações de Vendas
-                </p>
-                <p className="text-gray-200">
-                  <strong>Total Vendido:</strong>{' '}
-                  <span className="text-green-400">
-                    R$ {totalSoldPrice?.toFixed(2)}
-                  </span>
-                </p>
-                <p className="text-gray-200">
-                  <strong>Total Pendentes:</strong>{' '}
-                  <span className="text-yellow-400">
-                    R$ {totalPending?.toFixed(2)}
-                  </span>
-                </p>
+                <Title title="Informações de Vendas" />
+                {[
+                  {
+                    label: 'Total Vendido',
+                    value: totalSoldPrice?.toFixed(2),
+                    color: 'text-green-400',
+                  },
+                  {
+                    label: 'Total Pendentes',
+                    value: totalPending?.toFixed(2),
+                    color: 'text-yellow-400',
+                  },
+                ].map((info, index) => (
+                  <p key={index} className="text-gray-200">
+                    <strong>{info.label}:</strong>{' '}
+                    <span className={info.color}>R$ {info.value}</span>
+                  </p>
+                ))}
               </div>
             </div>
           </div>
@@ -221,54 +226,25 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
           {products.length > 0 && (
             <div className="mt-8">
-              <h2 className="text-xl font-bold mb-4 text-gray-200">
-                Status dos Produtos
-              </h2>
-              <table className="w-full table-auto border border-gray-700">
-                <thead>
-                  <tr className="bg-[#1]">
-                    <th className="px-4 py-2 text-left text-gray-200">
-                      Produto
-                    </th>
-                    <th className="px-4 py-2 text-left text-gray-200">Preço</th>
-                    <th className="px-4 py-2 text-left text-gray-200">
-                      Saldo Pendente
-                    </th>
-                    <th className="px-4 py-2 text-left text-gray-200">
-                      Visualizar
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {products
-                    .filter((product) => product.status !== 'Vendido')
-                    .map((product) => (
-                      <tr
-                        key={product.id}
-                        className="odd:bg-[#242424] even:bg-[#181818] text-gray-200"
-                      >
-                        <td className="px-4 py-2">{product.name}</td>
-                        <td className="px-4 py-2">R$ {product.price}</td>
-                        <td className="px-4 py-2">
-                          {product.remaining_balance === 0
-                            ? 'Venda finalizada'
-                            : `R$ ${product.remaining_balance ?? product.price}`}
-                        </td>
-                        <td className="px-4 py-2">
-                          <button
-                            title="Visualizar produto"
-                            onClick={() =>
-                              router.push(`/products/${product.id}`)
-                            }
-                            className="text-blue-400 hover:text-blue-600 transition duration-200"
-                          >
-                            <Eye size={18} />
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              <Title title="Status dos Produtos" />
+              <GenericTable
+                data={products
+                  .filter((product) => product.status !== 'Vendido')
+                  .map((product) => ({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    remaining_balance:
+                      product.remaining_balance === 0
+                        ? 'Venda finalizada'
+                        : `R$ ${product.remaining_balance ?? product.price}`,
+                  }))}
+                columns={[
+                  { key: 'name', label: 'Produto' },
+                  { key: 'price', label: 'Preço' },
+                  { key: 'remaining_balance', label: 'Saldo Pendente' },
+                ]}
+              />
             </div>
           )}
 
