@@ -3,8 +3,17 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
-import { Undo2 } from 'lucide-react'
+import {
+  Clock,
+  DollarSign,
+  Package,
+  ShoppingCart,
+  Tag,
+  Undo2,
+  User,
+} from 'lucide-react'
 import { LoadingCircle } from '@/component/loadingCircle'
+import { DetailItem } from '@/component/detailItem'
 
 interface ProductPageProps {
   params: {
@@ -33,78 +42,71 @@ export default function ProductPage(props: ProductPageProps) {
       {loading ? (
         <LoadingCircle />
       ) : (
-        <>
+        <div className="flex flex-col w-[90%] max-w-3xl">
+          <p className="text-3xl font-bold text-[#e3e3e3] my-4">
+            Detalhes do Produto
+          </p>
           <div className="bg-[#242424] text-[#e3e3e3] shadow-xl rounded-xl p-8 w-full max-w-3xl">
-            <h1 className="text-3xl font-bold mb-6 text-center text-[#e3e3e3]">
+            <h1 className="text-3xl font-medium mb-6 text-left text-[#e3e3e3]">
               {product?.name}
             </h1>
 
             <div className="space-y-6">
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold text-[#b0b0b0]">Cliente:</p>
-                <p className="text-lg">{product?.client.name || 'N/A'}</p>
-              </div>
+              <DetailItem
+                icon={User}
+                value={product?.client.name || 'N/A'}
+                label="Cliente"
+              />
 
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold text-[#b0b0b0]">
-                  Descrição:
-                </p>
-                <p className="text-lg">{product?.description || 'N/A'}</p>
-              </div>
+              <DetailItem
+                icon={Package}
+                value={product?.description || 'N/A'}
+                label="Descrição"
+              />
 
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold text-[#b0b0b0]">
-                  Preço de Venda:
-                </p>
-                <p className="text-lg font-semibold text-green-400">
-                  R$ {product?.price.toFixed(2)}
-                </p>
-              </div>
+              <DetailItem
+                icon={DollarSign}
+                value={product?.price.toFixed(2) || 'N/A'}
+                label="Preço de Venda"
+              />
 
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold text-[#b0b0b0]">
-                  Preço de Custo:
-                </p>
-                <p className="text-lg font-semibold text-red-400">
-                  R$ {product?.cost_price.toFixed(2)}
-                </p>
-              </div>
+              <DetailItem
+                icon={DollarSign}
+                value={product?.cost_price.toFixed(2) || 'N/A'}
+                label="Preço de Custo"
+              />
 
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold text-[#b0b0b0]">
-                  Fornecedor:
-                </p>
-                <p className="text-lg">{product?.supplier || 'N/A'}</p>
-              </div>
+              <DetailItem
+                icon={ShoppingCart}
+                value={product?.supplier || 'N/A'}
+                label="Fornecedor"
+              />
 
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold text-[#b0b0b0]">
-                  Código do Produto:
-                </p>
-                <p className="text-lg">{product?.product_code || 'N/A'}</p>
-              </div>
+              <DetailItem
+                icon={Tag}
+                value={product?.product_code || 'N/A'}
+                label="Código do Produto"
+              />
 
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold text-[#b0b0b0]">
-                  Atualizado em:
-                </p>
-                <p className="text-lg">
-                  {product?.updateAt
+              <DetailItem
+                icon={Clock}
+                value={
+                  product?.updateAt
                     ? new Date(product.updateAt).toLocaleString()
-                    : 'N/A'}
-                </p>
-              </div>
+                    : 'N/A'
+                }
+                label="Atualizado em"
+              />
 
-              <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold text-[#b0b0b0]">
-                  Criado em:
-                </p>
-                <p className="text-lg">
-                  {product?.createAt
+              <DetailItem
+                icon={Clock}
+                value={
+                  product?.createAt
                     ? new Date(product.createAt).toLocaleString()
-                    : 'N/A'}
-                </p>
-              </div>
+                    : 'N/A'
+                }
+                label="Criado em"
+              />
             </div>
           </div>
           <button
@@ -114,7 +116,7 @@ export default function ProductPage(props: ProductPageProps) {
           >
             <Undo2 />
           </button>
-        </>
+        </div>
       )}
     </div>
   )

@@ -86,11 +86,9 @@ export default function Clients() {
           )}
 
           <div className="w-full px-10 py-8 bg-[#181818] border border-gray-500 border-opacity-35 shadow-lg rounded-lg max-h-[800px] overflow-x-auto">
-            <div className="flex justify-between mb-6 w-full">
-              <div className="flex items-center">
-                <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">
-                  Clientes
-                </h1>
+            <div className="flex justify-between mb-6 w-full items-center">
+              <div className="flex items-center text-2xl font-bold text-[#e3e3e3]">
+                <h1>Clientes</h1>
               </div>
               <div>
                 <div
