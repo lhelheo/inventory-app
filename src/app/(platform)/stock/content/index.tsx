@@ -20,28 +20,28 @@ export const StockPage = (props: Product) => {
               <table className="min-w-full bg-[#242424] rounded-lg">
                 <thead>
                   <tr>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
                       Nome
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
                       Fornecedor
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
                       Preço
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
                       Preço de custo
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
                       Código
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
                       Descrição
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
                       Criado em
                     </th>
-                    <th className="py-3 px-4 bg-[#333333] text-[#e3e3e3] font-semibold text-left">
+                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
                       Atualizado em
                     </th>
                   </tr>
@@ -56,7 +56,7 @@ export const StockPage = (props: Product) => {
                     .map((product) => (
                       <tr
                         key={product.id}
-                        className="border-t ease-linear transition-all even:bg-[#2a2a2a] hover:bg-[#3b3b3b]"
+                        className="ease-linear transition-all bg-[#181818] even:bg-[#242424] hover:bg-[#3b3b3b]"
                       >
                         <td className="py-3 px-4 text-[#e3e3e3]">
                           {product.name || 'Não informado'}

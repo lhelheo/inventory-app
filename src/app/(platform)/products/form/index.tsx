@@ -103,7 +103,7 @@ export const ProductsForm = (props: ProductsFormProps) => {
                 {filteredProducts.map((product) => (
                   <tr
                     key={product.id}
-                    className="border-t border-gray-500 border-opacity-35 ease-linear transition-all even:bg-[#2a2a2a] hover:bg-[#3b3b3b] text-[#e3e3e3]"
+                    className="ease-linear transition-all bg-[#181818] even:bg-[#242424] hover:bg-[#3b3b3b] text-[#e3e3e3]"
                   >
                     <td className="py-3 px-4">{product.name}</td>
                     <td className="py-3 px-4">{product.client?.name || '-'}</td>

@@ -132,7 +132,7 @@ export default function Clients() {
                     {filteredCustomers.map((customer) => (
                       <tr
                         key={customer.id}
-                        className="border-t border-[#444444] hover:bg-[#333333] even:bg-[#2c2c2c] transition-all duration-300"
+                        className="border-t border-[#242424] hover:bg-[#333333] even:bg-[#181818] transition-all duration-300"
                       >
                         <td className="px-4 py-2">
                           {customer.name || 'Não informado'}
@@ -146,7 +146,7 @@ export default function Clients() {
                         </td>
                         <td className="flex py-3 px-4 text-center space-x-2">
                           <div
-                            className="flex font-bold text-green-500 hover:text-green-700 cursor-pointer ease-linear transition-all border border-gray-500 border-opacity-35 p-3"
+                            className="flex font-bold text-green-500 hover:text-green-700 cursor-pointer ease-linear transition-all border border-gray-500 border-opacity-35 p-2 rounded"
                             onClick={() =>
                               router.push(`/clients/${customer.id}/payment`)
                             }
@@ -155,7 +155,7 @@ export default function Clients() {
                             <DollarSign size={18} />
                           </div>
                           <div
-                            className="flex font-bold text-yellow-500 border border-gray-500 border-opacity-35 p-3 rounded hover:text-yellow-700 cursor-pointer ease-linear transition-all"
+                            className="flex font-bold text-yellow-500 border border-gray-500 border-opacity-35 p-2 rounded hover:text-yellow-700 cursor-pointer ease-linear transition-all"
                             onClick={() =>
                               router.push(`/clients/${customer.id}/edit`)
                             }
@@ -164,7 +164,7 @@ export default function Clients() {
                             <Pencil size={18} />
                           </div>
                           <div
-                            className="flex font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2 border border-gray-500 border-opacity-35 p-3"
+                            className="flex font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2 border border-gray-500 border-opacity-35 p-2 rounded"
                             onClick={() => {
                               setShowConfirm(true)
                               setSelectedClient(customer)
