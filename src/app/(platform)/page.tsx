@@ -61,7 +61,7 @@ export default function LoginPage() {
           </div>
           <form
             onSubmit={handleLogin}
-            className="flex flex-col space-y-2 w-[460px] bg-[#181818] border border-gray-500 border-opacity-35 rounded-lg shadow px-6 py-4"
+            className="flex flex-col space-y-2 w-[370px] bg-[#181818] border border-gray-500 border-opacity-35 rounded-lg shadow px-6 py-4"
           >
             <h2 className="text-2xl my-3 font-medium text-center text-[#e3e3e3]">
               Login

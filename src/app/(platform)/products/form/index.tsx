@@ -50,7 +50,7 @@ export const ProductsForm = (props: ProductsFormProps) => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] px-20 py-10">
+      <div className="flex flex-col justify-center items-center min-h-screen max-h-[800px] overflow-x-auto bg-[#181818] px-20 py-10">
         <div className="bg-[#181818] border border-gray-500 border-opacity-35 w-full shadow-md rounded-lg px-10 py-8 overflow-x-auto">
           <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">Produtos</h1>
 
