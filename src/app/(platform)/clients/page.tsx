@@ -6,7 +6,6 @@ import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'
 import { LoadingCircle } from '@/component/loadingCircle'
-import router from 'next/router'
 
 export default function Clients() {
   const router = useRouter()
