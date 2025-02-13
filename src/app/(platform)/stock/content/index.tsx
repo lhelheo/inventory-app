@@ -1,4 +1,5 @@
 'use client'
+import CustomTable from '@/component/customTable'
 import { formatData } from '@/helpers/format'
 import { IProduct } from '@/interface/interfaces'
 import { Home } from 'lucide-react'
@@ -17,79 +18,51 @@ export const StockPage = (props: Product) => {
           <div className="bg-[#181818] border border-gray-500 border-opacity-35 max-h-[800px] w-full shadow-md rounded-lg py-8 px-10 overflow-x-auto">
             <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">Estoque</h1>
             {props.products.length > 0 ? (
-              <table className="min-w-full bg-[#242424] rounded-lg">
-                <thead>
-                  <tr>
-                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
-                      Nome
-                    </th>
-                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
-                      Fornecedor
-                    </th>
-                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
-                      Preço
-                    </th>
-                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
-                      Preço de custo
-                    </th>
-                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
-                      Código
-                    </th>
-                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
-                      Descrição
-                    </th>
-                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
-                      Criado em
-                    </th>
-                    <th className="py-3 px-4 bg-[#242424] text-[#e3e3e3] font-semibold text-left">
-                      Atualizado em
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {props.products
-                    .filter(
-                      (product) =>
-                        !product.client ||
-                        (product.status === 'Disponivel' && !product.client),
-                    )
-                    .map((product) => (
-                      <tr
-                        key={product.id}
-                        className="ease-linear transition-all bg-[#181818] even:bg-[#242424] hover:bg-[#3b3b3b]"
-                      >
-                        <td className="py-3 px-4 text-[#e3e3e3]">
-                          {product.name || 'Não informado'}
-                        </td>
-                        <td className="py-3 px-4 text-[#e3e3e3]">
-                          {product.supplier || 'Não informado'}
-                        </td>
-                        <td className="py-3 px-4 text-[#e3e3e3]">
-                          {product.price
-                            ? `R$ ${product.price}`
-                            : 'Não informado'}
-                        </td>
-                        <td className="py-3 px-4 text-[#e3e3e3]">
-                          {product.cost_price
-                            ? `R$ ${product.cost_price}`
-                            : 'Não informado'}
-                        </td>
-                        <td className="py-3 px-4 text-[#e3e3e3]">
-                          {product.product_code || 'Não informado'}
-                        </td>
-                        <td className="py-3 px-4 text-[#e3e3e3]">
-                          {product.description || 'Não informado'}
-                        </td>
-                        <td className="py-3 px-4 text-[#e3e3e3]">
-                          {formatData(product.createAt)}
-                        </td>
-                        <td className="py-3 px-4 text-[#e3e3e3]">
-                          {formatData(product.updateAt)}
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
+              <CustomTable
+                columns={[
+                  {
+                    label: 'Nome',
+                    key: 'name',
+                  },
+                  {
+                    label: 'Fornecedor',
+                    key: 'supplier',
+                  },
+                  {
+                    label: 'Preço',
+                    key: 'price',
+                    formatAs: (value) => `R$ ${value}`,
+                  },
+                  {
+                    label: 'Preço de custo',
+                    key: 'cost_price',
+                    formatAs: (value) => `R$ ${value}`,
+                  },
+                  {
+                    label: 'Código',
+                    key: 'product_code',
+                  },
+                  {
+                    label: 'Descrição',
+                    key: 'description',
+                  },
+                  {
+                    label: 'Criado em',
+                    key: 'createAt',
+                    formatAs: formatData,
+                  },
+                  {
+                    label: 'Atualizado em',
+                    key: 'updateAt',
+                    formatAs: formatData,
+                  },
+                ]}
+                data={props.products.filter(
+                  (product) =>
+                    !product.client ||
+                    (product.status === 'Disponivel' && !product.client),
+                )}
+              />
             ) : (
               <p className="text-center text-[#e3e3e3]">
                 Nenhum produto disponível.

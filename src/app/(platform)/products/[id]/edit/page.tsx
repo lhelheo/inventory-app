@@ -8,6 +8,7 @@ import { api } from '@/app/services/api'
 import { useRouter } from 'next/navigation'
 import { Undo2 } from 'lucide-react'
 import { LoadingCircle } from '@/component/loadingCircle'
+import { Title } from '@/component/title'
 
 interface Product {
   params: {
@@ -135,9 +136,9 @@ export default function ProductPage(props: Product) {
         <>
           <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] p-4">
             <div className="text-[#e3e3e3] shadow-md rounded-lg p-8 w-full max-w-4xl border border-gray-500 border-opacity-35">
-              <h1 className="text-3xl font-bold text-[#e3e3e3] mb-8">
-                Editar Produto
-              </h1>
+              <div className="mb-4">
+                <Title title="Editar Produto" />
+              </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

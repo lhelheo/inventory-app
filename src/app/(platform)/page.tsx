@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
 import { LoadingCircle } from '@/component/loadingCircle'
+import { InputField } from '@/component/inputField'
 
 export default function LoginPage() {
   const [username, setUsername] = useState('')
@@ -67,34 +68,28 @@ export default function LoginPage() {
               Login
             </h2>
             <div className="my-4 gap-5 flex flex-col">
-              <label>
-                <p className="text-[#e3e3e3] mb-2">Usuário</p>
-                <input
-                  type="text"
-                  className="flex rounded w-full mb-2 py-3 px-4 bg-[#242424] border border-gray-500 border-opacity-35 shadow-md text-[#e3e3e3]"
-                  value={username}
-                  placeholder="Digite seu usuário"
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
-              </label>
-              <label>
-                <p className="text-[#e3e3e3] mb-2">Senha</p>
-                <input
-                  type="password"
-                  className="flex bg-[#242424] shadow-md text-[#e3e3e3] border border-gray-500 border-opacity-35 rounded w-full mb-2 py-3 px-4"
-                  value={password}
-                  placeholder="Digite sua senha"
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </label>
+              <InputField
+                label="Usuário"
+                type="text"
+                value={username}
+                placeholder="Digite seu usuário"
+                onChange={(e) => setUsername(e.target.value)}
+                name={'usuario'}
+              />
+              <InputField
+                label="Senha"
+                type="password"
+                value={password}
+                placeholder="Digite sua senha"
+                onChange={(e) => setPassword(e.target.value)}
+                name={'senha'}
+              />
             </div>
 
             <div className="relative">
               <button
                 type="submit"
-                className={`px-4 py-3 my-3 bg-[#242424] hover:bg-[#333333] font-medium text-[#e3e3e3] rounded w-full hover:scale-[101%] ease-linear transition-all ${
+                className={`px-4 py-3 mt-4 bg-[#242424] hover:bg-[#333333] font-medium text-[#e3e3e3] rounded w-full hover:scale-[101%] ease-linear transition-all ${
                   loading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 disabled={loading}

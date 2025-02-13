@@ -1,13 +1,12 @@
 import Link from 'next/link'
 import { Users, Package, PackagePlus, Boxes } from 'lucide-react'
+import { Title } from '@/component/title'
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#181818] p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold text-[#e3e3e3] mb-8">
-          Sistema de Gestão
-        </h1>
+        <Title title={'Sistema de Gestão'} />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <DashboardCard
