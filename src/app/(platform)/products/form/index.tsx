@@ -1,6 +1,7 @@
 'use client'
 import CustomTable from '@/component/customTable'
 import CustomModal from '@/component/modal'
+import { SearchBar } from '@/component/searchBar'
 import { formatData } from '@/helpers/format'
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
@@ -57,11 +58,10 @@ export const ProductsForm = (props: ProductsFormProps) => {
           <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">Produtos</h1>
 
           <div className="mb-6 w-full">
-            <input
-              type="text"
-              placeholder="Digite para pesquisar..."
-              className="w-full p-3 bg-[#181818] rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 text-[#e3e3e3] border border-gray-500 border-opacity-35"
+            <SearchBar
+              value={search}
               onChange={(e) => setSearch(e.target.value)}
+              placeholder="Buscar produto"
             />
           </div>
 
