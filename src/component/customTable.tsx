@@ -48,11 +48,11 @@ export default function CustomTable(props: TableProps) {
               </td>
             ))}
             {props.actions && (
-              <td className="flex py-3 px-4 text-center space-x-2">
+              <td className="flex py-3 px-4 text-center space-x-2 gap-4">
                 {props.actions.map((action, actionIndex) => (
                   <div
                     key={actionIndex}
-                    className={`${action.className} flex font-bold cursor-pointer border border-gray-500 border-opacity-35 p-2 rounded ease-linear transition-all hover:opacity-80`}
+                    className={`${action.className} flex font-bold  cursor-pointer border border-gray-500 border-opacity-35 p-2 rounded ease-linear transition-all hover:opacity-80`}
                     onClick={() => action.onClick(row)}
                     title={action.label}
                   >
