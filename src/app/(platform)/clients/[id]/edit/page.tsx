@@ -8,6 +8,7 @@ import { Undo2 } from 'lucide-react'
 import { Title } from '@/component/title'
 import { InputField } from '@/component/inputField'
 import { Form } from '@/component/form'
+import { BackButton } from '@/component/backButton'
 
 interface EditClientPageProps {
   params: {
@@ -121,13 +122,9 @@ export default function EditClientPage(props: EditClientPageProps) {
           </div>
         </Form>
       </div>
-      <button
-        onClick={() => router.back()}
-        className="fixed bottom-4 right-4 bg-[#333333] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
-        title="Voltar para a página anterior"
-      >
+      <BackButton onClick={() => router.back()}>
         <Undo2 />
-      </button>
+      </BackButton>
     </div>
   )
 }

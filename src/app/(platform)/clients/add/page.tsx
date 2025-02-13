@@ -7,6 +7,7 @@ import { Home } from 'lucide-react'
 import { Title } from '@/component/title'
 import { InputField } from '@/component/inputField'
 import { Button } from '@/component/bottom'
+import { BackButton } from '@/component/backButton'
 
 // TODO: Adicionar feedback visual para o usuario ao concluir ação e clique para visualizar cliente
 
@@ -142,13 +143,16 @@ export default function CreateClient() {
         </div>
       )}
 
-      <button
+      {/* <button
         onClick={() => router.push('/home')}
         className="fixed bottom-4 right-4 bg-[#181818] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
         title="Voltar para a página anterior"
       >
         <Home />
-      </button>
+      </button> */}
+      <BackButton onClick={() => router.push('/home')}>
+        <Home />
+      </BackButton>
     </div>
   )
 }

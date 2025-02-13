@@ -5,6 +5,7 @@ import { baseUrl } from '@/helpers/url'
 import { IClient } from '@/interface/interfaces'
 import { useRouter } from 'next/navigation'
 import { Home } from 'lucide-react'
+import { BackButton } from '@/component/backButton'
 
 export default function CreateProduct() {
   const router = useRouter()
@@ -258,13 +259,9 @@ export default function CreateProduct() {
           </button>
         </form>
 
-        <button
-          onClick={() => router.push('/home')}
-          className="fixed bottom-4 right-4 bg-[#242424] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
-          title="Voltar para a página anterior"
-        >
+        <BackButton onClick={() => router.push('/home')}>
           <Home />
-        </button>
+        </BackButton>
       </div>
 
       {message && (

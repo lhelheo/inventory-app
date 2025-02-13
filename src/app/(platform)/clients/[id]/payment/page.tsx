@@ -1,6 +1,7 @@
 'use client'
 
 import { api } from '@/app/services/api'
+import { BackButton } from '@/component/backButton'
 import GenericTable from '@/component/genericTable'
 import { Title } from '@/component/title'
 import { baseUrl } from '@/helpers/url'
@@ -248,13 +249,9 @@ export default function ClientPayment(props: ClientPaymentProps) {
             </div>
           )}
 
-          <button
-            onClick={() => router.back()}
-            className="fixed bottom-4 right-4 bg-[#242424] hover:bg-[#181818] text-white p-4 rounded-full shadow-lg transition duration-300"
-            title="Voltar para a página anterior"
-          >
+          <BackButton onClick={() => router.back()}>
             <Undo2 />
-          </button>
+          </BackButton>
         </div>
       </div>
     </div>
