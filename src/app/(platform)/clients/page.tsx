@@ -6,6 +6,12 @@ import { baseUrl } from '@/helpers/url'
 import { useRouter } from 'next/navigation'
 import { IClient } from '@/interface/interfaces'
 import { LoadingCircle } from '@/component/loadingCircle'
+import { Title } from '@/component/title'
+import { Button } from '@/component/bottom'
+import { SearchBar } from '@/component/searchBar'
+import CustomTable from '@/component/customTable'
+import { formatPhoneNumber } from '@/helpers/format'
+import CustomModal from '@/component/modal'
 
 export default function Clients() {
   const router = useRouter()
@@ -47,6 +53,10 @@ export default function Clients() {
           (customer) => customer.id !== selectedClient.id,
         )
         setCustomers(allCustomers)
+        // Remove a mensagem após 5 segundos
+        setTimeout(() => {
+          setMessage('')
+        }, 5000)
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch {
@@ -61,18 +71,6 @@ export default function Clients() {
     customer.name.toLowerCase().includes(searchQuery.toLowerCase()),
   )
 
-  function formatPhoneNumber(phone: string): string {
-    const cleaned = phone.replace(/\D/g, '')
-    if (cleaned.length !== 11) return phone
-
-    const ddd = cleaned.slice(0, 2)
-    const firstPart = cleaned.slice(2, 3)
-    const secondPart = cleaned.slice(3, 7)
-    const thirdPart = cleaned.slice(7)
-
-    return `(${ddd}) ${firstPart} ${secondPart}-${thirdPart}`
-  }
-
   return (
     <div>
       {loading ? (
@@ -85,28 +83,22 @@ export default function Clients() {
             </div>
           )}
 
-          <div className="w-full px-10 py-8 bg-[#181818] border border-gray-500 border-opacity-35 shadow-lg rounded-lg max-h-[800px] overflow-x-auto">
+          <div className="w-full px-10 py-8 bg-[#181818] border border-gray-500 border-opacity-35 shadow-lg rounded-lg max-h-[780px]">
             <div className="flex justify-between mb-6 w-full items-center">
-              <div className="flex items-center text-2xl font-bold text-[#e3e3e3]">
-                <h1>Clientes</h1>
-              </div>
-              <div>
-                <div
-                  className="flex text-[#e3e3e3] bg-[#242424] hover:bg-[#333333] hover:scale-[101%] gap-1 ease-linear font-medium transition-all min-w-[160px] justify-center px-2 py-4 rounded hover:cursor-pointer"
-                  onClick={() => router.push('/clients/add')}
-                >
-                  <Plus />
-                  <p>Criar cliente</p>
-                </div>
-              </div>
+              <Title title="Clientes" />
+              <Button
+                icon={<Plus />}
+                width="w-76"
+                onClick={() => router.push('/clients/add')}
+              >
+                Criar cliente
+              </Button>
             </div>
             <div className="mb-4 w-full">
-              <input
-                type="text"
-                placeholder="Pesquise o nome"
+              <SearchBar
+                placeholder="Buscar cliente..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full p-3 bg-[#181818] border border-gray-500 border-opacity-35 shadow-md rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-[#e3e3e3]"
               />
             </div>
 
@@ -115,100 +107,70 @@ export default function Clients() {
             ) : filteredCustomers.length === 0 ? (
               <p className="text-[#e3e3e3]">Nenhum cliente encontrado</p>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="table-auto w-full bg-[#242424] shadow-md rounded-lg text-white">
-                  <thead>
-                    <tr className="bg-[#333333] text-gray-300">
-                      <th className="px-4 py-2 text-left">Nome</th>
-                      <th className="px-4 py-2 text-left">Email</th>
-                      <th className="px-4 py-2 text-left">Telefone</th>
-                      <th className="px-4 py-2 text-left">Ações</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredCustomers.map((customer) => (
-                      <tr
-                        key={customer.id}
-                        className="border-t border-[#242424] hover:bg-[#333333] even:bg-[#181818] transition-all duration-300"
-                      >
-                        <td className="px-4 py-2">
-                          {customer.name || 'Não informado'}
-                        </td>
-                        <td className="px-4 py-2">
-                          {customer.email || 'Não informado'}
-                        </td>
-                        <td className="px-4 py-2">
-                          {formatPhoneNumber(customer.phone ?? '') ||
-                            'Não informado'}
-                        </td>
-                        <td className="flex py-3 px-4 text-center space-x-2">
-                          <div
-                            className="flex font-bold text-green-500 hover:text-green-700 cursor-pointer ease-linear transition-all border border-gray-500 border-opacity-35 p-2 rounded"
-                            onClick={() =>
-                              router.push(`/clients/${customer.id}/payment`)
-                            }
-                            title="Visualizar vendas"
-                          >
-                            <DollarSign size={18} />
-                          </div>
-                          <div
-                            className="flex font-bold text-yellow-500 border border-gray-500 border-opacity-35 p-2 rounded hover:text-yellow-700 cursor-pointer ease-linear transition-all"
-                            onClick={() =>
-                              router.push(`/clients/${customer.id}/edit`)
-                            }
-                            title="Editar cliente"
-                          >
-                            <Pencil size={18} />
-                          </div>
-                          <div
-                            className="flex font-bold text-red-500 hover:text-red-700 cursor-pointer ease-linear transition-all mr-2 border border-gray-500 border-opacity-35 p-2 rounded"
-                            onClick={() => {
-                              setShowConfirm(true)
-                              setSelectedClient(customer)
-                            }}
-                            title="Deletar cliente"
-                          >
-                            <Trash2 size={18} />
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+              <div className="max-h-[500px] overflow-y-auto">
+                <CustomTable
+                  columns={[
+                    { key: 'name', label: 'Nome' },
+                    { key: 'email', label: 'Email' },
+                    {
+                      key: 'phone',
+                      label: 'Telefone',
+                      formatAs: formatPhoneNumber,
+                    },
+                  ]}
+                  data={filteredCustomers}
+                  actions={[
+                    {
+                      className: 'text-green-400',
+                      label: 'Visualizar vendas',
+                      icon: <DollarSign size={18} />,
+                      onClick: (row) =>
+                        router.push(`/clients/${row.id}/payment`),
+                    },
+                    {
+                      className: 'text-yellow-400',
+                      label: 'Editar cliente',
+                      icon: <Pencil size={18} />,
+                      onClick: (row) => router.push(`/clients/${row.id}/edit`),
+                    },
+                    {
+                      className: 'text-red-400',
+                      label: 'Deletar cliente',
+                      icon: <Trash2 size={18} />,
+                      onClick: (row) => {
+                        setShowConfirm(true)
+                        setSelectedClient(row as IClient)
+                      },
+                    },
+                  ]}
+                />
               </div>
             )}
           </div>
 
-          {showConfirm && selectedClient && (
-            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="bg-[#242424] p-6 rounded-lg shadow-lg text-white">
-                <h2 className="text-lg font-semibold mb-4">
-                  Confirmar Exclusão
-                </h2>
-                <p className="mb-4">
-                  Tem certeza que deseja deletar o cliente{' '}
-                  <span className="font-semibold">{selectedClient.name}</span>?
-                </p>
-                <div className="flex justify-end">
-                  <button
-                    onClick={() => {
-                      setShowConfirm(false)
-                      setSelectedClient(null)
-                    }}
-                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    onClick={handleDeleteConfirmed}
-                    className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
-                  >
-                    Confirmar
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
+          <CustomModal
+            isOpen={showConfirm}
+            onClose={() => setShowConfirm(false)}
+            title="Confirmar Exclusão"
+            message={`Tem certeza que deseja deletar o cliente ${selectedClient?.name}?`}
+            actions={[
+              {
+                label: 'Cancelar',
+                onClick: () => {
+                  setShowConfirm(false)
+                  setSelectedClient(null)
+                },
+                className:
+                  'bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded ease-linear transition-all',
+              },
+              {
+                label: 'Confirmar',
+                onClick: handleDeleteConfirmed,
+                className:
+                  'bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded ease-linear transition-all',
+              },
+            ]}
+          />
 
           <button
             onClick={() => router.push('/home')}

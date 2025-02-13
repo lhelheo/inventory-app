@@ -134,7 +134,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
                 </label>
                 <select
                   id="product"
-                  className="mt-1 block w-full p-2 rounded-md bg-[#181818] text-gray-200 border border-gray-700 focus:ring focus:ring-blue-500"
+                  className="mt-1 block w-full p-2 rounded-md bg-[#181818] text-gray-200 border border-gray-700"
                   value={selectedProductId || ''}
                   onChange={(e) => setSelectedProductId(e.target.value)}
                 >
@@ -161,7 +161,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
                 <input
                   type="number"
                   id="paymentValue"
-                  className="mt-1 block w-full p-2 rounded-md bg-[#181818] text-gray-200 border border-gray-700 focus:ring focus:ring-blue-500"
+                  className="mt-1 block w-full p-2 rounded-md bg-[#181818] text-gray-200 border border-gray-700"
                   value={paymentValue}
                   onChange={(e) => setPaymentValue(e.target.value)}
                   min="0"

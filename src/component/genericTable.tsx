@@ -16,7 +16,10 @@ export default function GenericTable({
       <thead>
         <tr className="bg-[#1]">
           {columns.map((column) => (
-            <th key={column.key} className="px-4 py-2 text-left text-gray-200">
+            <th
+              key={column.key}
+              className="px-4 py-2 text-left text-gray-200 bg-[#333333]"
+            >
               {column.label}
             </th>
           ))}
@@ -26,7 +29,7 @@ export default function GenericTable({
         {data.map((row, index) => (
           <tr
             key={index}
-            className="odd:bg-[#242424] even:bg-[#181818] text-gray-200 cursor-pointer"
+            className="odd:bg-[#242424] even:bg-[#181818] bg-[#ffffff] hover:bg-[#ff2c2c] text-gray-200 cursor-pointer"
             onClick={() => onRowClick && onRowClick(row)}
           >
             {columns.map((column) => (

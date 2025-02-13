@@ -17,9 +17,10 @@ export const InputField = (props: InputFieldProps) => {
         {props.label}
       </label>
       <input
-        id="name"
-        name="name"
-        placeholder="Digite o nome do cliente"
+        id={props.id}
+        name={props.name}
+        placeholder={props.placeholder}
+        type={props.type}
         value={props.value}
         onChange={props.onChange}
         required

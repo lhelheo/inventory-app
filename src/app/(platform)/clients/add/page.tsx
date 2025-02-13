@@ -4,6 +4,9 @@ import { baseUrl } from '@/helpers/url'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import { Home } from 'lucide-react'
+import { Title } from '@/component/title'
+import { InputField } from '@/component/inputField'
+import { Button } from '@/component/bottom'
 
 // TODO: Adicionar feedback visual para o usuario ao concluir ação e clique para visualizar cliente
 
@@ -89,65 +92,40 @@ export default function CreateClient() {
     <div className="flex flex-col h-screen justify-center items-center bg-[#181818]">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col w-full h-min max-w-md mx-auto justify-center items-center gap-6 px-10 py-8 border border-gray-500 border-opacity-35 shadow-lg rounded"
+        className="flex flex-col w-full h-min max-w-2xl mx-auto justify-center items-center gap-6 px-10 py-8 border border-gray-500 border-opacity-35 shadow-lg rounded"
       >
-        <h2 className="text-2xl font-semibold text-center text-[#e3e3e3]">
-          Criar Cliente
-        </h2>
+        <Title title="Criar Cliente" />
 
-        <div className="flex flex-col w-full">
-          <label htmlFor="name" className="text-[#e3e3e3] font-medium mb-1">
-            Nome
-          </label>
-          <input
-            type="text"
-            id="name"
+        <div className="grid grid-cols-2 gap-6 w-full">
+          <InputField
+            label="Nome"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            required
-            placeholder="Digite o nome do cliente"
-            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#242424] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="Ex: João da Silva"
+            type="text"
           />
-        </div>
 
-        <div className="flex flex-col w-full">
-          <label htmlFor="email" className="text-[#e3e3e3] font-medium mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
+          <InputField
+            label="Email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="Ex: teste@gmail.com"
-            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#242424] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            type="email"
           />
-        </div>
 
-        <div className="flex flex-col w-full">
-          <label htmlFor="phone" className="text-[#e3e3e3] font-medium mb-1">
-            Telefone
-          </label>
-          <input
-            type="tel"
-            id="phone"
+          <InputField
+            label="Telefone"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            required
-            placeholder="Ex: (11) 91234-5678"
-            className="border border-gray-500 border-opacity-35 rounded p-3 bg-[#242424] text-[#e3e3e3] transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            placeholder="Ex: (11) 99999-9999"
+            type="tel"
           />
         </div>
 
-        <button
-          type="submit"
-          className="bg-[#242424] hover:bg-[#333333] text-[#e3e3e3] rounded py-3 mt-6 w-full transition duration-200"
-        >
-          Salvar
-        </button>
+        <Button type="submit">Salvar</Button>
       </form>
 
       {message && (

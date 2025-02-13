@@ -1,4 +1,6 @@
 'use client'
+import CustomTable from '@/component/customTable'
+import CustomModal from '@/component/modal'
 import { formatData } from '@/helpers/format'
 import { baseUrl } from '@/helpers/url'
 import { IProduct } from '@/interface/interfaces'
@@ -50,8 +52,8 @@ export const ProductsForm = (props: ProductsFormProps) => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center min-h-screen max-h-[800px] overflow-x-auto bg-[#181818] px-20 py-10">
-        <div className="bg-[#181818] border border-gray-500 border-opacity-35 w-full shadow-md rounded-lg px-10 py-8 overflow-x-auto">
+      <div className="flex flex-col justify-center items-center min-h-screen bg-[#181818] px-20 py-10">
+        <div className="bg-[#181818] border border-gray-500 border-opacity-35 w-full max-h-[700px] shadow-md rounded-lg px-10 py-8">
           <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">Produtos</h1>
 
           <div className="mb-6 w-full">
@@ -64,89 +66,64 @@ export const ProductsForm = (props: ProductsFormProps) => {
           </div>
 
           {props.products.length > 0 ? (
-            <table className="min-w-full bg-[#242424] rounded-lg">
-              <thead>
-                <tr className="bg-[#333333]">
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Nome
-                  </th>
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Comprador
-                  </th>
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Status
-                  </th>
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Código
-                  </th>
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Custo
-                  </th>
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Venda
-                  </th>
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Descrição
-                  </th>
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Criado em
-                  </th>
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Atualizado em
-                  </th>
-                  <th className="py-3 px-4 text-[#e3e3e3] font-semibold text-left">
-                    Ações
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredProducts.map((product) => (
-                  <tr
-                    key={product.id}
-                    className="ease-linear transition-all bg-[#181818] even:bg-[#242424] hover:bg-[#3b3b3b] text-[#e3e3e3]"
-                  >
-                    <td className="py-3 px-4">{product.name}</td>
-                    <td className="py-3 px-4">{product.client?.name || '-'}</td>
-                    <td className="py-3 px-4">{product.status}</td>
-                    <td className="py-3 px-4">{product.product_code}</td>
-                    <td className="py-3 px-4">{`R$ ${product.cost_price}`}</td>
-                    <td className="py-3 px-4">{`R$ ${product.price}`}</td>
-                    <td className="py-3 px-4">{product.description}</td>
-                    <td className="py-3 px-4">
-                      {formatData(product.createAt)}
-                    </td>
-                    <td className="py-3 px-4">
-                      {formatData(product.updateAt)}
-                    </td>
-                    <td className="flex py-3 px-4 text-center space-x-2">
-                      <div
-                        className="border border-gray-500 border-opacity-35 rounded-lg p-2 text-yellow-500 hover:text-yellow-700 cursor-pointer transition duration-200"
-                        onClick={() =>
-                          router.push(`/products/${product.id}/edit/`)
-                        }
-                      >
-                        <Pencil size={18} />
-                      </div>
-                      <div
-                        className="border border-gray-500 border-opacity-35 rounded-lg p-2 text-blue-500 hover:text-blue-700 cursor-pointer transition duration-200"
-                        onClick={() => router.push(`/products/${product.id}`)}
-                      >
-                        <Eye size={18} />
-                      </div>
-                      <div
-                        className="border border-gray-500 border-opacity-35 rounded-lg p-2 text-red-500 hover:text-red-700 cursor-pointer transition duration-200"
-                        onClick={() => {
-                          setShowConfirm(true)
-                          setSelectedProduct(product)
-                        }}
-                      >
-                        <Trash2 size={18} />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="overflow-x-auto max-h-[500px]">
+              <CustomTable
+                columns={[
+                  { label: 'Nome', key: 'name' },
+                  { label: 'Comprador', key: 'client.name' },
+                  { label: 'Status', key: 'status' },
+                  { label: 'Código', key: 'product_code' },
+                  {
+                    label: 'Custo',
+                    key: 'cost_price',
+                    formatAs: (value) => `R$ ${value}`,
+                  },
+                  {
+                    label: 'Venda',
+                    key: 'price',
+                    formatAs: (value) => `R$ ${value}`,
+                  },
+                  { label: 'Descrição', key: 'description' },
+                  {
+                    label: 'Criado em',
+                    key: 'createAt',
+                    formatAs: formatData,
+                  },
+                  {
+                    label: 'Atualizado em',
+                    key: 'updateAt',
+                    formatAs: formatData,
+                  },
+                ]}
+                data={filteredProducts}
+                key={filteredProducts.length}
+                actions={[
+                  {
+                    icon: <Pencil size={18} />,
+                    label: 'Editar',
+                    className: 'text-yellow-500 hover:text-yellow-700',
+                    onClick: (product) =>
+                      router.push(`/products/${product.id}/edit/`),
+                  },
+                  {
+                    icon: <Eye size={18} />,
+                    label: 'Visualizar',
+                    className: 'text-blue-500 hover:text-blue-700',
+                    onClick: (product) =>
+                      router.push(`/products/${product.id}`),
+                  },
+                  {
+                    icon: <Trash2 size={18} />,
+                    label: 'Deletar',
+                    className: 'text-red-500 hover:text-red-700',
+                    onClick: (product) => {
+                      setShowConfirm(true)
+                      setSelectedProduct(product as IProduct)
+                    },
+                  },
+                ]}
+              />
+            </div>
           ) : (
             <p className="text-center text-[#e3e3e3]">
               Nenhum produto disponível.
@@ -163,36 +140,29 @@ export const ProductsForm = (props: ProductsFormProps) => {
         </button>
       </div>
 
-      {showConfirm && selectedProduct && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-[#242424] p-6 rounded-lg shadow-lg">
-            <h2 className="text-lg font-semibold text-[#e3e3e3] mb-4">
-              Confirmar Exclusão
-            </h2>
-            <p className="text-[#e3e3e3] mb-4">
-              Tem certeza que deseja deletar o produto{' '}
-              <span className="font-semibold">{selectedProduct.name}</span>?
-            </p>
-            <div className="flex justify-end">
-              <button
-                onClick={() => {
-                  setShowConfirm(false)
-                  setSelectedProduct(null)
-                }}
-                className="bg-[#4b4b4b] hover:bg-[#333333] text-[#e3e3e3] font-semibold py-2 px-4 rounded mr-2"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={handleDeleteConfirmed}
-                className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
-              >
-                Confirmar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <CustomModal
+        isOpen={showConfirm}
+        onClose={() => setShowConfirm(false)}
+        title="Confirmar Exclusão"
+        message={`Tem certeza que deseja deletar o produto ${selectedProduct?.name}?`}
+        actions={[
+          {
+            label: 'Cancelar',
+            onClick: () => {
+              setShowConfirm(false)
+              setSelectedProduct(null)
+            },
+            className:
+              'bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded ease-linear transition-all',
+          },
+          {
+            label: 'Confirmar',
+            onClick: handleDeleteConfirmed,
+            className:
+              'bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded ease-linear transition-all',
+          },
+        ]}
+      />
     </>
   )
 }
