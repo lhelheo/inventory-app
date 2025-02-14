@@ -149,6 +149,37 @@ export default function Clients() {
             )}
           </div>
 
+          {showConfirm && selectedClient && (
+            <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="bg-[#242424] p-6 rounded-lg shadow-lg text-white">
+                <h2 className="text-lg font-semibold mb-4">
+                  Confirmar Exclusão
+                </h2>
+                <p className="mb-4">
+                  Tem certeza que deseja deletar o cliente{' '}
+                  <span className="font-semibold">{selectedClient.name}</span>?
+                </p>
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => {
+                      setShowConfirm(false)
+                      setSelectedClient(null)
+                    }}
+                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded mr-2"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    onClick={handleDeleteConfirmed}
+                    className="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
+                  >
+                    Confirmar
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           <CustomModal
             isOpen={showConfirm}
             onClose={() => setShowConfirm(false)}

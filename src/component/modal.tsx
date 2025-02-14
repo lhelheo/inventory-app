@@ -1,3 +1,5 @@
+// TODO: Corrigir modal
+
 interface ModalProps {
   isOpen: boolean
   title: string
@@ -14,7 +16,7 @@ export default function CustomModal(props: ModalProps) {
       <div className="bg-[#242424] p-6 rounded-lg shadow-lg text-white w-96">
         <h2 className="text-lg font-semibold mb-4">{props.title}</h2>
         <p className="mb-4">{props.message}</p>
-        <div className="flex justify-end space-x-2">
+        <div className="flex justify-end space-x-2 gap-4">
           {props.actions.map((action, index) => (
             <button
               key={index}
