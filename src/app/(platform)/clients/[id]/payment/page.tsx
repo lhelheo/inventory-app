@@ -3,6 +3,7 @@
 import { api } from '@/app/services/api'
 import { BackButton } from '@/component/backButton'
 import GenericTable from '@/component/genericTable'
+import { InputField } from '@/component/inputField'
 import { Title } from '@/component/title'
 import { baseUrl } from '@/helpers/url'
 import { IClient, IProduct } from '@/interface/interfaces'
@@ -153,20 +154,15 @@ export default function ClientPayment(props: ClientPaymentProps) {
               </div>
 
               <div className="mb-4">
-                <label
-                  htmlFor="paymentValue"
-                  className="block text-sm font-medium text-gray-200"
-                >
-                  Valor do Pagamento
-                </label>
-                <input
+                <InputField
+                  label="Valor do Pagamento"
                   type="number"
-                  id="paymentValue"
-                  className="mt-1 block w-full p-2 rounded-md bg-[#181818] text-gray-200 border border-gray-700"
                   value={paymentValue}
                   onChange={(e) => setPaymentValue(e.target.value)}
                   min="0"
                   step="0.01"
+                  name="paymentValue"
+                  placeholder="Digite o valor do pagamento"
                 />
               </div>
 

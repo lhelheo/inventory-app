@@ -5,7 +5,6 @@ import { baseUrl } from '@/helpers/url'
 import { IClient } from '@/interface/interfaces'
 import { useRouter } from 'next/navigation'
 import { Home } from 'lucide-react'
-import { BackButton } from '@/component/backButton'
 
 export default function CreateProduct() {
   const router = useRouter()
@@ -93,10 +92,10 @@ export default function CreateProduct() {
 
   return (
     <div className="flex flex-col col-auto justify-center items-center min-h-screen bg-[#181818]">
-      <div className="border border-gray-500 border-opacity-35 shadow-lg rounded-lg px-10 py-8 max-w-[1200px] w-full">
-        <h1 className="text-2xl font-bold text-[#e3e3e3] mb-6">
-          Adicionar Produto
-        </h1>
+      <h1 className="text-3xl font-bold text-[#e3e3e3] mb-6 text-center">
+        Adicionar Produto
+      </h1>
+      <div className="bg-[#242424] shadow-lg rounded-lg px-10 py-8 max-w-[1200px] w-full  ">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
@@ -114,7 +113,7 @@ export default function CreateProduct() {
                     e.target.value ? Number(e.target.value) : null,
                   )
                 }
-                className="rounded-lg w-full p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
+                className="rounded-lg w-full p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
               >
                 <option value="">Nenhum cliente associado</option>
                 {clients.map((client) => (
@@ -136,7 +135,7 @@ export default function CreateProduct() {
                 id="status"
                 ref={statusRef}
                 required
-                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
+                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
               >
                 <option value="Disponivel">Disponível</option>
                 <option value="Vendido">Vendido</option>
@@ -157,8 +156,7 @@ export default function CreateProduct() {
                 id="productName"
                 ref={productNameRef}
                 type="text"
-                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
-                placeholder='Ex: "Camiseta preta"'
+                className="w-full rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
                 required
               />
             </div>
@@ -174,8 +172,7 @@ export default function CreateProduct() {
                 id="productCode"
                 ref={productCodeRef}
                 type="text"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
-                placeholder='Ex: "123456"'
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
                 required
               />
             </div>
@@ -191,8 +188,7 @@ export default function CreateProduct() {
                 id="productPrice"
                 ref={productPriceRef}
                 type="number"
-                className=" w-full  focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35 rounded-lg p-3 text-[#e3e3e3] bg-[#242424]"
-                placeholder='Ex: "100.00"'
+                className=" w-full  focus:outline-none focus:ring-2 focus:ring-[#181818] rounded-lg p-3 text-[#e3e3e3] bg-[#181818] "
                 step="0.01"
                 required
               />
@@ -209,8 +205,7 @@ export default function CreateProduct() {
                 id="costPrice"
                 ref={costPriceRef}
                 type="number"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
-                placeholder='Ex: "50.00"'
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
                 step="0.01"
                 required
               />
@@ -227,8 +222,7 @@ export default function CreateProduct() {
                 id="supplier"
                 ref={supplierRef}
                 type="text"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
-                placeholder='Ex: "Fornecedor X"'
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
               />
             </div>
 
@@ -243,8 +237,7 @@ export default function CreateProduct() {
                 id="description"
                 ref={descriptionRef}
                 type="text"
-                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#242424] focus:outline-none focus:ring-2 focus:ring-[#242424] border border-gray-500 border-opacity-35"
-                placeholder='Ex: "Camiseta preta de algodão"'
+                className=" w-full  rounded-lg p-3 text-[#e3e3e3] bg-[#181818] focus:outline-none focus:ring-2 focus:ring-[#181818]"
                 required
               />
             </div>
@@ -252,16 +245,20 @@ export default function CreateProduct() {
 
           <button
             type="submit"
-            className="bg-[#242424] hover:bg-[#333333] hover:scale-[101%] font-medium text-[#e3e3e3] rounded-lg py-3 mt-4 ease-linear transition-all focus:ring-4 focus:ring-[#242424] disabled:bg-[#242424]"
+            className="bg-[#3b82f6] hover:bg-[#2563eb] text-[#e3e3e3] rounded-lg py-3 mt-4 ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
             disabled={loading}
           >
-            {loading ? 'Carregando...' : 'Salvar'}
+            {loading ? 'Carregando...' : 'Adicionar Produto'}
           </button>
         </form>
 
-        <BackButton onClick={() => router.push('/home')}>
+        <button
+          onClick={() => router.push('/home')}
+          className="fixed bottom-4 right-4 bg-[#181818] hover:bg-[#1f1f1f] text-white p-4 rounded-full shadow-lg transition duration-300"
+          title="Voltar para a página anterior"
+        >
           <Home />
-        </BackButton>
+        </button>
       </div>
 
       {message && (

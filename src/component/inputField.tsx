@@ -8,6 +8,10 @@ interface InputFieldProps {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   id?: string
   placeholder?: string
+  min?: string
+  step?: string
+  required?: boolean
+  ref?: any
 }
 
 export const InputField = (props: InputFieldProps) => {
@@ -23,7 +27,10 @@ export const InputField = (props: InputFieldProps) => {
         type={props.type}
         value={props.value}
         onChange={props.onChange}
-        required
+        min={props.min}
+        step={props.step}
+        ref={props.ref}
+        required={props.required}
         className="w-full p-2 rounded text-[#e3e3e3] bg-[#242424] border border-gray-500 border-opacity-35"
       />
     </div>
