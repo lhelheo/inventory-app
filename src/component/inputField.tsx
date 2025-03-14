@@ -11,6 +11,7 @@ interface InputFieldProps {
   min?: string
   step?: string
   required?: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ref?: any
 }
 

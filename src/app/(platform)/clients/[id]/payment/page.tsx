@@ -48,6 +48,7 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
   useEffect(() => {
     fetchClientProducts()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function handlePayment() {
@@ -83,12 +84,14 @@ export default function ClientPayment(props: ClientPaymentProps) {
 
   useEffect(() => {
     loadCustomers()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     if (message) {
       loadCustomers()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [message])
 
   async function loadCustomers() {

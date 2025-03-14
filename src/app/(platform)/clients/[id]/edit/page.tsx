@@ -40,6 +40,7 @@ export default function EditClientPage(props: EditClientPageProps) {
 
   useEffect(() => {
     loadClient()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
