@@ -1,28 +1,27 @@
 'use client'
-// TODO: Select client by name
 import { useState, useEffect, useRef, FormEvent } from 'react'
+import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { baseUrl } from '@/helpers/url'
 import { IProduct, IClient } from '@/interface/interfaces'
-import { api } from '@/app/services/api'
-import { useRouter } from 'next/navigation'
-import { Undo2 } from 'lucide-react'
 import { LoadingCircle } from '@/component/loadingCircle'
 import { Title } from '@/component/title'
 import { BackButton } from '@/component/backButton'
+import { Undo2 } from 'lucide-react'
 
-interface Product {
+interface ProductProps {
   params: {
     id: string
   }
+  customers: IClient[] // Clientes para o select de cliente
 }
 
-export default function ProductPage(props: Product) {
+export default function ProductPage(props: ProductProps) {
   const router = useRouter()
-  const [product, setProduct] = useState<IProduct | null>(null)
+
   const [message, setMessage] = useState<string | null>(null)
-  const [loading, setLoading] = useState<boolean>(true)
-  const [customers, setCustomers] = useState<IClient[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+  const [product, setProduct] = useState<IProduct | null>(null)
 
   const nameRef = useRef<HTMLInputElement>(null)
   const priceRef = useRef<HTMLInputElement>(null)
@@ -34,57 +33,38 @@ export default function ProductPage(props: Product) {
   const clientIDRef = useRef<HTMLSelectElement>(null)
 
   useEffect(() => {
-    loadCustomers()
-  }, [])
-
-  async function loadCustomers() {
-    try {
-      const response = await api.get(`${baseUrl}/clients`)
-      setCustomers(response.data)
-    } catch (error) {
-      console.error('Failed to load customers', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    async function fetchProduct() {
-      if (!props.params.id) return
+    const fetchProduct = async () => {
       try {
         const response = await axios.get(
           `${baseUrl}/products/${props.params.id}`,
         )
         setProduct(response.data)
+        setLoading(false)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        if (axios.isAxiosError(error) && error.response) {
-          setMessage('Erro ao buscar o produto.')
-        }
+        setMessage('Erro ao carregar o produto.')
+        setLoading(false)
       }
     }
+
     fetchProduct()
   }, [props.params.id])
 
+  // Atualiza os campos do formulário quando o produto é carregado
   useEffect(() => {
     if (product) {
-      if (nameRef.current) nameRef.current.value = product.name
-      if (priceRef.current) priceRef.current.value = product.price.toString()
-      if (descriptionRef.current)
-        descriptionRef.current.value = product.description ?? 'Não informado'
-      if (statusRef.current)
-        statusRef.current.value = product.status ?? 'Disponivel'
-      if (supplierRef.current)
-        supplierRef.current.value = product.supplier ?? 'Não informado'
-      if (costPriceRef.current)
-        costPriceRef.current.value = product.cost_price.toString()
-      if (productCodeRef.current)
-        productCodeRef.current.value = product.product_code ?? ''
-      if (clientIDRef.current)
-        clientIDRef.current.value = product.clientID?.toString() ?? ''
+      nameRef.current!.value = product.name
+      priceRef.current!.value = product.price.toString()
+      descriptionRef.current!.value = product.description || ''
+      statusRef.current!.value = product.status
+      supplierRef.current!.value = product.supplier
+      costPriceRef.current!.value = product.cost_price?.toString() || '0'
+      productCodeRef.current!.value = product.product_code || ''
+      clientIDRef.current!.value = product.clientID?.toString() || ''
     }
   }, [product])
 
-  async function handleSubmit(event: FormEvent) {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault()
     setLoading(true)
 
@@ -98,13 +78,14 @@ export default function ProductPage(props: Product) {
       product_code: productCodeRef.current!.value,
       clientID: clientIDRef.current!.value
         ? Number(clientIDRef.current!.value)
-        : null, // Convertendo clientID para Number
+        : null,
     }
 
     try {
       await axios.put(`${baseUrl}/products/${props.params.id}`, updatedProduct)
       setMessage('Produto atualizado com sucesso.')
-      clearForm()
+      // Se necessário, redireciona após o sucesso
+      router.push('/products')
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setMessage(
@@ -117,18 +98,6 @@ export default function ProductPage(props: Product) {
       setLoading(false)
     }
   }
-
-  function clearForm() {
-    nameRef.current!.value = ''
-    priceRef.current!.value = ''
-    descriptionRef.current!.value = ''
-    statusRef.current!.value = 'Disponivel'
-    supplierRef.current!.value = 'Não informado'
-    costPriceRef.current!.value = '0'
-    productCodeRef.current!.value = ''
-    clientIDRef.current!.value = ''
-  }
-
   return (
     <div>
       {loading ? (
@@ -275,7 +244,7 @@ export default function ProductPage(props: Product) {
                       className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                     >
                       <option value="">Selecione um cliente (opcional)</option>
-                      {customers.map((client) => (
+                      {props.customers?.map((client) => (
                         <option key={client.id} value={client.id}>
                           {client.name}
                         </option>

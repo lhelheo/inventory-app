@@ -55,7 +55,7 @@ export default function EditClientPage(props: EditClientPageProps) {
     setLoading(true)
 
     try {
-      await axios.put(`${baseUrl}/products/${id}/clients`, client)
+      await axios.put(`${baseUrl}/products/${id}/client`, client)
       router.push('/clients')
     } catch (error) {
       console.error('Failed to update client', error)
@@ -67,13 +67,13 @@ export default function EditClientPage(props: EditClientPageProps) {
 
   if (loading)
     return (
-      <div className="h-screen w-full bg-[#181818]">
+      <div className="h-screen w-full flex justify-center items-center bg-[#181818]">
         <p className="text-[#e3e3e3]">Carregando dados do cliente...</p>
       </div>
     )
   if (error)
     return (
-      <div className="h-screen w-full bg-[#181818]">
+      <div className="h-screen w-full flex justify-center items-center bg-[#181818]">
         <p className="text-[#e3e3e3]">Erro ao carregar dados do cliente.</p>
       </div>
     )

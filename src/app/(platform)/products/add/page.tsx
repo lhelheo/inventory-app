@@ -245,10 +245,10 @@ export default function CreateProduct() {
 
           <button
             type="submit"
-            className="bg-[#3b82f6] hover:bg-[#2563eb] text-[#e3e3e3] rounded-lg py-3 mt-4 ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
+            className="bg-[#181818] hover:bg-[#1f1f1f] text-[#e3e3e3] rounded-lg py-3 mt-4 ease-linear transition-all focus:ring-4 focus:ring-[#181818] disabled:bg-[#181818]"
             disabled={loading}
           >
-            {loading ? 'Carregando...' : 'Adicionar Produto'}
+            {loading ? 'Carregando...' : 'Salvar'}
           </button>
         </form>
 
