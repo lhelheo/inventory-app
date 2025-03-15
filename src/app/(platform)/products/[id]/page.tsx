@@ -55,7 +55,7 @@ export default function ProductPage(props: ProductPageProps) {
             <div className="space-y-6">
               <DetailItem
                 icon={User}
-                value={product?.client.name || 'N/A'}
+                value={product?.client?.name || 'N/A'}
                 label="Cliente"
               />
 

@@ -23,9 +23,9 @@ interface TableProps {
 
 export default function CustomTable(props: TableProps) {
   return (
-    <table className="table-auto w-full bg-[#242424] shadow-md rounded-lg text-white">
-      <thead>
-        <tr className="bg-[#333333] text-gray-300">
+    <table className="table-auto w-full shadow-md rounded text-white">
+      <thead className="bg-[#242424]">
+        <tr className="text-[#e3e3e3]">
           {props.columns.map((column) => (
             <th key={column.key} className="px-4 py-2 text-left">
               {column.label}
@@ -38,7 +38,9 @@ export default function CustomTable(props: TableProps) {
         {props.data.map((row, index) => (
           <tr
             key={index}
-            className="border-t border-[#242424] hover:bg-[#333333] even:bg-[#181818] transition-all duration-300"
+            className={`border-t border-[#242424] hover:bg-[#333333] transition-all duration-300 ${
+              index % 2 === 0 ? 'even:bg-gray-800' : 'odd:bg-[#181818]'
+            }`}
           >
             {props.columns.map((column) => (
               <td key={column.key} className="px-4 py-2">
@@ -52,7 +54,7 @@ export default function CustomTable(props: TableProps) {
                 {props.actions.map((action, actionIndex) => (
                   <div
                     key={actionIndex}
-                    className={`${action.className} flex font-bold  cursor-pointer border border-gray-500 border-opacity-35 p-2 rounded ease-linear transition-all hover:opacity-80`}
+                    className={`${action.className} flex font-bold cursor-pointer border border-gray-500 border-opacity-35 p-2 rounded ease-linear transition-all hover:opacity-80`}
                     onClick={() => action.onClick(row)}
                     title={action.label}
                   >
