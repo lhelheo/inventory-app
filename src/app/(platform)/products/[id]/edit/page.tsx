@@ -9,19 +9,20 @@ import { Title } from '@/component/title'
 import { BackButton } from '@/component/backButton'
 import { Undo2 } from 'lucide-react'
 
-interface ProductProps {
+interface ProductPageProps {
   params: {
     id: string
   }
-  customers: IClient[] // Clientes para o select de cliente
 }
 
-export default function ProductPage(props: ProductProps) {
+export default function ProductPage(props: ProductPageProps) {
+  const { id } = props.params
   const router = useRouter()
 
   const [message, setMessage] = useState<string | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
   const [product, setProduct] = useState<IProduct | null>(null)
+  const [customers, setCustomers] = useState<IClient[] | null>(null)
 
   const nameRef = useRef<HTMLInputElement>(null)
   const priceRef = useRef<HTMLInputElement>(null)
@@ -32,12 +33,25 @@ export default function ProductPage(props: ProductProps) {
   const productCodeRef = useRef<HTMLInputElement>(null)
   const clientIDRef = useRef<HTMLSelectElement>(null)
 
+  // get customers
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/clients`)
+        setCustomers(response.data)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (error) {
+        setMessage('Erro ao carregar os clientes.')
+      }
+    }
+
+    fetchCustomers()
+  }, [])
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
-          `${baseUrl}/products/${props.params.id}`,
-        )
+        const response = await axios.get(`${baseUrl}/products/${id}`)
         setProduct(response.data)
         setLoading(false)
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -48,7 +62,7 @@ export default function ProductPage(props: ProductProps) {
     }
 
     fetchProduct()
-  }, [props.params.id])
+  }, [id])
 
   // Atualiza os campos do formulário quando o produto é carregado
   useEffect(() => {
@@ -244,7 +258,7 @@ export default function ProductPage(props: ProductProps) {
                       className="p-3 rounded bg-[#242424] text-[#e3e3e3] shadow focus:outline-none w-full border border-gray-500 border-opacity-35"
                     >
                       <option value="">Selecione um cliente (opcional)</option>
-                      {props.customers?.map((client) => (
+                      {customers?.map((client) => (
                         <option key={client.id} value={client.id}>
                           {client.name}
                         </option>
