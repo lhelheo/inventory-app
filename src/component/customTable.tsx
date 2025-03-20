@@ -24,8 +24,8 @@ interface TableProps {
 export default function CustomTable(props: TableProps) {
   return (
     <table className="table-auto w-full shadow-md rounded text-white">
-      <thead className="bg-[#242424]">
-        <tr className="text-[#e3e3e3]">
+      <thead style={{ backgroundColor: '#242424' }}>
+        <tr>
           {props.columns.map((column) => (
             <th key={column.key} className="px-4 py-2 text-left">
               {column.label}
@@ -38,9 +38,7 @@ export default function CustomTable(props: TableProps) {
         {props.data.map((row, index) => (
           <tr
             key={index}
-            className={`border-t border-[#242424] hover:bg-[#333333] transition-all duration-300 ${
-              index % 2 === 0 ? 'even:bg-gray-800' : 'odd:bg-[#181818]'
-            }`}
+            style={{ backgroundColor: index % 2 === 0 ? '#181818' : '#242424' }}
           >
             {props.columns.map((column) => (
               <td key={column.key} className="px-4 py-2">

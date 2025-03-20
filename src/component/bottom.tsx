@@ -12,10 +12,12 @@ export const Button = (props: ButtonProps) => {
     <button
       type={props.type || 'button'}
       onClick={props.onClick}
-      className={`bg-[#242424] flex justify-center hover:bg-[#333333] text-[#e3e3e3] rounded p-3 gap-3 ${props.width ? props.width : 'w-full'} font-medium ease-linear transition duration-200`}
+      className={`bg-[#242424] flex justify-center hover:bg-[#333333] text-[#e3e3e3] rounded p-3 px- ${props.width ? props.width : 'w-full'} font-medium ease-linear transition duration-200`}
     >
-      {props.icon}
-      {props.children}
+      <div className="flex gap-4">
+        {props.icon}
+        <p>{props.children}</p>
+      </div>
     </button>
   )
 }
