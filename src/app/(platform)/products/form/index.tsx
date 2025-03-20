@@ -77,12 +77,12 @@ export const ProductsForm = (props: ProductsFormProps) => {
                   {
                     label: 'Custo',
                     key: 'cost_price',
-                    formatAs: (value) => `R$ ${value}`,
+                    formatAs: (value) => `R$ ${value}` || 'N/A',
                   },
                   {
                     label: 'Venda',
                     key: 'price',
-                    formatAs: (value) => `R$ ${value}`,
+                    formatAs: (value) => `R$ ${value} ` || 'N/A',
                   },
                   { label: 'Descrição', key: 'description' },
                   {
